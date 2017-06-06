@@ -1,3 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-06-06T02:07:17-04:00</updated><id>http://localhost:4000/</id><title type="html">Scratchings on biomoleclar simulation and theory</title><subtitle>.</subtitle><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><entry><title type="html">Placeholder for MSST post</title><link href="http://localhost:4000/computational/method/first-post/" rel="alternate" type="text/html" title="Placeholder for MSST post" /><published>2017-06-06T02:00:00-04:00</published><updated>2017-06-06T02:00:00-04:00</updated><id>http://localhost:4000/computational/method/first-post</id><content type="html" xml:base="http://localhost:4000/computational/method/first-post/">&lt;p&gt;This is a placeholder for a lengthy post about mass-scaling simulated tempering, supplying a few details on the theory, providing an explanation of the OpenMM implementation, and linking to the github entry for an example with Trpcage folding.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-06-06T14:50:23-04:00</updated><id>http://localhost:4000/</id><title type="html">Scratchings on biomoleclar simulation and theory</title><subtitle>.</subtitle><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><entry><title type="html">Mass-Scaling Simulated Tempering for Optimizing Time-steps</title><link href="http://localhost:4000/computational-method/MSST/" rel="alternate" type="text/html" title="Mass-Scaling Simulated Tempering for Optimizing Time-steps" /><published>2017-06-06T14:45:00-04:00</published><updated>2017-06-06T14:45:00-04:00</updated><id>http://localhost:4000/computational-method/MSST</id><content type="html" xml:base="http://localhost:4000/computational-method/MSST/">&lt;p&gt;The simulated and parallel tempering are briefly discussed. I explain the MSST method and present its implementation in OpenMM.&lt;/p&gt;
 
-&lt;p&gt;Please read and cite: “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” T. Nagai, G.A. Pantelopulos, T. Takahashi, J.E. Straub &lt;em&gt;J. Comp. Chem.&lt;/em&gt; &lt;strong&gt;27&lt;/strong&gt; 2017-2028 (2016).&lt;/p&gt;</content><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><summary type="html">This is a placeholder for a lengthy post about mass-scaling simulated tempering, supplying a few details on the theory, providing an explanation of the OpenMM implementation, and linking to the github entry for an example with Trpcage folding.</summary></entry></feed>
+&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
+&lt;/script&gt;
+
+&lt;h1 id=&quot;tempering&quot;&gt;Tempering&lt;/h1&gt;
+
+&lt;p&gt;Sampling of the equilibrium state of a system with Hamiltonian &lt;em&gt;H&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; can be hampered by barriers in the system free energy landscape. These barriers can be more easily crossed without prior knowledge of the free energy landscape via tempering the Hamiltonian.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/MSST/StrongTransitionPicture.jpg&quot; alt=&quot;Energy Landscape Example&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure:&lt;/strong&gt; The system order parameter at various realizations of a the Hamiltonian.&lt;/p&gt;
+
+&lt;p&gt;The Hamiltonian is most commonly tempered by raising the system temperature (as the name implies).&lt;/p&gt;
+
+&lt;h1 id=&quot;parallel-tempering-aka-replica-exchange-molecular-dynamics-remd&quot;&gt;Parallel Tempering aka Replica Exchange Molecular Dynamics (REMD)&lt;/h1&gt;
+
+&lt;p&gt;With no prior knowledge of the system, parallel tempering with temperature is a simplistic method to quickly sample the equilibrium state of a Hamiltonian &lt;em&gt;H&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Typically, MD trajectories in each Hamiltonian are run in parallel and periodically swap temperature following the Metropolis-Hastings criterion.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p = \text{min}\left(1,e^{(U_i - U_j)(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j}) }\right)&lt;/script&gt;
+
+&lt;p&gt;After successful temperature exchange, velocities are rescaled for what we should expect in the new temperature condition.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;v_i = v_i \sqrt{\frac{T_j}{T_i}},\quad  v_j = v_j \sqrt{\frac{T_i}{T_j}}&lt;/script&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/MSST/potential_overlap.jpg&quot; alt=&quot;REMD schematic&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure:&lt;/strong&gt; Illustration of REMD with temperature replicas.&lt;/p&gt;
+
+&lt;h1 id=&quot;simulated-tempering-st&quot;&gt;Simulated Tempering (ST)&lt;/h1&gt;
+
+&lt;p&gt;Running parallel trajectories can be extremely expensive, so much so that the computational efficiency of sampling might be less than that of a typical MD simulation.&lt;/p&gt;
+
+&lt;p&gt;Simulated Tempering (ST) employs a single trajectory with a temperature exchange criterion intended to achieve a random walk in temperature, requiring knowledge of the free energy landscape. MC swaps are similar to parallel tempering:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p = \text{min}\left(1,e^{(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j})U_i + a(T_i) - a(T_j)}\right)&lt;/script&gt;
+
+&lt;p&gt;Where &lt;em&gt;a&lt;/em&gt;(&lt;strong&gt;&lt;em&gt;T&lt;/em&gt;&lt;/strong&gt;) is parameterized to both achieve a random walk in temperature space and preserve balance. Velocities are also rescaled, as in REMD:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;v' = v \sqrt{\frac{T_j}{T_i}}&lt;/script&gt;
+
+&lt;p&gt;&lt;em&gt;a&lt;/em&gt;(&lt;strong&gt;&lt;em&gt;T&lt;/em&gt;&lt;/strong&gt;) is most commonly determined by:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Sufficient sampling with parallel tempering to estimate &lt;em&gt;a&lt;/em&gt;(&lt;strong&gt;&lt;em&gt;T&lt;/em&gt;&lt;/strong&gt;) via WHAM or MBAR&lt;/li&gt;
+  &lt;li&gt;On the fly using the Wang-Landau algorithm&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://openmm.org/&quot;&gt;OpenMM&lt;/a&gt; provides a very simple environment for writing efficient GPU-accelerated MD simulations.
+GPU acceleration can enormously increase the computational efficiency of ST relative to REMD!&lt;/p&gt;
+
+&lt;h1 id=&quot;mass-scaling-simulated-tempering-msst&quot;&gt;Mass-Scaling Simulated Tempering (MSST)&lt;/h1&gt;
+
+&lt;p&gt;Molecular motion at high temperatures employed in tempering can require the use of small time-steps to avoid accumulative errors in kinetic energy. Time-step sizes can be scaled with temperature, but this is a needless cost.&lt;/p&gt;
+
+&lt;p&gt;By manipulating the masses of all atoms in the system as dependent on temperature we can utilize one optimal time-step and which does not require velocity scaling!&lt;/p&gt;
+
+&lt;p&gt;We may make all masses scale as &lt;script type=&quot;math/tex&quot;&gt;m_k(T_i) = m_{0,k}\frac{T_i}{T_0}&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;m_0&lt;/script&gt; are the masses at initial the lowest temperature &lt;script type=&quot;math/tex&quot;&gt;T_0&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;As such, we have the kinetic energy: &lt;script type=&quot;math/tex&quot;&gt;K_i(v) = \sum^N_{k = 1}\frac{m_{0,k} \frac{T_i}{T_0}\mathbf{v}_k^2}{2}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;And the ensemble weight factor: &lt;script type=&quot;math/tex&quot;&gt;w(q,v,T_i) = e^{-K_i(v)-U(q)/k_\text{B}T_i + g(T_i)} = \\ \text{exp} [{\sum^N_{k = 1}\frac{m_{0,k} \frac{T_i}{T_0}\mathbf{v}_k^2}{2 k_\text{B} T_i}-(U(q)/k_\text{B}T_i) + g(T_i)}]&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;in which we see that the velocity distributions are independent of temperature.&lt;/p&gt;
+
+&lt;p&gt;Additionally, rather than scaling all masses in the system, a subset of the system may be mass-scaled by some arbitrary amount &lt;script type=&quot;math/tex&quot;&gt;\alpha&lt;/script&gt;, such that &lt;script type=&quot;math/tex&quot;&gt;m_k(T_i) = \alpha_{k,i} m_{0,k}\frac{T_i}{T_0}&lt;/script&gt; and velocities will then be re-scaled upon changing temperature as &lt;script type=&quot;math/tex&quot;&gt;v_k' = \sqrt{\frac{\alpha_{k,i}}{\alpha_{k,j}}} \sqrt{\frac{T_j}{T_i}} v_k&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;Doing this of course causes the loss of the special ability to find one, optimal time-step for the simulation, but it can help reduce errors in integration, as we detail in simulations of LJ fluid, coarse-grained lipid simulation, and atomistic Trp-cage folding.[1] Additionally, the scaling of separate groups of atoms, such as protein hydrogens and sidechains to decrease viscosity, has been used to enhance sampling in protein simulations.[2]&lt;/p&gt;
+
+&lt;p&gt;Below is detailed the MSST implementation workflow in OpenMM, for which there is an example application with Trp-cage folding following the classic protein folding paper by Simmerling et. al.[3] &lt;a href=&quot;https://github.com/gpantel/MD_methods-and-analysis/tree/master/MSST&quot;&gt;on my github&lt;/a&gt;. This is a “hack” of OpenMM head developer &lt;a href=&quot;https://github.com/peastman&quot;&gt;Peter Eastman&lt;/a&gt;’s simulatedtempering.py.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/MSST/MSST_workflow.jpg&quot; alt=&quot;MSST workflow&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Figure:&lt;/strong&gt; Workflow for the MSST implementation in OpenMM.&lt;/p&gt;
+
+&lt;p&gt;The  MSST method, or its accompanying Mass-Scaling Replica Exchange Method,[4,5] may be used to lengthen the time-step of simulations employing tempering. In most cases the change to velocities will often not matter as tempering simulations are conducted to measure ensemble-averaged structural proterties, only dependent on &lt;script type=&quot;math/tex&quot;&gt;U(\mathbf{q})&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;Please read and cite: T. Nagai, G.A. Pantelopulos, T. Takahashi, &amp;amp; J.E. Straub “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” &lt;em&gt;J. Comp. Chem.&lt;/em&gt; &lt;strong&gt;27&lt;/strong&gt; 2017-2028 (2016).&lt;/p&gt;
+
+&lt;p&gt;References:&lt;br /&gt;
+[1] T. Nagai, G.A. Pantelopulos, T. Takahashi, &amp;amp; J.E. Straub “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” &lt;em&gt;J. Comp. Chem.&lt;/em&gt; &lt;strong&gt;27&lt;/strong&gt; 2017-2028 (2016).&lt;br /&gt;
+[2] Lin, I.-C. &amp;amp; Tuckerman, M. E. “Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses,” &lt;em&gt;J. Phys. Chem. B&lt;/em&gt; &lt;strong&gt;114&lt;/strong&gt;, 15935–15940 (2010).&lt;br /&gt;
+[3] Simmerling, C., Strockbine, B. &amp;amp; Roitberg, A. E. “All-atom structure prediction and folding simulations of a stable protein,” &lt;em&gt;J. Am. Chem. Soc.&lt;/em&gt; &lt;strong&gt;124&lt;/strong&gt;, 11258–11259 (2002).&lt;br /&gt;
+[4] Nagai, T. &amp;amp; Takahashi, T. “Mass-scaling replica-exchange molecular dynamics optimizes computational resources with simpler algorithm,” &lt;em&gt;J. Chem. Phys.&lt;/em&gt; &lt;strong&gt;141&lt;/strong&gt;, (2014).&lt;br /&gt;
+[5] Nagai, T. “General Formalism of Mass Scaling Approach for Replica-Exchange Molecular Dynamics and its Application,” &lt;em&gt;J. Phys. Soc. Japan&lt;/em&gt; &lt;strong&gt;86&lt;/strong&gt;, 14003 (2017).&lt;/p&gt;</content><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><summary type="html">The simulated and parallel tempering are briefly discussed. I explain the MSST method and present its implementation in OpenMM.</summary></entry></feed>

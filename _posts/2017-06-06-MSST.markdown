@@ -1,10 +1,91 @@
 ---
 layout: single
-title:  "Placeholder for MSST post"
-date:   2017-06-06 02:00:00 -0400
-categories: computational method
+title:  "Mass-Scaling Simulated Tempering for Optimizing Time-steps"
+date:   2017-06-06 14:45:00 -0400
+categories: computational-method
 ---
 
-This is a placeholder for a lengthy post about mass-scaling simulated tempering, supplying a few details on the theory, providing an explanation of the OpenMM implementation, and linking to the github entry for an example with Trpcage folding.
+The simulated and parallel tempering are briefly discussed. I explain the MSST method and present its implementation in OpenMM.
 
-Please read and cite: "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," T. Nagai, G.A. Pantelopulos, T. Takahashi, J.E. Straub *J. Comp. Chem.* **27** 2017-2028 (2016).
+[comment]: <> This must be added to enable MathJax with kramdown on github pages
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+# Tempering
+
+Sampling of the equilibrium state of a system with Hamiltonian *H<sub>i</sub>* can be hampered by barriers in the system free energy landscape. These barriers can be more easily crossed without prior knowledge of the free energy landscape via tempering the Hamiltonian.
+
+![Energy Landscape Example]({{ site.url }}/assets/MSST/StrongTransitionPicture.jpg)  
+**Figure:** The system order parameter at various realizations of a the Hamiltonian.
+
+The Hamiltonian is most commonly tempered by raising the system temperature (as the name implies).
+
+# Parallel Tempering aka Replica Exchange Molecular Dynamics (REMD)
+
+With no prior knowledge of the system, parallel tempering with temperature is a simplistic method to quickly sample the equilibrium state of a Hamiltonian *H<sub>i</sub>*.
+
+Typically, MD trajectories in each Hamiltonian are run in parallel and periodically swap temperature following the Metropolis-Hastings criterion.
+
+$$p = \text{min}\left(1,e^{(U_i - U_j)(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j}) }\right)$$
+
+After successful temperature exchange, velocities are rescaled for what we should expect in the new temperature condition.
+
+$$v_i = v_i \sqrt{\frac{T_j}{T_i}},\quad  v_j = v_j \sqrt{\frac{T_i}{T_j}}$$
+
+![REMD schematic]({{ site.url }}/assets/MSST/potential_overlap.jpg)  
+**Figure:** Illustration of REMD with temperature replicas.
+
+# Simulated Tempering (ST)
+
+Running parallel trajectories can be extremely expensive, so much so that the computational efficiency of sampling might be less than that of a typical MD simulation.
+
+Simulated Tempering (ST) employs a single trajectory with a temperature exchange criterion intended to achieve a random walk in temperature, requiring knowledge of the free energy landscape. MC swaps are similar to parallel tempering:
+
+$$p = \text{min}\left(1,e^{(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j})U_i + a(T_i) - a(T_j)}\right)$$
+
+Where *a*(***T***) is parameterized to both achieve a random walk in temperature space and preserve balance. Velocities are also rescaled, as in REMD:
+
+$$v' = v \sqrt{\frac{T_j}{T_i}}$$
+
+*a*(***T***) is most commonly determined by:
+1. Sufficient sampling with parallel tempering to estimate *a*(***T***) via WHAM or MBAR
+2. On the fly using the Wang-Landau algorithm
+
+[OpenMM](http://openmm.org/) provides a very simple environment for writing efficient GPU-accelerated MD simulations.
+GPU acceleration can enormously increase the computational efficiency of ST relative to REMD!
+
+# Mass-Scaling Simulated Tempering (MSST)
+
+Molecular motion at high temperatures employed in tempering can require the use of small time-steps to avoid accumulative errors in kinetic energy. Time-step sizes can be scaled with temperature, but this is a needless cost.
+
+By manipulating the masses of all atoms in the system as dependent on temperature we can utilize one optimal time-step and which does not require velocity scaling!
+
+We may make all masses scale as $$m_k(T_i) = m_{0,k}\frac{T_i}{T_0}$$ where $$m_0$$ are the masses at initial the lowest temperature $$T_0$$.
+
+As such, we have the kinetic energy: $$K_i(v) = \sum^N_{k = 1}\frac{m_{0,k} \frac{T_i}{T_0}\mathbf{v}_k^2}{2}$$
+
+And the ensemble weight factor: $$w(q,v,T_i) = e^{-K_i(v)-U(q)/k_\text{B}T_i + g(T_i)} = \\ \text{exp} [{\sum^N_{k = 1}\frac{m_{0,k} \frac{T_i}{T_0}\mathbf{v}_k^2}{2 k_\text{B} T_i}-(U(q)/k_\text{B}T_i) + g(T_i)}]$$
+
+in which we see that the velocity distributions are independent of temperature. 
+
+
+Additionally, rather than scaling all masses in the system, a subset of the system may be mass-scaled by some arbitrary amount $$\alpha$$, such that $$m_k(T_i) = \alpha_{k,i} m_{0,k}\frac{T_i}{T_0}$$ and velocities will then be re-scaled upon changing temperature as $$v_k' = \sqrt{\frac{\alpha_{k,i}}{\alpha_{k,j}}} \sqrt{\frac{T_j}{T_i}} v_k$$.
+
+Doing this of course causes the loss of the special ability to find one, optimal time-step for the simulation, but it can help reduce errors in integration, as we detail in simulations of LJ fluid, coarse-grained lipid simulation, and atomistic Trp-cage folding.[1] Additionally, the scaling of separate groups of atoms, such as protein hydrogens and sidechains to decrease viscosity, has been used to enhance sampling in protein simulations.[2]
+
+Below is detailed the MSST implementation workflow in OpenMM, for which there is an example application with Trp-cage folding following the classic protein folding paper by Simmerling et. al.[3] [on my github](https://github.com/gpantel/MD_methods-and-analysis/tree/master/MSST). This is a "hack" of OpenMM head developer [Peter Eastman](https://github.com/peastman)'s simulatedtempering.py.
+
+![MSST workflow]({{ site.url }}/assets/MSST/MSST_workflow.jpg)  
+**Figure:** Workflow for the MSST implementation in OpenMM.
+
+The  MSST method, or its accompanying Mass-Scaling Replica Exchange Method,[4,5] may be used to lengthen the time-step of simulations employing tempering. In most cases the change to velocities will often not matter as tempering simulations are conducted to measure ensemble-averaged structural proterties, only dependent on $$U(\mathbf{q})$$.
+
+Please read and cite: T. Nagai, G.A. Pantelopulos, T. Takahashi, & J.E. Straub "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," *J. Comp. Chem.* **27** 2017-2028 (2016).
+
+References:  
+[1] T. Nagai, G.A. Pantelopulos, T. Takahashi, & J.E. Straub "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," *J. Comp. Chem.* **27** 2017-2028 (2016).  
+[2] Lin, I.-C. & Tuckerman, M. E. "Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses," *J. Phys. Chem. B* **114**, 15935–15940 (2010).  
+[3] Simmerling, C., Strockbine, B. & Roitberg, A. E. "All-atom structure prediction and folding simulations of a stable protein," *J. Am. Chem. Soc.* **124**, 11258–11259 (2002).  
+[4] Nagai, T. & Takahashi, T. "Mass-scaling replica-exchange molecular dynamics optimizes computational resources with simpler algorithm," *J. Chem. Phys.* **141**, (2014).  
+[5] Nagai, T. "General Formalism of Mass Scaling Approach for Replica-Exchange Molecular Dynamics and its Application," *J. Phys. Soc. Japan* **86**, 14003 (2017).

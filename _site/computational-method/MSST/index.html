@@ -1,0 +1,460 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Mass-Scaling Simulated Tempering for Optimizing Time-steps - Scratchings on biomoleclar simulation and theory</title>
+
+
+
+
+<meta name="description" content="The simulated and parallel tempering are briefly discussed. I explain the MSST method and present its implementation in OpenMM.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomoleclar simulation and theory">
+<meta property="og:title" content="Mass-Scaling Simulated Tempering for Optimizing Time-steps">
+
+
+  <link rel="canonical" href="http://localhost:4000/computational-method/MSST/">
+  <meta property="og:url" content="http://localhost:4000/computational-method/MSST/">
+
+
+
+  <meta property="og:description" content="The simulated and parallel tempering are briefly discussed. I explain the MSST method and present its implementation in OpenMM.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2017-06-06T14:45:00-04:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomoleclar simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomoleclar simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am PhD student working with John E. Straub aspiring to the accurate modeling of the cell membrane via atomistic simulation.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Boston University</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Mass-Scaling Simulated Tempering for Optimizing Time-steps">
+    <meta itemprop="description" content="The simulated and parallel tempering are briefly discussed. I explain the MSST method and present its implementation in OpenMM.">
+    <meta itemprop="datePublished" content="June 06, 2017">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Mass-Scaling Simulated Tempering for Optimizing Time-steps
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>The simulated and parallel tempering are briefly discussed. I explain the MSST method and present its implementation in OpenMM.</p>
+
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1 id="tempering">Tempering</h1>
+
+<p>Sampling of the equilibrium state of a system with Hamiltonian <em>H<sub>i</sub></em> can be hampered by barriers in the system free energy landscape. These barriers can be more easily crossed without prior knowledge of the free energy landscape via tempering the Hamiltonian.</p>
+
+<p><img src="http://localhost:4000/assets/MSST/StrongTransitionPicture.jpg" alt="Energy Landscape Example" /><br />
+<strong>Figure:</strong> The system order parameter at various realizations of a the Hamiltonian.</p>
+
+<p>The Hamiltonian is most commonly tempered by raising the system temperature (as the name implies).</p>
+
+<h1 id="parallel-tempering-aka-replica-exchange-molecular-dynamics-remd">Parallel Tempering aka Replica Exchange Molecular Dynamics (REMD)</h1>
+
+<p>With no prior knowledge of the system, parallel tempering with temperature is a simplistic method to quickly sample the equilibrium state of a Hamiltonian <em>H<sub>i</sub></em>.</p>
+
+<p>Typically, MD trajectories in each Hamiltonian are run in parallel and periodically swap temperature following the Metropolis-Hastings criterion.</p>
+
+<script type="math/tex; mode=display">p = \text{min}\left(1,e^{(U_i - U_j)(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j}) }\right)</script>
+
+<p>After successful temperature exchange, velocities are rescaled for what we should expect in the new temperature condition.</p>
+
+<script type="math/tex; mode=display">v_i = v_i \sqrt{\frac{T_j}{T_i}},\quad  v_j = v_j \sqrt{\frac{T_i}{T_j}}</script>
+
+<p><img src="http://localhost:4000/assets/MSST/potential_overlap.jpg" alt="REMD schematic" /><br />
+<strong>Figure:</strong> Illustration of REMD with temperature replicas.</p>
+
+<h1 id="simulated-tempering-st">Simulated Tempering (ST)</h1>
+
+<p>Running parallel trajectories can be extremely expensive, so much so that the computational efficiency of sampling might be less than that of a typical MD simulation.</p>
+
+<p>Simulated Tempering (ST) employs a single trajectory with a temperature exchange criterion intended to achieve a random walk in temperature, requiring knowledge of the free energy landscape. MC swaps are similar to parallel tempering:</p>
+
+<script type="math/tex; mode=display">p = \text{min}\left(1,e^{(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j})U_i + a(T_i) - a(T_j)}\right)</script>
+
+<p>Where <em>a</em>(<strong><em>T</em></strong>) is parameterized to both achieve a random walk in temperature space and preserve balance. Velocities are also rescaled, as in REMD:</p>
+
+<script type="math/tex; mode=display">v' = v \sqrt{\frac{T_j}{T_i}}</script>
+
+<p><em>a</em>(<strong><em>T</em></strong>) is most commonly determined by:</p>
+<ol>
+  <li>Sufficient sampling with parallel tempering to estimate <em>a</em>(<strong><em>T</em></strong>) via WHAM or MBAR</li>
+  <li>On the fly using the Wang-Landau algorithm</li>
+</ol>
+
+<p><a href="http://openmm.org/">OpenMM</a> provides a very simple environment for writing efficient GPU-accelerated MD simulations.
+GPU acceleration can enormously increase the computational efficiency of ST relative to REMD!</p>
+
+<h1 id="mass-scaling-simulated-tempering-msst">Mass-Scaling Simulated Tempering (MSST)</h1>
+
+<p>Molecular motion at high temperatures employed in tempering can require the use of small time-steps to avoid accumulative errors in kinetic energy. Time-step sizes can be scaled with temperature, but this is a needless cost.</p>
+
+<p>By manipulating the masses of all atoms in the system as dependent on temperature we can utilize one optimal time-step and which does not require velocity scaling!</p>
+
+<p>We may make all masses scale as <script type="math/tex">m_k(T_i) = m_{0,k}\frac{T_i}{T_0}</script> where <script type="math/tex">m_0</script> are the masses at initial the lowest temperature <script type="math/tex">T_0</script>.</p>
+
+<p>As such, we have the kinetic energy: <script type="math/tex">K_i(v) = \sum^N_{k = 1}\frac{m_{0,k} \frac{T_i}{T_0}\mathbf{v}_k^2}{2}</script></p>
+
+<p>And the ensemble weight factor: <script type="math/tex">w(q,v,T_i) = e^{-K_i(v)-U(q)/k_\text{B}T_i + g(T_i)} = \\ \text{exp} [{\sum^N_{k = 1}\frac{m_{0,k} \frac{T_i}{T_0}\mathbf{v}_k^2}{2 k_\text{B} T_i}-(U(q)/k_\text{B}T_i) + g(T_i)}]</script></p>
+
+<p>in which we see that the velocity distributions are independent of temperature.</p>
+
+<p>Additionally, rather than scaling all masses in the system, a subset of the system may be mass-scaled by some arbitrary amount <script type="math/tex">\alpha</script>, such that <script type="math/tex">m_k(T_i) = \alpha_{k,i} m_{0,k}\frac{T_i}{T_0}</script> and velocities will then be re-scaled upon changing temperature as <script type="math/tex">v_k' = \sqrt{\frac{\alpha_{k,i}}{\alpha_{k,j}}} \sqrt{\frac{T_j}{T_i}} v_k</script>.</p>
+
+<p>Doing this of course causes the loss of the special ability to find one, optimal time-step for the simulation, but it can help reduce errors in integration, as we detail in simulations of LJ fluid, coarse-grained lipid simulation, and atomistic Trp-cage folding.[1] Additionally, the scaling of separate groups of atoms, such as protein hydrogens and sidechains to decrease viscosity, has been used to enhance sampling in protein simulations.[2]</p>
+
+<p>Below is detailed the MSST implementation workflow in OpenMM, for which there is an example application with Trp-cage folding following the classic protein folding paper by Simmerling et. al.[3] <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/MSST">on my github</a>. This is a “hack” of OpenMM head developer <a href="https://github.com/peastman">Peter Eastman</a>’s simulatedtempering.py.</p>
+
+<p><img src="http://localhost:4000/assets/MSST/MSST_workflow.jpg" alt="MSST workflow" /><br />
+<strong>Figure:</strong> Workflow for the MSST implementation in OpenMM.</p>
+
+<p>The  MSST method, or its accompanying Mass-Scaling Replica Exchange Method,[4,5] may be used to lengthen the time-step of simulations employing tempering. In most cases the change to velocities will often not matter as tempering simulations are conducted to measure ensemble-averaged structural proterties, only dependent on <script type="math/tex">U(\mathbf{q})</script>.</p>
+
+<p>Please read and cite: T. Nagai, G.A. Pantelopulos, T. Takahashi, &amp; J.E. Straub “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” <em>J. Comp. Chem.</em> <strong>27</strong> 2017-2028 (2016).</p>
+
+<p>References:<br />
+[1] T. Nagai, G.A. Pantelopulos, T. Takahashi, &amp; J.E. Straub “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” <em>J. Comp. Chem.</em> <strong>27</strong> 2017-2028 (2016).<br />
+[2] Lin, I.-C. &amp; Tuckerman, M. E. “Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses,” <em>J. Phys. Chem. B</em> <strong>114</strong>, 15935–15940 (2010).<br />
+[3] Simmerling, C., Strockbine, B. &amp; Roitberg, A. E. “All-atom structure prediction and folding simulations of a stable protein,” <em>J. Am. Chem. Soc.</em> <strong>124</strong>, 11258–11259 (2002).<br />
+[4] Nagai, T. &amp; Takahashi, T. “Mass-scaling replica-exchange molecular dynamics optimizes computational resources with simpler algorithm,” <em>J. Chem. Phys.</em> <strong>141</strong>, (2014).<br />
+[5] Nagai, T. “General Formalism of Mass Scaling Approach for Replica-Exchange Molecular Dynamics and its Application,” <em>J. Phys. Soc. Japan</em> <strong>86</strong>, 14003 (2017).</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#computational-method" class="page__taxonomy-item" rel="tag">computational-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-06-06T14:45:00-04:00">June 06, 2017</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Mass-Scaling Simulated Tempering for Optimizing Time-steps http://localhost:4000/computational-method/MSST/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/computational-method/MSST/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/computational-method/MSST/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/computational-method/MSST/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2017 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>
