@@ -79,7 +79,7 @@ analytics:
 author:
   name             : "George A. Pantelopulos"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am PhD student in the Straub Group at Boston University."
+  bio              : "I am PhD student working with John E. Straub aspiring to the accurate modeling of the cell membrane via atomistic simulation."
   cv               : ""
   location         : "Boston University"
   email            : "gpantel@bu.edu"
