@@ -80,6 +80,7 @@ author:
   name             : "George A. Pantelopulos"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "I am PhD student in the Straub Group at Boston University."
+  cv               : ""
   location         : "Boston University"
   email            : "gpantel@bu.edu"
   uri              :
@@ -106,7 +107,6 @@ author:
   weibo            :
   xing             :
   youtube          : # "https://youtube.com/c/MichaelRoseDesign"
-
 
 # Reading Files
 include:
