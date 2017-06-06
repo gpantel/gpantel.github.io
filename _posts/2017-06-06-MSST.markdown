@@ -72,7 +72,10 @@ in which we see that the velocity distributions are independent of temperature.
 
 Additionally, rather than scaling all masses in the system, a subset of the system may be mass-scaled by some arbitrary amount $$\alpha$$, such that $$m_k(T_i) = \alpha_{k,i} m_{0,k}\frac{T_i}{T_0}$$ and velocities will then be re-scaled upon changing temperature as $$v_k' = \sqrt{\frac{\alpha_{k,i}}{\alpha_{k,j}}} \sqrt{\frac{T_j}{T_i}} v_k$$.
 
-Doing this of course causes the loss of the special ability to find one, optimal time-step for the simulation, but it can help reduce errors in integration, as we detail in simulations of LJ fluid, coarse-grained lipid simulation, and atomistic Trp-cage folding.[1] Additionally, the scaling of separate groups of atoms, such as protein hydrogens and sidechains to decrease viscosity, has been used to enhance sampling in protein simulations.[2]
+Doing this of course causes the loss of the special ability to find one optimal time-step for the simulation, but it can help reduce errors in integration. Additionally, the scaling of separate groups of atoms, such as protein hydrogens and sidechains to decrease viscosity, has been used to enhance sampling in protein simulations.[1]
+
+
+In a 2016 paper,[2] we performed MSST simulations of LJ fluid, coarse-grained lipid simulation, and atomistic Trp-cage folding, demonstrating the ability to use longer time-steps and reduce integration errors.
 
 Below is detailed the MSST implementation workflow in OpenMM, for which there is an example application with Trp-cage folding following the classic protein folding paper by Simmerling et. al.[3] [on my github](https://github.com/gpantel/MD_methods-and-analysis/tree/master/MSST). This is a "hack" of OpenMM head developer [Peter Eastman](https://github.com/peastman)'s simulatedtempering.py.
 
@@ -84,8 +87,8 @@ The  MSST method, or its accompanying Mass-Scaling Replica Exchange Method,[4,5]
 Please read and cite: T. Nagai, G.A. Pantelopulos, T. Takahashi, & J.E. Straub "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," *J. Comp. Chem.* **27** 2017-2028 (2016).
 
 References:  
-[1] T. Nagai, G.A. Pantelopulos, T. Takahashi, & J.E. Straub "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," *J. Comp. Chem.* **27** 2017-2028 (2016).  
-[2] Lin, I.-C. & Tuckerman, M. E. "Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses," *J. Phys. Chem. B* **114**, 15935–15940 (2010).  
+[1] Lin, I.-C. & Tuckerman, M. E. "Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses," *J. Phys. Chem. B* **114**, 15935–15940 (2010).  
+[2] T. Nagai, G.A. Pantelopulos, T. Takahashi, & J.E. Straub "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," *J. Comp. Chem.* **27** 2017-2028 (2016).
 [3] Simmerling, C., Strockbine, B. & Roitberg, A. E. "All-atom structure prediction and folding simulations of a stable protein," *J. Am. Chem. Soc.* **124**, 11258–11259 (2002).  
 [4] Nagai, T. & Takahashi, T. "Mass-scaling replica-exchange molecular dynamics optimizes computational resources with simpler algorithm," *J. Chem. Phys.* **141**, (2014).  
 [5] Nagai, T. "General Formalism of Mass Scaling Approach for Replica-Exchange Molecular Dynamics and its Application," *J. Phys. Soc. Japan* **86**, 14003 (2017).

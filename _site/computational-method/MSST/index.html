@@ -350,7 +350,9 @@ GPU acceleration can enormously increase the computational efficiency of ST rela
 
 <p>Additionally, rather than scaling all masses in the system, a subset of the system may be mass-scaled by some arbitrary amount <script type="math/tex">\alpha</script>, such that <script type="math/tex">m_k(T_i) = \alpha_{k,i} m_{0,k}\frac{T_i}{T_0}</script> and velocities will then be re-scaled upon changing temperature as <script type="math/tex">v_k' = \sqrt{\frac{\alpha_{k,i}}{\alpha_{k,j}}} \sqrt{\frac{T_j}{T_i}} v_k</script>.</p>
 
-<p>Doing this of course causes the loss of the special ability to find one, optimal time-step for the simulation, but it can help reduce errors in integration, as we detail in simulations of LJ fluid, coarse-grained lipid simulation, and atomistic Trp-cage folding.[1] Additionally, the scaling of separate groups of atoms, such as protein hydrogens and sidechains to decrease viscosity, has been used to enhance sampling in protein simulations.[2]</p>
+<p>Doing this of course causes the loss of the special ability to find one optimal time-step for the simulation, but it can help reduce errors in integration. Additionally, the scaling of separate groups of atoms, such as protein hydrogens and sidechains to decrease viscosity, has been used to enhance sampling in protein simulations.[1]</p>
+
+<p>In a 2016 paper,[2] we performed MSST simulations of LJ fluid, coarse-grained lipid simulation, and atomistic Trp-cage folding, demonstrating the ability to use longer time-steps and reduce integration errors.</p>
 
 <p>Below is detailed the MSST implementation workflow in OpenMM, for which there is an example application with Trp-cage folding following the classic protein folding paper by Simmerling et. al.[3] <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/MSST">on my github</a>. This is a “hack” of OpenMM head developer <a href="https://github.com/peastman">Peter Eastman</a>’s simulatedtempering.py.</p>
 
@@ -362,8 +364,8 @@ GPU acceleration can enormously increase the computational efficiency of ST rela
 <p>Please read and cite: T. Nagai, G.A. Pantelopulos, T. Takahashi, &amp; J.E. Straub “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” <em>J. Comp. Chem.</em> <strong>27</strong> 2017-2028 (2016).</p>
 
 <p>References:<br />
-[1] T. Nagai, G.A. Pantelopulos, T. Takahashi, &amp; J.E. Straub “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” <em>J. Comp. Chem.</em> <strong>27</strong> 2017-2028 (2016).<br />
-[2] Lin, I.-C. &amp; Tuckerman, M. E. “Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses,” <em>J. Phys. Chem. B</em> <strong>114</strong>, 15935–15940 (2010).<br />
+[1] Lin, I.-C. &amp; Tuckerman, M. E. “Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses,” <em>J. Phys. Chem. B</em> <strong>114</strong>, 15935–15940 (2010).<br />
+[2] T. Nagai, G.A. Pantelopulos, T. Takahashi, &amp; J.E. Straub “On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics,” <em>J. Comp. Chem.</em> <strong>27</strong> 2017-2028 (2016).
 [3] Simmerling, C., Strockbine, B. &amp; Roitberg, A. E. “All-atom structure prediction and folding simulations of a stable protein,” <em>J. Am. Chem. Soc.</em> <strong>124</strong>, 11258–11259 (2002).<br />
 [4] Nagai, T. &amp; Takahashi, T. “Mass-scaling replica-exchange molecular dynamics optimizes computational resources with simpler algorithm,” <em>J. Chem. Phys.</em> <strong>141</strong>, (2014).<br />
 [5] Nagai, T. “General Formalism of Mass Scaling Approach for Replica-Exchange Molecular Dynamics and its Application,” <em>J. Phys. Soc. Japan</em> <strong>86</strong>, 14003 (2017).</p>
