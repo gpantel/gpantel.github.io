@@ -33,8 +33,10 @@ After successful temperature exchange, velocities are rescaled for what we shoul
 
 $$v_i = v_i \sqrt{\frac{T_j}{T_i}},\quad  v_j = v_j \sqrt{\frac{T_i}{T_j}}$$
 
+The most typical method to attempt to exchange *i* and *j* simulation conditions is to alternatively select even and odd-numbered pairs of most-similar (neighboring) simulation conditions.
+
 ![REMD schematic]({{ site.url }}/assets/MSST/potential_overlap.jpg)  
-**Figure:** Illustration of REMD with temperature replicas.
+**Figure:** Illustration of REMD with temperature replicas using even-odd pair neighbor swapping.
 
 # Simulated Tempering (ST)
 
