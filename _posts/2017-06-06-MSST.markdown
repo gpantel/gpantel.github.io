@@ -69,7 +69,7 @@ As such, we have the kinetic energy: $$K_i(v) = \sum^N_{k = 1}\frac{m_{0,k} \fra
 
 And the ensemble weight factor: $$w(q,v,T_i) = e^{-K_i(v)-U(q)/k_\text{B}T_i + g(T_i)} = \\ \text{exp} [{\sum^N_{k = 1}\frac{m_{0,k} \frac{T_i}{T_0}\mathbf{v}_k^2}{2 k_\text{B} T_i}-(U(q)/k_\text{B}T_i) + g(T_i)}]$$
 
-in which we see that the velocity distributions are independent of temperature. 
+in which we see that the velocity distributions are independent of temperature!
 
 
 Additionally, rather than scaling all masses in the system, a subset of the system may be mass-scaled by some arbitrary amount $$\alpha$$, such that $$m_k(T_i) = \alpha_{k,i} m_{0,k}\frac{T_i}{T_0}$$ and velocities will then be re-scaled upon changing temperature as $$v_k' = \sqrt{\frac{\alpha_{k,i}}{\alpha_{k,j}}} \sqrt{\frac{T_j}{T_i}} v_k$$.
