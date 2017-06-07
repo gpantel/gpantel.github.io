@@ -47,7 +47,7 @@ I perform this clustering by
 
 On these clusters, I analyze the liquid crystal order parameter $$P_2$$ and the bond-orientational order parameter $$\Psi_6$$. I'll reserve discussion of these for future posts, perhaps. The mean order parameter of each cluster is evaluated, such that we have order parameters dependent on (*n,m*).
 
-The script which implements all of these measurements is available on [my github](), which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you'd like help to do this, but please read the comments first!
+The script which implements all of these measurements is available on [my github](https://github.com/gpantel/MD_methods-and-analysis/tree/master/membrane_analysis), which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you'd like help to do this, but please read the comments first!
 
 Please cite: G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Submitted* (2017)
 
