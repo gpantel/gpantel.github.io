@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  'Measuring structural order parameters in intra- and inter-leaflet lipid clusters'
-date:   2017-06-06 14:45:00 -0400
+date:   2017-06-07 14:20:00 -0400
 categories: analysis-method
 ---
 
@@ -45,7 +45,7 @@ I perform this clustering by
 ![Domain Schematic]({{ site.url }}/assets/Membrane/n_m_schematic.jpg)  
 **Figure** (Left) Illustration of one state of a ternay lipid bilayer of DPPC (blue), DIPC (red) and CHOL (black) with clusters identified in reference to the top leaflet. (Right) Representation of the lipid bilayer configuration at maximum values of *n* and *m*.
 
-On these clusters I analyze the liquid crystal order parameter $$P_2$$ and the bond-orientational order parameter $$\Psi_6$$. I'll reserve discussion of these for future posts, perhaps. The mean order parameter of each cluster is evaluated, such that we have order parameters dependent on (*n,m*).
+On these clusters I analyze the liquid crystal order parameter $$P_2$$ and the bond-orientational order parameter $$\Psi_6$$. I'll reserve discussion of these for future posts. The mean order parameter of each cluster is evaluated, such that we have order parameters dependent on (*n,m*).
 
 A script which implements all of these measurements is available on [my github](https://github.com/gpantel/MD_methods-and-analysis/tree/master/membrane_analysis), which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you'd like help to do this, but please read the comments first!
 
