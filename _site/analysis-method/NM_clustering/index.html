@@ -300,35 +300,36 @@
 
 <h1 id="understanding-the-structure-of-lipid-domains">Understanding the structure of lipid domains</h1>
 
-<p>Using molecular dynamics simulations we can understand the structure of lipids at any point in time. With such detailed information we can ask questions like “How does the structure of a lipid depend on the <em>size</em> of a domain?”.</p>
+<p>Using molecular dynamics simulations we can understand the structure of lipids at any point in time <em>a priori</em>. With such detailed information we can ask questions like “How does the structure of a lipid depend on the <em>size</em> of a domain?”</p>
 
 <p>Of course we could answer this question as-is, but there is someting else very important to consider… lipid bilayers are a <em>bilayer</em> – the distribution of lipids is never symmetric across the two leaflets. So we should consider how many lipids are part of a domain in reference to each side of the membrane. This is to say, we should decompose the number of lipids involved in a domain into intra- and inter-leaflet lipids, and then measure the mean structural order for all lipids as dependent on the number of intra- (<em>n</em>) and inter- (<em>m</em>) leaflet lipids in the domain.</p>
 
 <p>Currently, only coarse-grained models of lipid mixtures can reach an equilibrium spatial and structural distribution. I use the DPPC:DIPC:CHOL mixture in the MARTINI coarse-grained forcefield to study some general feature of phase separation. Many other people do, too.</p>
 
 <p><img src="http://localhost:4000/assets/Membrane/Martini_models.jpg" alt="Domain Schematic" /><br />
-<strong>Figure:</strong> (Left) Atomistic DPPC (130 atoms!) (Center) Schematic of MARTINI lipid bead names and restraints that cause for formation of different phases (12 atoms and ~10x larger integration time-step than atomistic!) (Right) CHOL model from Melo et. al. [1] very rigid and uses virtual sites (v).</p>
+<strong>Figure:</strong> (Left) Atomistic DPPC (130 atoms!) (Center) Schematic of MARTINI lipid bead names and restraints that cause for formation of different phases (12 atoms and ~10x larger integration time-step than atomistic!) (Right) CHOL model from Melo et. al. [1] is very rigid and uses virtual sites (v).</p>
 
 <h1 id="clustering-lipids">Clustering lipids</h1>
 
-<p>How do we cluster lipids to discover these domains? Most clutering algorithms require an input of <em>k</em> numbers of clusters to discover. In our case, we don’t know how many clusters exist in the membrane at any point of time. We can use <a href="https://en.wikipedia.org/wiki/Single-linkage_clustering">hierarchical single-link distance-based clustering</a> (HCA), because it’s easy to understand, easy to use, and makes no assumption of the number of clusters. Also, it’s in <a href="ihttps://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.cluster.hierarchy.fclusterdata.html#scipy.cluster.hierarchy.fclusterdata">scipy</a>.</p>
+<p>How do we cluster lipids to discover these domains? Most clutering algorithms require an input of <em>k</em> numbers of clusters to be assigned. In our case, we don’t know how many clusters exist in the membrane at any point of time. We can use <a href="https://en.wikipedia.org/wiki/Single-linkage_clustering">hierarchical single-link distance-based clustering</a> (HCA), because it’s easy to understand, easy to use, and makes no assumption of the number of clusters. Also, it’s in <a href="ihttps://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.cluster.hierarchy.fclusterdata.html#scipy.cluster.hierarchy.fclusterdata">scipy</a>.</p>
 
-<p>Studies of lipid domain formation are typically initated from a ideally-mixed state where all lipids are in a L<sub>d</sub> thermodynamic phase. The L<sub>o</sub> thermodynamic phase forms as high melting temperature lipids (e.g. DPPC) and cholesterol (CHOL) aggregate. As such, I am only analyzing domains formed from DPPC and cholesterol. Additionally, DPPC and CHOL pack together most tightly about the lipid tails. Because DPPC has two lipid tails, I cluster each lipid tail individually.</p>
+<p>Studies of lipid domain formation are typically initated from an ideally-mixed state where all lipids are in a L<sub>d</sub> thermodynamic phase. The L<sub>o</sub> thermodynamic phase forms as high melting temperature lipids (e.g. DPPC) and cholesterol (CHOL) aggregate. As such, I am only analyzing domains formed from DPPC and cholesterol. Additionally, DPPC and CHOL pack together most tightly about the lipid tails. Because DPPC has two lipid tails, I cluster each lipid tail individually.</p>
 
 <p>I perform this clustering by</p>
 <ol>
-  <li>Identifying all clusters of intra-leaflet lipids tails (C2[A/B] beads on DPPC, centroid of R[1-5] on CHOL) using HCA with a cutoff of 5.8 angstroms.</li>
+  <li>Identifying all clusters of intra-leaflet lipids tails (C2A and C2B beads on DPPC, centroid of R[1-5] on CHOL) using HCA with a cutoff of 5.8 angstroms.</li>
   <li>For each intra-leaflet cluster, identify lipids in contact on the opposite leaflet by discovering lipid tails (C2[A/B] beads on DPPC, centroid of R[1-5] on CHOL) within a cutoff of 7.0 angstroms.</li>
 </ol>
 
 <p><img src="http://localhost:4000/assets/Membrane/n_m_schematic.jpg" alt="Domain Schematic" /><br />
 <strong>Figure</strong> (Left) Illustration of one state of a ternay lipid bilayer of DPPC (blue), DIPC (red) and CHOL (black) with clusters identified in reference to the top leaflet. (Right) Representation of the lipid bilayer configuration at maximum values of <em>n</em> and <em>m</em>.</p>
 
-<p>On these clusters, I analyze the liquid crystal order parameter <script type="math/tex">P_2</script> and the bond-orientational order parameter <script type="math/tex">\Psi_6</script>. I’ll reserve discussion of these for future posts, perhaps. The mean order parameter of each cluster is evaluated, such that we have order parameters dependent on (<em>n,m</em>).</p>
+<p>On these clusters I analyze the liquid crystal order parameter <script type="math/tex">P_2</script> and the bond-orientational order parameter <script type="math/tex">\Psi_6</script>. I’ll reserve discussion of these for future posts, perhaps. The mean order parameter of each cluster is evaluated, such that we have order parameters dependent on (<em>n,m</em>).</p>
 
-<p>The script which implements all of these measurements is available on <a href="">my github</a>, which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you’d like help to do this, but please read the comments first!</p>
+<p>A script which implements all of these measurements is available on <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/membrane_analysis">my github</a>, which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you’d like help to do this, but please read the comments first!</p>
 
-<p>Please cite: G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Submitted</em> (2017)</p>
+<p>Please cite:<br />
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Submitted</em> (2017)</p>
 
 <p>References:</p>
 <ol>

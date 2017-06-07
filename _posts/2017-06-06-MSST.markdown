@@ -86,7 +86,8 @@ Below is detailed the MSST implementation workflow in OpenMM, for which there is
 
 The  MSST method, or its accompanying Mass-Scaling Replica Exchange Method,[4,5] may be used to lengthen the time-step of simulations employing tempering. In most cases the change to velocities will often not matter as tempering simulations are conducted to measure ensemble-averaged structural proterties, only dependent on $$U(\mathbf{q})$$.
 
-Please read and cite: T. Nagai, G.A. Pantelopulos, T. Takahashi, & J.E. Straub "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," *J. Comp. Chem.* **27** 2017-2028 (2016).
+Please read and cite:  
+T. Nagai, G.A. Pantelopulos, T. Takahashi, & J.E. Straub "On the use of mass scaling for stable and efficient simulated tempering with molecular dynamics," *J. Comp. Chem.* **27** 2017-2028 (2016).
 
 References:  
 [1] Lin, I.-C. & Tuckerman, M. E. "Enhanced Conformational Sampling of Peptides via Reduced Side-Chain and Solvent Masses," *J. Phys. Chem. B* **114**, 15935–15940 (2010).  
