@@ -40,7 +40,7 @@ Studies of lipid domain formation are typically initated from an ideally-mixed s
 
 I perform this clustering by 
 1. Identifying all clusters of intra-leaflet lipids tails (C2A and C2B beads on DPPC, centroid of R[1-5] on CHOL) using HCA with a cutoff of 5.8 angstroms.
-2. For each intra-leaflet cluster, identify lipids in contact on the opposite leaflet by discovering lipid tails (C2[A/B] beads on DPPC, centroid of R[1-5] on CHOL) within a cutoff of 7.0 angstroms.
+2. For each intra-leaflet cluster, identify lipids in contact on the opposite leaflet by discovering lipid tails (C2A and C2B beads on DPPC, centroid of R[1-5] on CHOL) within a cutoff of 7.0 angstroms.
 
 ![Domain Schematic]({{ site.url }}/assets/Membrane/n_m_schematic.jpg)  
 **Figure** (Left) Illustration of one state of a ternay lipid bilayer of DPPC (blue), DIPC (red) and CHOL (black) with clusters identified in reference to the top leaflet. (Right) Representation of the lipid bilayer configuration at maximum values of *n* and *m*.
