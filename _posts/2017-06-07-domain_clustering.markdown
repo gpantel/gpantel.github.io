@@ -14,7 +14,7 @@ I discuss use of hierarchical clustering to identify intra- and inter-leaflet cl
 
 # Lipid phase separation
 
-The phase separation of complex mixtures of lipids in cell membranes has been the subject of hundreds of investigations. This phase separation can cause for the formation of "domains" of lipids in *different thermodynamic phases*. Liquid ordered (L<sub>o</sub>) and liquid disordered (L<sub>d</sub>) phases have been the subject of many studies.
+The phase separation of complex mixtures of lipids in cell membranes has been the subject of hundreds of investigations. This phase separation can cause for the formation of "domains" of lipids in *different thermodynamic phases*. Liquid ordered (L<sub>o</sub>) and liquid disordered (L<sub>d</sub>) phases have been the subject of many studies. A very simplified concept of phase separation is that, in a mixed state, all of the membrane exists in the L<sub>d</sub> phase, but as high melting temperature lipids (e.g. saturated lipids, sphingomyelin) aggregate together with cholesterol, the L<sub>o</sub> phase is formed.
 
 ![Domain Schematic]({{ site.url }}/assets/Membrane/Domain_Schematic_RB.jpg)  
 **Figure:** Illustration of a macroscopic phase separation in a ternary lipid mixture with proteins.
