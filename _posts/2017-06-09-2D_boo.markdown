@@ -36,7 +36,7 @@ For many years the character of 2D phase transitions in hard disks (2D circles t
 Pair-wise distance (*r*) correlation functions of $$\Psi_6^k$$ (*g<sub>6</sub>*(*r*)) and position (*g<sub>G</sub>*(*r*)) have been used to identify solid, hexatic, and liquid 2D phases. This is done based on the functional form of decay of the correlation over pair-wise distance in the Kosterlitz-Thouless-Halperin-Nelson-Young (KTHNY) theory of 2D melting:
 
 ![Illutration of Psi6]({{ site.url }}/assets/Membrane/2D_phase_paircorrelations.jpg)  
-**Figure** Example Voronoi tessellations of 2D systems in the solid, hexatic, and liquid state. Pair correlation functions of position (*g<sub>G</sub>*(*r*)) and $$\Psi_6^k$$ (*g<sub>6</sub>*(*r*)). Voronoi tessellations credited to [N. Vandewalle at GRASP](https://grasp-lab.org/2013/06/18/hexatic/).[3]
+**Figure** Example Voronoi tessellations of 2D systems in the solid, hexatic, and liquid state. Pair correlation functions of position (*g<sub>G</sub>*(*r*)) and $$\Psi_6^k$$ (*g<sub>6</sub>*(*r*)). $$T^* = k_{\text{B}}T/<U>$$ Voronoi tessellations credited to [N. Vandewalle at GRASP](https://grasp-lab.org/2013/06/18/hexatic/).[3]
 
 # Interest in lipid bilayers
 
