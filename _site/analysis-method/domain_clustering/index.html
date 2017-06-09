@@ -291,7 +291,7 @@
 
 <h1 id="lipid-phase-separation">Lipid phase separation</h1>
 
-<p>The phase separation of complex mixtures of lipids in cell membranes has been the subject of hundreds of investigations. This phase separation can cause for the formation of “domains” of lipids in <em>different thermodynamic phases</em>. Liquid ordered (L<sub>o</sub>) and liquid disordered (L<sub>d</sub>) phases have been the subject of many studies.</p>
+<p>The phase separation of complex mixtures of lipids in cell membranes has been the subject of hundreds of investigations. This phase separation can cause for the formation of “domains” of lipids in <em>different thermodynamic phases</em>. Liquid ordered (L<sub>o</sub>) and liquid disordered (L<sub>d</sub>) phases have been the subject of many studies. A very simplified concept of phase separation is that, in a mixed state, all of the membrane exists in the L<sub>d</sub> phase, but as high melting temperature lipids (e.g. saturated lipids, sphingomyelin) aggregate together with cholesterol, the L<sub>o</sub> phase is formed.</p>
 
 <p><img src="http://localhost:4000/assets/Membrane/Domain_Schematic_RB.jpg" alt="Domain Schematic" /><br />
 <strong>Figure:</strong> Illustration of a macroscopic phase separation in a ternary lipid mixture with proteins.</p>
@@ -318,7 +318,7 @@
 <p>I perform this clustering by</p>
 <ol>
   <li>Identifying all clusters of intra-leaflet lipids tails (C2A and C2B beads on DPPC, centroid of R[1-5] on CHOL) using HCA with a cutoff of 5.8 angstroms.</li>
-  <li>For each intra-leaflet cluster, identify lipids in contact on the opposite leaflet by discovering lipid tails (C2[A/B] beads on DPPC, centroid of R[1-5] on CHOL) within a cutoff of 7.0 angstroms.</li>
+  <li>For each intra-leaflet cluster, identify lipids in contact on the opposite leaflet by discovering lipid tails (C2A and C2B beads on DPPC, centroid of R[1-5] on CHOL) within a cutoff of 7.0 angstroms.</li>
 </ol>
 
 <p><img src="http://localhost:4000/assets/Membrane/n_m_schematic.jpg" alt="Domain Schematic" /><br />
@@ -326,7 +326,7 @@
 
 <p>On these clusters I analyze the liquid crystal order parameter <script type="math/tex">P_2</script> and the bond-orientational order parameter <script type="math/tex">\Psi_6</script>. I’ll reserve discussion of these for future posts. The mean order parameter of each cluster is evaluated, such that we have order parameters dependent on (<em>n,m</em>).</p>
 
-<p>A script which implements all of these measurements is available on <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/membrane_analysis">my github</a>, which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you’d like help to do this, but please read the comments first!</p>
+<p>A script which implements all of these measurements is available on <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/compute_n_m_DPPC%2BDIPC%2BCHOL.py">my github</a>, which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you’d like help to do this, but please read the comments first!</p>
 
 <p>Please cite:<br />
 G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Submitted</em> (2017)</p>

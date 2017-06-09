@@ -1,0 +1,68 @@
+---
+layout: single
+title:  "2D Bond-Orientational Order for Lipid Membranes"
+date:   2017-06-09 12:25:00 -0400
+categories: analysis-method
+---
+
+I discuss the use of 2D Bond-Orientational Order to describe lipid phase in membrane and the use of projections to address membrane undulation when measuring.
+
+[comment]: <> This must be added to enable MathJax with kramdown on github pages
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+# The 2D Bond-Orientational Order Parameter
+
+This past year, the famous 2D Bond-Orientational Order, originally developd by Nelson and Halperin,[1] recieved some of the spotlight as part of the Nobel Prize in Physics, awarded to Thouless, Haldane, and Kosterlitz [”for theoretical discoveries of topological phase transitions and topological phases of matter.”](https://www.nobelprize.org/nobel_prizes/physics/laureates/2016/press.html) It has been used to describe solid, "hexatic", and liquid phases of 2D systems. To describe bond-orientations of *n*-fold order around the *k*th particle in a system with *n* nearest neighbors, each indexed as *l*, the order parameter is:
+
+$$\Psi_n^k = \sum^n_{l\ \epsilon\ nn(k)} exp[in\theta_{lk}] = \sum^n_{l\ \epsilon\ nn(k)} \cos(n\theta_{lk}) + i\sin(n\theta_{lk})$$
+
+But typically only $$\Psi_6^k$$ is used as an order parameter:
+
+$$\Psi_6^k = \sum^n_{l\ \epsilon\ nn(k)} exp[i6\theta_{lk}]$$
+
+By doing this measurement, we get a complex vector which tells us the orientation of the hexagon and when we take norm of this complex vector (\|$$\Psi_6^k$$\|) we get a number between 0 and 1 which tells us how close to a hexagon the orientation of *l* points around *k* are.
+
+Often when I've explained this order parameter to a colleague in chemistry it has been difficult to help them understand. Please see the following illustration, which should help your understanding of $$\Psi_6^k$$:
+
+![Illutration of Psi6]({{ site.url }}/assets/Membrane/Psi6_illustration.jpg)  
+**Figure:** (Left) Illustration of a particle *k* and it's six nearest neighbors, indexed by *l*, along with the reference vector, which is often selected to be (x,y) = (1,0). (Right) The orientation of the conceptual hexagon defined by nearest neighbors of *k*, which can be described by the real (or imaginary) parts of $$\Psi_6^k$$.
+
+# $$\Psi_6^k$$ and positional pair correlation functions are used to describe phases in 2D
+
+For many years the character of 2D phase transitions in hard disks (2D circles that cannot overlap each-other but have no attractive or repulsive forces) has been debated. A 2011 [paper by Barnard and Krauth](http://www.lps.ens.fr/~krauth/index.php/Bernard_Krauth_2011), along with some follow-up papers, seem to have put the debate to rest.[2]
+
+Pair-wise distance (*r*) correlation functions of $$\Psi_6^k$$ (*g<sub>6</sub>*(*r*)) and position (*g<sub>G</sub>*(*r*)) have been used to identify solid, hexatic, and liquid 2D phases. This is done based on the functional form of decay of the correlation over pair-wise distance in the Kosterlitz-Thouless-Halperin-Nelson-Young (KTHNY) theory of 2D melting:
+
+![Illutration of Psi6]({{ site.url }}/assets/Membrane/2D_phase_paircorrelations.jpg)  
+**Figure** Example Voronoi tessellations of 2D systems in the solid, hexatic, and liquid state. Pair correlation functions of position (*g<sub>G</sub>*(*r*)) and $$\Psi_6^k$$ (*g<sub>6</sub>*(*r*)). Voronoi tessellations credited to [N. Vandewalle at GRASP](https://grasp-lab.org/2013/06/18/hexatic/).[3]
+
+# Interest in lipid bilayers
+
+We may use this order parameter as a method to distinguish the thermodynamic phase of lipids. In the case of lipid phase separations to liquid ordered (L<sub>o</sub>) and disordered (L<sub>d</sub>) domains, we are able to see that the packing of each lipid (\|$$\Psi_6^k$$\|) is clearly different between phases, though the bond-orientations of lipids ($$\Psi_6^k$$) are uncorrelated, as expected of any liquid state.
+
+![Phase separated 2D boo]({{ site.url }}/assets/Membrane/2D_boo_phaseseparated.jpg)  
+**Figure** Tessellations of a phase separated 5406-lipid bilayer. Blue, red, and white dots represent lipid tails belonging to DPPC, DIPC, and CHOL lipids in the membrane. (Left) \|$$\Psi_6^k$$\| shows clear separation between the *packing* lipid domains, though $$\Psi_6^k$$ shows the *bond-orientation* of lipids is not substantially different between L<sub>o</sub> and L<sub>d</sub> phases.
+
+We should also consider the following: Lipid bilayers are not simply 2D. There are undulations to the membrane surface that would, if not addressed, distort the measurement of $$\Psi_6^k$$, as angles from the reference vector would include height mismatchings of the measured atoms. I address this via a plane fitting approach.
+
+# Plane-fitted measurement of $$\Psi_6^k$$
+
+To address height mismatches of a lipid tail's nearest neighbors, I fit a lipid tail and its six nearest neighbors to a plane of best fit, project the coordinates and reference vector into the plane, and measure $$\Psi_6^k$$ there.
+
+![NN plane Fitting]({{ site.url }}/assets/Membrane/Plane_fitting.jpg)  
+**Figure:** Coordinate representing a MARTINI lipid tail with coordinates representing its six nearest neighhbor tails transformed to lie on a plane that best-fits all seven points. The reference vector is transformed to lie in the plane as well. In this particular application, C2A, C2B (D2A, D2B) beads of DPPC (DIPC) are selected and the centroid of R[1-5] of CHOL are selected to represent lipid tails.
+
+If you'd like to check out an example script written to analyze MARTINI DPPC, DIPC, and CHOL lipid membranes using the MDAnalysis library to find these coordinates, please check out my [github](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/psi6_MARTINI_tail_example.py). There, plane fitting is performed using [singular value decomposition of the coordinates](https://www.ltu.se/cms_fs/1.51590!/svd-fitting.pdf).
+
+Additionally, this past year saw a very nice use of $$\Psi_6^k$$ to describe a "hexatic-like" lipid phase of DPPC with the MARTINI coarse-grained model. It's a pretty cool read.[4]
+
+Please cite:  
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Submitted* (2017)
+
+References:
+1. B.I. Halperin & D.R. Nelson "Theory of Two-Dimensional melting," *Phys. Rev. Lett.* **41**, 121–124 (1978). 
+2. E.P. Bernard & W. Krauth "Two-Step Melting in Two Dimensions: First-Order Liquid-Hexatic Transition," *Phys. Rev. Lett.* **107**, 155704 (2011).
+3. J. Schockmel, E. Mersch, N. Vandewalle, & G. Lumay, "Melting of a confined monolayer of magnetized beads," *Phys. Rev. E - Stat. Nonlinear, Soft Matter Phys.* **87**, 1–7 (2013).
+4. S. Katira,  K.K. Mandadapu, S. Vaikuntanathan, B. Smit, & D. Chandler "Pre-transition effects mediate forces of assembly between transmembrane proteins," *Elife* **5**, 1–8 (2016).
