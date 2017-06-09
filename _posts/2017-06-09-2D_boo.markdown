@@ -16,11 +16,11 @@ I discuss the use of 2D Bond-Orientational Order to describe lipid phase in memb
 
 This past year, the famous 2D Bond-Orientational Order parameter, originally developd by Nelson and Halperin,[1] recieved some of the spotlight as part of the Nobel Prize in Physics, awarded to Thouless, Haldane, and Kosterlitz [”for theoretical discoveries of topological phase transitions and topological phases of matter.”](https://www.nobelprize.org/nobel_prizes/physics/laureates/2016/press.html) It has been used to describe solid, "hexatic", and liquid phases of 2D systems. To describe bond-orientations of *n*-fold order around the *k*th particle in a system with *n* nearest neighbors, each indexed as *l*, the order parameter is:
 
-$$\Psi_n^k = \sum^n_{l\ \epsilon\ nn(k)} exp[in\theta_{lk}] = \sum^n_{l\ \epsilon\ nn(k)} \cos(n\theta_{lk}) + i\sin(n\theta_{lk})$$
+$$\Psi_n^k = \sum^n_{l\ \epsilon\ nn(k)} \exp[in\theta_{lk}] = \sum^n_{l\ \epsilon\ nn(k)} \cos(n\theta_{lk}) + i\sin(n\theta_{lk})$$
 
 But typically only $$\Psi_6^k$$ is used as an order parameter:
 
-$$\Psi_6^k = \sum^n_{l\ \epsilon\ nn(k)} exp[i6\theta_{lk}]$$
+$$\Psi_6^k = \sum^n_{l\ \epsilon\ nn(k)} \exp[i6\theta_{lk}]$$
 
 By doing this measurement, we get a complex vector which tells us the orientation of the hexagon and when we take norm of this complex vector (\|$$\Psi_6^k$$\|) we get a number between 0 and 1 which tells us how close to a hexagon the orientation of *l* points around *k* are.
 
