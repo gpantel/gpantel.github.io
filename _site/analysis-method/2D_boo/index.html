@@ -1,0 +1,450 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>2D Bond-Orientational Order for Lipid Membranes - Scratchings on biomoleclar simulation and theory</title>
+
+
+
+
+<meta name="description" content="I discuss the use of 2D Bond-Orientational Order to describe lipid phase in membrane and the use of projections to address membrane undulation when measuring.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomoleclar simulation and theory">
+<meta property="og:title" content="2D Bond-Orientational Order for Lipid Membranes">
+
+
+  <link rel="canonical" href="http://localhost:4000/analysis-method/2D_boo/">
+  <meta property="og:url" content="http://localhost:4000/analysis-method/2D_boo/">
+
+
+
+  <meta property="og:description" content="I discuss the use of 2D Bond-Orientational Order to describe lipid phase in membrane and the use of projections to address membrane undulation when measuring.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2017-06-09T12:25:00-04:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomoleclar simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomoleclar simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am PhD student working with John E. Straub aspiring to the accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Boston University</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="2D Bond-Orientational Order for Lipid Membranes">
+    <meta itemprop="description" content="I discuss the use of 2D Bond-Orientational Order to describe lipid phase in membrane and the use of projections to address membrane undulation when measuring.">
+    <meta itemprop="datePublished" content="June 09, 2017">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">2D Bond-Orientational Order for Lipid Membranes
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>I discuss the use of 2D Bond-Orientational Order to describe lipid phase in membrane and the use of projections to address membrane undulation when measuring.</p>
+
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1 id="the-2d-bond-orientational-order-parameter">The 2D Bond-Orientational Order Parameter</h1>
+
+<p>This past year, the famous 2D Bond-Orientational Order parameter, originally developd by Nelson and Halperin,[1] recieved some of the spotlight as part of the Nobel Prize in Physics, awarded to Thouless, Haldane, and Kosterlitz <a href="https://www.nobelprize.org/nobel_prizes/physics/laureates/2016/press.html">”for theoretical discoveries of topological phase transitions and topological phases of matter.”</a> It has been used to describe solid, “hexatic”, and liquid phases of 2D systems. To describe bond-orientations of <em>n</em>-fold order around the <em>k</em>th particle in a system with <em>n</em> nearest neighbors, each indexed as <em>l</em>, the order parameter is:</p>
+
+<script type="math/tex; mode=display">\Psi_n^k = \sum^n_{l\ \epsilon\ nn(k)} \exp[in\theta_{lk}] = \sum^n_{l\ \epsilon\ nn(k)} \cos(n\theta_{lk}) + i\sin(n\theta_{lk})</script>
+
+<p>But typically only <script type="math/tex">\Psi_6^k</script> is used as an order parameter:</p>
+
+<script type="math/tex; mode=display">\Psi_6^k = \sum^n_{l\ \epsilon\ nn(k)} \exp[i6\theta_{lk}]</script>
+
+<p>By doing this measurement, we get a complex vector which tells us the orientation of the hexagon and when we take norm of this complex vector (|<script type="math/tex">\Psi_6^k</script>|) we get a number between 0 and 1 which tells us how close to a hexagon the orientation of <em>l</em> points around <em>k</em> are.</p>
+
+<p>Often when I’ve explained this order parameter to a colleague in chemistry it has been difficult to help them understand. Please see the following illustration, which should help your understanding of <script type="math/tex">\Psi_6^k</script>:</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/Psi6_illustration.jpg" alt="Illutration of Psi6" /><br />
+<strong>Figure:</strong> (Left) Illustration of a particle <em>k</em> and it’s six nearest neighbors, indexed by <em>l</em>, along with the reference vector, which is often selected to be (x,y) = (1,0). (Right) The orientation of the conceptual hexagon defined by nearest neighbors of <em>k</em>, which can be described by the real (or imaginary) parts of <script type="math/tex">\Psi_6^k</script>.</p>
+
+<h1 id="psi_6k-and-positional-pair-correlation-functions-are-used-to-describe-phases-in-2d"><script type="math/tex">\Psi_6^k</script> and positional pair correlation functions are used to describe phases in 2D</h1>
+
+<p>For many years the character of 2D phase transitions in hard disks (2D circles that cannot overlap each-other but have no attractive or repulsive forces) has been debated. A 2011 <a href="http://www.lps.ens.fr/~krauth/index.php/Bernard_Krauth_2011">paper by Barnard and Krauth</a>, along with some follow-up papers, seem to have put the debate to rest.[2]</p>
+
+<p>Pair-wise distance (<em>r</em>) correlation functions of <script type="math/tex">\Psi_6^k</script> (<em>g<sub>6</sub></em>(<em>r</em>)) and position (<em>g<sub>G</sub></em>(<em>r</em>)) have been used to identify solid, hexatic, and liquid 2D phases. This is done based on the functional form of decay of the correlation over pair-wise distance in the Kosterlitz-Thouless-Halperin-Nelson-Young (KTHNY) theory of 2D melting:</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/2D_phase_paircorrelations.jpg" alt="Illutration of Psi6" /><br />
+<strong>Figure</strong> Example Voronoi tessellations of 2D systems in the solid, hexatic, and liquid state. Pair correlation functions of position (<em>g<sub>G</sub></em>(<em>r</em>)) and <script type="math/tex">\Psi_6^k</script> (<em>g<sub>6</sub></em>(<em>r</em>)). <script type="math/tex">% <![CDATA[
+T^* = k_{\text{B}}T/<U> %]]></script>. Voronoi tessellations credited to <a href="https://grasp-lab.org/2013/06/18/hexatic/">N. Vandewalle at GRASP</a>.[3]</p>
+
+<h1 id="interest-in-lipid-bilayers">Interest in lipid bilayers</h1>
+
+<p>We may use this order parameter as a method to distinguish the thermodynamic phase of lipids. In the case of lipid phase separations to liquid ordered (L<sub>o</sub>) and disordered (L<sub>d</sub>) domains, we are able to see that the packing of each lipid (|<script type="math/tex">\Psi_6^k</script>|) is clearly different between phases, though the bond-orientations of lipids (<script type="math/tex">\Psi_6^k</script>) are uncorrelated, as expected of any liquid state.</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/2D_boo_phaseseparated.jpg" alt="Phase separated 2D boo" /><br />
+<strong>Figure</strong> Tessellations of a phase separated 5406-lipid bilayer. Blue, red, and white dots represent lipid tails belonging to DPPC, DIPC, and CHOL lipids in the membrane. (Left) |<script type="math/tex">\Psi_6^k</script>| shows clear separation between the <em>packing</em> lipid domains, though <script type="math/tex">\Psi_6^k</script> shows the <em>bond-orientation</em> of lipids is not substantially different between L<sub>o</sub> and L<sub>d</sub> phases.</p>
+
+<p>We should also consider the following: Lipid bilayers are not simply 2D. There are undulations to the membrane surface that would, if not addressed, distort the measurement of <script type="math/tex">\Psi_6^k</script>, as angles from the reference vector would include height mismatchings of the measured atoms. I address this via a plane fitting approach.</p>
+
+<h1 id="plane-fitted-measurement-of-psi_6k">Plane-fitted measurement of <script type="math/tex">\Psi_6^k</script></h1>
+
+<p>To address height mismatches of a lipid tail’s nearest neighbors, I fit a lipid tail and its six nearest neighbors to a plane of best fit, project the coordinates and reference vector into the plane, and measure <script type="math/tex">\Psi_6^k</script> there.</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/Plane_fitting.jpg" alt="NN plane Fitting" /><br />
+<strong>Figure:</strong> Coordinate representing a MARTINI lipid tail with coordinates representing its six nearest neighhbor tails transformed to lie on a plane that best-fits all seven points. The reference vector is transformed to lie in the plane as well. In this particular application, C2A, C2B (D2A, D2B) beads of DPPC (DIPC) are selected and the centroid of R[1-5] of CHOL are selected to represent lipid tails.</p>
+
+<p>If you’d like to check out an example script written to analyze MARTINI DPPC, DIPC, and CHOL lipid membranes using the MDAnalysis library to find these coordinates, please check out my <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/psi6_MARTINI_tail_example.py">github</a>. There, plane fitting is performed using <a href="https://www.ltu.se/cms_fs/1.51590!/svd-fitting.pdf">singular value decomposition of the coordinates</a>.</p>
+
+<p>Additionally, this past year saw a very nice use of <script type="math/tex">\Psi_6^k</script> to describe a “hexatic-like” lipid phase of DPPC with the MARTINI coarse-grained model. It’s a pretty cool read.[4]</p>
+
+<p>Please cite:<br />
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Submitted</em> (2017)</p>
+
+<p>References:</p>
+<ol>
+  <li>B.I. Halperin &amp; D.R. Nelson “Theory of Two-Dimensional melting,” <em>Phys. Rev. Lett.</em> <strong>41</strong>, 121–124 (1978).</li>
+  <li>E.P. Bernard &amp; W. Krauth “Two-Step Melting in Two Dimensions: First-Order Liquid-Hexatic Transition,” <em>Phys. Rev. Lett.</em> <strong>107</strong>, 155704 (2011).</li>
+  <li>J. Schockmel, E. Mersch, N. Vandewalle, &amp; G. Lumay, “Melting of a confined monolayer of magnetized beads,” <em>Phys. Rev. E - Stat. Nonlinear, Soft Matter Phys.</em> <strong>87</strong>, 1–7 (2013).</li>
+  <li>S. Katira,  K.K. Mandadapu, S. Vaikuntanathan, B. Smit, &amp; D. Chandler “Pre-transition effects mediate forces of assembly between transmembrane proteins,” <em>Elife</em> <strong>5</strong>, 1–8 (2016).</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#analysis-method" class="page__taxonomy-item" rel="tag">analysis-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-06-09T12:25:00-04:00">June 09, 2017</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=2D Bond-Orientational Order for Lipid Membranes http://localhost:4000/analysis-method/2D_boo/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/analysis-method/2D_boo/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/analysis-method/2D_boo/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/analysis-method/2D_boo/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/analysis-method/domain_clustering/" class="pagination--pager" title="Measuring structural order parameters in intra- and inter-leaflet lipid clusters
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/analysis-method/mixent/" class="pagination--pager" title="Voronoi tessellation lipid mixing entropy
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2017 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,430 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Voronoi tessellation lipid mixing entropy - Scratchings on biomoleclar simulation and theory</title>
+
+
+
+
+<meta name="description" content="I discuss mixing entropy as an order parameter for lipid mixing and describe a Voronoi tessellation-based method and calculation using MDAnalysis and scipy.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomoleclar simulation and theory">
+<meta property="og:title" content="Voronoi tessellation lipid mixing entropy">
+
+
+  <link rel="canonical" href="http://localhost:4000/analysis-method/mixent/">
+  <meta property="og:url" content="http://localhost:4000/analysis-method/mixent/">
+
+
+
+  <meta property="og:description" content="I discuss mixing entropy as an order parameter for lipid mixing and describe a Voronoi tessellation-based method and calculation using MDAnalysis and scipy.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2017-06-11T12:25:00-04:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomoleclar simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomoleclar simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am PhD student working with John E. Straub aspiring to the accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Boston University</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Voronoi tessellation lipid mixing entropy">
+    <meta itemprop="description" content="I discuss mixing entropy as an order parameter for lipid mixing and describe a Voronoi tessellation-based method and calculation using MDAnalysis and scipy.">
+    <meta itemprop="datePublished" content="June 11, 2017">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Voronoi tessellation lipid mixing entropy
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>I discuss mixing entropy as an order parameter for lipid mixing and describe a Voronoi tessellation-based method and calculation using MDAnalysis and scipy.</p>
+
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1 id="lateral-heterogeneity-in-the-cell-membrane">Lateral Heterogeneity in the Cell Membrane</h1>
+
+<p>Membranes are composed of an incredibly complicated mixture of proteins, lipids, and glycomolecules. There can be many domains of molecules over the surface of the membrane which are structurally distinct. Protein structures and thus functions can be different depending on what kind of domain they sit within. For many years people have worked to understand how these domains form.</p>
+
+<p>There are over one hundred lipids that may compose a cell membrane. These mix together, increasing the entropy of the mixture until the enthalpic benefit of interacting with similar lipids and the entropic benefit of mixing with different lipids balance out.</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/thykaloid_marrink.jpeg" alt="Marrink thykaloid" /><br />
+<strong>Figure:</strong> Complex mixture of a plant membrane constructed with coarse-grained lipids by <a href="http://cgmartini.nl/">Marrink and coworkers.</a></p>
+
+<h1 id="lipid-mixing-entropy">Lipid Mixing Entropy</h1>
+
+<p>To quantify how “mixed” a lipid membrane is, many have employed a measure of “mixing entropy” (<em>S<sub>mix</sub></em>). The most common way this has been done is by gridding each leaflet of the membrane in to <em>M</em>  regions and counting the fraction of each j<sup>th</sup> lipid (<em>p<sub>j</sub></em>) within each i<sup>th</sup> region, and then taking the mean of the entropies calculated for all regions[1]:</p>
+
+<script type="math/tex; mode=display">S_{mix} = -\frac{1}{N_{regions}} \sum^{N_{regions}}_{i=1} \sum^{M}_{j=1} p_j(i) \log(p_j(i))</script>
+
+<p>However, this method is limited in that the solution is dependent on how the system is split into these regions. Other methods, which rely on the identification of nearest neighbors which require selection of cutoffs for neighbor detection or separation of the system into regions.[2] Ideally, the mixing entropy should be measured without any kind of cutoff or gridding scheme that can influence the result.</p>
+
+<p>In a recently submitted paper about finite size effects of lipid domain formation, we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it simply involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as</p>
+
+<script type="math/tex; mode=display">S_{mix} = -\sum^{E}_{j=1} p_j \log_E(p_j),</script>
+
+<p>where there are <em>E</em> types of voronoi edges and we find the probability of the j<sup>th</sup> type of voronoi edge. These “types” of voronoi edges are unique types of contacts formed by a pair of lipids sharing a voronoi edge. For example, lipidA-lipidA, lipidB-lipidB, … lipidZ-lipidZ are all the same kind of voronoi edge – they are edges between the same type of lipid to the same type of lipid. However, lipidA-lipidB, lipidA-lipidC, lipidB-lipidC are all different edges. As such, in a two-lipid system <em>E</em>=2, in a three-lipid system <em>E</em>=4, in a four-lipid system <em>E</em>=7, in a five-lipid system <em>E</em>=11 and so on. The log is in the base of <em>E</em> such that the maximum value of <em>S<sub>mix</sub></em> is always 1.</p>
+
+<p>In recently submitted work we used this method to calculate the mixing entropy only considering DPPC and DIPC lipids in a ternary mixture which includes cholesterol. As such, we only evaluated DPPC-DPPC = DIPC-DIPC and DPPC-DIPC voronoi edges.</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/SmixTesselExample.jpeg" alt="Smix Tessel Example" /><br />
+<strong>Figure</strong> (Left) Visualization of a Voronoi Tessellation of lipid head group (x,y) coordinates (blue) in a slice of a  DPPC (purple), DIPC (pink), and cholesterol (black) mixture. (Right) Cartoon showing each type of voronoi edge when evaluating mixing entropy of only DPPC and DIPC.</p>
+
+<p>A python implementation of this method (with contribution from <a href="https://scholar.google.com/citations?user=fdnxyPwAAAAJ&amp;hl=en">Asanga Bandara</a> used to tessel DPPC-DIPC-CHOL mixtures in the Martini coarse-grained model using scipy, MDAnalysis to get (x,y) coordinates of lipid head groups, and multiprocessing for parallization with OpenMP is available <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/membrane_analysis">on my github</a>.</p>
+
+<p>Please cite:<br />
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Submitted</em> (2017)</p>
+
+<p>References:</p>
+<ol>
+  <li>Camesasca, M., Kaufman, M. &amp; Manas-Zloczower, I. Quantifying Fluid Mixing with the Shannon Entropy. Macromol. Theory Simulations 15, 595–607 (2006).</li>
+  <li>Brandani, G. B. et al. Quantifying Disorder through Conditional Entropy: An Application to Fluid Mixing. PLoS One 8, e65617 (2013).</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#analysis-method" class="page__taxonomy-item" rel="tag">analysis-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-06-11T12:25:00-04:00">June 11, 2017</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Voronoi tessellation lipid mixing entropy http://localhost:4000/analysis-method/mixent/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/analysis-method/mixent/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/analysis-method/mixent/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/analysis-method/mixent/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/analysis-method/2D_boo/" class="pagination--pager" title="2D Bond-Orientational Order for Lipid Membranes
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2017 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>
