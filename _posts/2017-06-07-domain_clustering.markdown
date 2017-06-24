@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  'Measuring structural order parameters in intra- and inter-leaflet lipid clusters'
+title:  'Measuring Structural Order Parameters in Intra- and Interleaflet Lipid Clusters'
 date:   2017-06-07 14:20:00 -0400
 categories: analysis-method
 ---
