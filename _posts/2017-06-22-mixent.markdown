@@ -36,7 +36,7 @@ $$S_{mix} = -\sum^{E}_{j=1} p_j \log_E(p_j),$$
 
 where there are *E* types of voronoi edges and we find the probability of the j<sup>th</sup> type of voronoi edge. These "types" of voronoi edges are unique types of contacts formed by a pair of lipids sharing a voronoi edge. For example, lipidA-lipidA, lipidB-lipidB, ... lipidZ-lipidZ are all the same kind of voronoi edge -- they are edges between the same type of lipid to the same type of lipid. However, lipidA-lipidB, lipidA-lipidC, lipidB-lipidC are all different edges. As such, in a two-lipid system *E*=2, in a three-lipid system *E*=4, in a four-lipid system *E*=7, in a five-lipid system *E*=11 and so on. The log is in the base of *E* such that the maximum value of *S<sub>mix</sub>* is always 1.
 
-In recently submitted work we used this method to calculate the mixing entropy only considering DPPC and DIPC lipids in a ternary mixture which includes cholesterol. As such, we only evaluated DPPC-DPPC = DIPC-DIPC and DPPC-DIPC voronoi edges.
+In recently submitted work we used this method to calculate the mixing entropy only considering DPPC and DIPC lipids in a ternary mixture which includes cholesterol. As such, we only evaluated DPPC-DPPC = DIPC-DIPC and DPPC-DIPC Voronoi edges.
 
 ![Smix Tessel Example]({{ site.url }}/assets/Membrane/SmixTesselExample.png)  
 **Figure** (Left) Visualization of a Voronoi Tessellation of lipid head group (x,y) coordinates (blue) in a slice of a  DPPC (purple), DIPC (pink), and cholesterol (black) mixture. (Right) Cartoon showing each type of voronoi edge when evaluating mixing entropy of only DPPC and DIPC.
@@ -47,5 +47,5 @@ Please cite:
 G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Submitted* (2017)
 
 References:
-1. Camesasca, M., Kaufman, M. & Manas-Zloczower, I. Quantifying Fluid Mixing with the Shannon Entropy. Macromol. Theory Simulations 15, 595–607 (2006).
-2. Brandani, G. B. et al. Quantifying Disorder through Conditional Entropy: An Application to Fluid Mixing. PLoS One 8, e65617 (2013).
+1. M. Camesasca, M. Kaufman, & I. Manas-Zloczower "Quantifying Fluid Mixing with the Shannon Entropy," *Macromol. Theory Simulations* **15** 595–607 (2006).
+2. Brandani, G. B. et al. "Quantifying Disorder through Conditional Entropy: An Application to Fluid Mixing," *PLoS One* **8** e65617 (2013).
