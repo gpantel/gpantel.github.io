@@ -44,13 +44,13 @@ Running parallel trajectories can be extremely expensive, so much so that the co
 
 Simulated Tempering (ST) employs a single trajectory with a temperature exchange criterion intended to achieve a random walk in temperature, requiring knowledge of the free energy landscape. MC swaps are similar to parallel tempering:
 
-$$p = \text{min}\left(1,e^{(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j})U_i + a(T_i) - a(T_j)}\right)$$
+$$p = \text{min}\left(1,e^{(\frac{1}{k_\text{B}T_i}  - \frac{1}{k_\text{B}T_j})U_i + g(T_i) - g(T_j)}\right)$$
 
-Where *a*(***T***) is parameterized to both achieve a random walk in temperature space and preserve balance. Velocities are also rescaled, as in REMD:
+Where *g*(***T***) is parameterized to both achieve a random walk in temperature space and preserve balance. Velocities are also rescaled, as in REMD:
 
 $$v' = v \sqrt{\frac{T_j}{T_i}}$$
 
-*a*(***T***) is most commonly determined by:
+*g*(***T***) is most commonly determined by:
 1. Sufficient sampling with parallel tempering to estimate *a*(***T***) via WHAM or MBAR
 2. On the fly using the Wang-Landau algorithm
 
