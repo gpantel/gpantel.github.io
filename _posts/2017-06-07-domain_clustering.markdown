@@ -25,7 +25,7 @@ Of course, proteins can adopt different folded structures depending on the therm
 
 Using molecular dynamics simulations we can understand the structure of lipids at any point in time *a priori*. With such detailed information we can ask questions like "How does the structure of a lipid depend on the *size* of a domain?"
 
-Of course we could answer this question as-is, but there is someting else very important to consider... lipid bilayers are a *bilayer* -- the distribution of lipids is never symmetric across the two leaflets. So we should consider how many lipids are part of a domain in reference to each side of the membrane. This is to say, we should decompose the number of lipids involved in a domain into intra- and inter-leaflet lipids, and then measure the mean structural order for all lipids as dependent on the number of intra- (*n*) and inter- (*m*) leaflet lipids in the domain.
+Of course we could answer this question as-is, but there is someting else very important to consider... lipid bilayers are a *bilayer* -- the distribution of lipids is not perfectly symmetric across the two leaflets. So we should consider how many lipids are part of a domain in reference to each side of the membrane. This is to say, we should decompose the number of lipids involved in a domain into intra- and inter-leaflet lipids, and then measure the mean structural order for all lipids as dependent on the number of intra- (*n*) and inter- (*m*) leaflet lipids in the domain.
 
 Currently, only coarse-grained models of lipid mixtures can reach an equilibrium spatial and structural distribution. I use the DPPC:DIPC:CHOL mixture in the MARTINI coarse-grained forcefield to study some general feature of phase separation. Many other people do, too.
 

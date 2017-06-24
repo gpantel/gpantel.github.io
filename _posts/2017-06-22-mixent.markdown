@@ -50,4 +50,4 @@ G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size
 
 References:
 1. M. Camesasca, M. Kaufman, & I. Manas-Zloczower "Quantifying Fluid Mixing with the Shannon Entropy," *Macromol. Theory Simulations* **15** 595–607 (2006).
-2. Brandani, G. B. et al. "Quantifying Disorder through Conditional Entropy: An Application to Fluid Mixing," *PLoS One* **8** e65617 (2013).
+2. G.B. Brandani, M. Schor, C.E. MacPhee, H. Grubmuller, U. Zachariae, & D. Marenduzzo  "Quantifying Disorder through Conditional Entropy: An Application to Fluid Mixing," *PLoS One* **8** e65617 (2013).

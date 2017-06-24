@@ -22,7 +22,7 @@ But typically only $$\Psi_6^k$$ is used as an order parameter:
 
 $$\Psi_6^k = \sum^n_{l\ \epsilon\ nn(k)} \exp[i6\theta_{lk}]$$
 
-By doing this measurement, we get a complex vector which tells us the orientation of the hexagon and when we take norm of this complex vector (\|$$\Psi_6^k$$\|) we get a number between 0 and 1 which tells us how close to a hexagon the orientation of *l* points around *k* are.
+where the angle $$\theta_{lk}$$ is evaluated using an arbitrary, constant reference vector. By doing this measurement, we get a complex vector which tells us the orientation of the hexagon and when we take norm of this complex vector (\|$$\Psi_6^k$$\|) we get a number between 0 and 1 which tells us how close to a hexagon the orientation of *l* points around *k* are.
 
 Often when I've explained this order parameter to a colleague in chemistry it has been difficult to help them understand. Please see the following illustration, which should help your understanding of $$\Psi_6^k$$:
 
