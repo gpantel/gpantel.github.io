@@ -28,15 +28,15 @@ To quantify how "mixed" a lipid membrane is, many have employed a measure of "mi
 
 $$S_{mix} = -\frac{1}{N_{regions}} \sum^{N_{regions}}_{i=1} \sum^{M}_{j=1} p_j(i) \log(p_j(i))$$
 
-However, this method is limited in that the solution is dependent on how the system is split into these regions. Other methods, which rely on the identification of nearest neighbors which require selection of cutoffs for neighbor detection or separation of the system into regions.[2] Ideally, the mixing entropy should be measured without any kind of cutoff or gridding scheme that can influence the result.
+However, this method is limited in that the solution is dependent on how the system is split into these regions. Other methods rely on the identification of nearest neighbors requiring selection of cutoffs for neighbor detection or separation of the system into regions.[2] Ideally, the mixing entropy should be measured without any kind of cutoff or gridding scheme that can influence the result.
 
 # Voronoi Edge Lipid Mixing Entropy
 
-In a recently submitted paper about finite size effects of lipid domain formation, we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it simply involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as
+In a recently submitted paper about finite size effects of lipid domain formation, we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as
 
 $$S_{mix} = -\sum^{E}_{j=1} p_j \log_E(p_j),$$
 
-where there are *E* types of voronoi edges and we find the probability of the j<sup>th</sup> type of voronoi edge. These "types" of voronoi edges are unique types of contacts formed by a pair of lipids sharing a voronoi edge. For example, lipidA-lipidA, lipidB-lipidB, ... lipidZ-lipidZ are all the same kind of voronoi edge -- they are edges between the same type of lipid to the same type of lipid. However, lipidA-lipidB, lipidA-lipidC, lipidB-lipidC are all different edges. As such, in a two-lipid system *E*=2, in a three-lipid system *E*=4, in a four-lipid system *E*=7, in a five-lipid system *E*=11 and so on. The log is in the base of *E* such that the maximum value of *S<sub>mix</sub>* is always 1.
+where there are *E* types of voronoi edges and we find the probability of the j<sup>th</sup> type of voronoi edge. These "types" of voronoi edges are unique types of contacts formed by a pair of lipids sharing a voronoi edge. For example, lipidA-lipidA, lipidB-lipidB, ..., lipidZ-lipidZ are all the same kind of voronoi edge -- they are edges between the same type of lipid to the same type of lipid. However, lipidA-lipidB, lipidA-lipidC, lipidB-lipidC are all different types of edges. As such, in a two-lipid system *E*=2, in a three-lipid system *E*=4, in a four-lipid system *E*=7, in a five-lipid system *E*=11 and so on. The log is in the base of *E* such that the maximum value of *S<sub>mix</sub>* is always 1.
 
 In recently submitted work we used this method to calculate the mixing entropy only considering DPPC and DIPC lipids in a ternary mixture which includes cholesterol. As such, we only evaluated DPPC-DPPC = DIPC-DIPC and DPPC-DIPC Voronoi edges.
 
