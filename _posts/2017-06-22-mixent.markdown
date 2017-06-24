@@ -30,6 +30,8 @@ $$S_{mix} = -\frac{1}{N_{regions}} \sum^{N_{regions}}_{i=1} \sum^{M}_{j=1} p_j(i
 
 However, this method is limited in that the solution is dependent on how the system is split into these regions. Other methods, which rely on the identification of nearest neighbors which require selection of cutoffs for neighbor detection or separation of the system into regions.[2] Ideally, the mixing entropy should be measured without any kind of cutoff or gridding scheme that can influence the result.
 
+# Voronoi Edge Lipid Mixing Entropy
+
 In a recently submitted paper about finite size effects of lipid domain formation, we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it simply involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as
 
 $$S_{mix} = -\sum^{E}_{j=1} p_j \log_E(p_j),$$
