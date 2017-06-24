@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Voronoi tessellation lipid mixing entropy"
+title:  "Lipid Mixing Entropy with Voronoi Tessellation"
 date:   2017-06-23 20:00:00 -0400
 categories: analysis-method
 ---
@@ -41,7 +41,7 @@ In recently submitted work we used this method to calculate the mixing entropy o
 ![Smix Tessel Example]({{ site.url }}/assets/Membrane/SmixTesselExample.jpeg)  
 **Figure** (Left) Visualization of a Voronoi Tessellation of lipid head group (x,y) coordinates (blue) in a slice of a  DPPC (purple), DIPC (pink), and cholesterol (black) mixture. (Right) Cartoon showing each type of voronoi edge when evaluating mixing entropy of only DPPC and DIPC.
 
-A python implementation of this method (with contribution from [Asanga Bandara](https://scholar.google.com/citations?user=fdnxyPwAAAAJ&hl=en) used to tessel DPPC-DIPC-CHOL mixtures in the Martini coarse-grained model using scipy, MDAnalysis to get (x,y) coordinates of lipid head groups, and multiprocessing for parallization with OpenMP is available [on my github](https://github.com/gpantel/MD_methods-and-analysis/tree/master/membrane_analysis).
+A python implementation of this method (with contribution from [Asanga Bandara](https://scholar.google.com/citations?user=fdnxyPwAAAAJ&hl=en) used to tessel DPPC-DIPC-CHOL mixtures in the Martini coarse-grained model using scipy, MDAnalysis to get (x,y) coordinates of lipid head groups, and multiprocessing for parallization with OpenMP is available [on my github](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/ternary_lipid_voronoi_edges.py).
 
 Please cite:  
 G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Submitted* (2017)
