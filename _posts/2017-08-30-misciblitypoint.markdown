@@ -24,10 +24,10 @@ In the case of lipid bilayers, experimentalists have defined the "miscibility po
 ![Fluorescence Miscibility]({{ site.url }}/assets/Membrane/FF0_T.jpg)  
 **Figure:** Illustration of *F/F<sub>0</sub>* fluorescence measurement used to determing miscibility point, which is assigned as the point of inflection in *F/F<sub>0</sub>(T)*.
 
-Veatch and Keller also assign the "miscibility point" to corespond to the point when 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids in giant unilamellar vesicle (GUV) fluorescence experiments.[6] We can find the point where 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids simulation by evaluating the mixing entropy of a binary mixture on a hexagonal lattice monolayer, which happens to be very similar to a lipid bilayer for a few reasons.
+Veatch and Keller also assign the "miscibility point" to corespond to the point when 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids in giant unilamellar vesicle (GUV) fluorescence experiments.[3,4] We can find the point where 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids simulation by evaluating the mixing entropy of a binary mixture on a hexagonal lattice monolayer, which happens to be very similar to a lipid bilayer for a few reasons.
 
 # % Miscibilities of binary mixture on a hexagonal lattice
-Each monolayer of a lipid bilayer can easily be thought of as a quasi-2D structure, and just like any 2D surface, lipids within monolayers are, on average, coordinated with six surrounding lipids.[5] Additionally, phase-separated bilayers (paticularly macroscopic separations, visible via microscopy) show strongly regstered domains -- that is, L<sub>o</sub> domains lie on top of L<sub>o</sub> domains, and L<sub>d</sub> domains lie on top of L<sub>d</sub> domains.(CITAITON) Because of this, thinking about phase-separated lipid bilayers as finite-sized periodic 2D hexagonal lattices seems quite reasonable, as this should be similar to the conditions of a lipid bilayer simulation.
+Each monolayer of a lipid bilayer can easily be thought of as a quasi-2D structure, and just like any 2D surface, lipids within monolayers are, on average, coordinated with six surrounding lipids.[5] Additionally, phase-separated bilayers (paticularly macroscopic separations, visible via microscopy) show strongly regstered domains -- that is, L<sub>o</sub> domains lie on top of L<sub>o</sub> domains, and L<sub>d</sub> domains lie on top of L<sub>d</sub> domains.[6] Because of this, thinking about phase-separated lipid bilayers as finite-sized periodic 2D hexagonal lattices seems quite reasonable, as this should be similar to the conditions of a lipid bilayer simulation.
 
 [In a previous post](https://gpantel.github.io/analysis-method/mixent/) I discussed the measurement of lipid mixing entropy using voronoi tessellations of lipid leaflets. The very same definition of mixing entropy will be used here for the binary case (*E*=2),
 
@@ -44,7 +44,7 @@ In a phase separation in which the two domains are truly pure, the only contribu
 
 To determine the mixing entropy of a system at 50% miscibility, or more precisely, where the system should be expected to exhibit 50% of its maximum fluorescence, we add in a region consisting of 50% of all lipids in an ideally-mixed domain, such that the remaining, pure domains of the system would contribute 50% of the maximum fluorescence signal. This requires the definition of an additional interface between pure and mixed phases, and the contribution of the ideally-mixed domian to the mixing entropy.
 
-While developing the 50% miscibility case, we may as well write equations that describe $$S_\mathrm{mix}$$ as dependent on any % miscibility as well. We can introduce another parameter, $$\Phi = \frac{\%\ miscibility}{100\%}$$ to represent this. Lipids involved in the interface between pure and mixed phases contribute $$p_1 = \frac{7}{10}\sqrt{N}/N$$ and $$p_2 = \frac{3}{10}\sqrt{N}/N$$ to the mixing entropy while lipids in the ideally mixed phase contribute $$p_1 = \frac{2}{3}N_\mathrm{D}\Phi$$ and $$p_2 = \frac{1}{3}N_\mathrm{D}\Phi$$ to the mixing entropy:
+While developing the 50% miscibility case, we may as well write equations that describe $$S_\mathrm{mix}$$ as dependent on any % miscibility as well. We can introduce another parameter, $$\Phi = \frac{\%\ miscibility}{100\%}$$ to represent this. Lipids involved in the interface between pure and mixed phases contribute $$p_1 = \frac{7}{10}\sqrt{N}/N$$ and $$p_2 = \frac{3}{10}\sqrt{N}/N$$ to the mixing entropy while lipids in the ideally mixed phase contribute $$p_1 = \frac{2}{3}N_\mathrm{D}\Phi$$ and $$p_2 = \frac{1}{3}N_\mathrm{D}\Phi$$ to the mixing entropy, where $$N_\mathrm{D} = N - 4\sqrt{N}$$:
 
 ![Pure Interface Cartoon]({{ site.url }}/assets/Membrane/ImpureDomainAddition.jpg)  
 **Figure:** Illustration of pure domains in a binary mixture coexisting with an ideally-mixed domain composing a fraction ($$\Phi$$) of the system. The two types of lipids are represented in red and blue, respectively, the interfaces between pure domains are drawn with a bold green line, and the interfaces between ideally-mixed and pure domains are drawn with a bold cyan line.
@@ -54,12 +54,13 @@ With these additions, we can write
 $$p_1 = \left( N_\mathrm{D}\Phi + \frac{2}{3}N_\mathrm{D}\Phi + 2\frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N$$,
 $$p_2 = \left( \frac{1}{3}N_\mathrm{D}\Phi + 2\frac{1}{3}\sqrt{N} + 2 \frac{3}{10}\sqrt{N} \right) / N$$,
 
-which may be used to determine the mixing entropy, $$S_{mix}$$ corresponding to some % miscibility, and vice-versa. This allows us to extract a concept of "extent of mixing" of a system that is easy to conceptualize, and directly relateable to experiment from the results of lipid bilayer simulations.
+which may be used to determine the mixing entropy, $$S_{mix}$$ corresponding to some % miscibility, and vice-versa. This allows us to describe the "extent of mixing" of these systems in a way that is easy to conceptualize, and is directly relateable to experiment, from the results of lipid bilayer simulations.
 
-Last, let's see what the pure domain separation and the 50% miscibility ($$\Phi = 0.5$$) mixing entropies are as dependent on *N*:
+Last, for fun, let's see what the pure domain separation and the 50% miscibility ($$\Phi = 0.5$$) mixing entropies are as dependent on *N*:
 
 ![Pure Interface Cartoon]({{ site.url }}/assets/Membrane/MiscibilityMixingEntropyN.jpg)  
 **Figure**: Binary mixing entropies computed for the case of pure domains and the case including an ideally-mixed domain of system fraction $$\Phi = 0.5$$, similar to the miscibility point used to determing miscibility temperatures in fluoresence experiments.
+
 
 For more details on finite size effects in lipid bilayer phase separation, I urge you to read our recent work in JCP:
 G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Accepted* (2017)
