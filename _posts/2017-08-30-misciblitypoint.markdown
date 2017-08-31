@@ -2,7 +2,7 @@
 layout: single
 References:
 title:  "How to Determine When a Lipid Bilayer is Phase Separated"
-date:   2017-08-30 1:00:00 -0400
+date:   2017-08-31 10:00:00 -0400
 categories: analysis-method
 ---
 
@@ -19,14 +19,14 @@ Several people working on simulations of lipid phase separation have asked the q
 
 What would be very convenient for people performing *simulations* of phase-separating systems, though, is to find a way to relate their results to experimental observations.
 
-In the case of lipid bilayers, experimentalists have defined the "miscibility point", at which they assign miscibiliy temperatures, to correspond to the point where 50% of liquid ordered (L<sub>o</sub>) domain-forming lipids are miscible with liquid disordered (L<sub>d</sub>) domain-forming lipids. For example, in the works of Bakht and London, they prepare small unilamellar vesicles (SUVs) of phase-separating lipid mixtures and measure the flourescence of probes (of fluorescence *F*) which are quenced in the presence of L<sub>d</sub> phase (of fluorescence *F<sub>0</sub>*), and report the ratio *F/F<sub>0</sub>*.[1,2] As a function of temperature, the ratio *F/F<sub>0</sub>*  follows a sigmoid function as dependent on temperature, and the inflection point of this function is believed to correspond to 50% miscibility of L<sub>o</sub> and L<sub>d</sub> domains, where they assign the miscibility teperature.
+In the case of lipid bilayers, experimentalists have defined the "miscibility point," at which they assign miscibiliy temperatures, to correspond to the point where 50% of liquid ordered (L<sub>o</sub>) domain-forming lipids are miscible with liquid disordered (L<sub>d</sub>) domain-forming lipids. For example, in the works of Bakht and London, they prepare small unilamellar vesicles (SUVs) of phase-separating lipid mixtures and measure the flourescence of probes (of fluorescence *F*) which are quenced in the presence of L<sub>d</sub> phase (of fluorescence *F<sub>0</sub>*), and report the ratio *F/F<sub>0</sub>*.[1,2] As a function of temperature, the ratio *F/F<sub>0</sub>*  follows a sigmoid function as dependent on temperature, and the inflection point of this function is believed to correspond to 50% miscibility of L<sub>o</sub> and L<sub>d</sub> domains, where they assign the miscibility teperature.
 
 ![Fluorescence Miscibility]({{ site.url }}/assets/Membrane/FF0_T.jpg)  
 **Figure:** Illustration of *F/F<sub>0</sub>* fluorescence measurement used to determing miscibility point, which is assigned as the point of inflection in *F/F<sub>0</sub>(T)*.
 
 Veatch and Keller also assign the "miscibility point" to corespond to the point when 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids in giant unilamellar vesicle (GUV) fluorescence experiments.[3,4] We can find the point where 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids simulation by evaluating the mixing entropy of a binary mixture on a hexagonal lattice monolayer, which happens to be very similar to a lipid bilayer for a few reasons.
 
-# % Miscibilities of binary mixture on a hexagonal lattice
+# % Miscibilities of binary mixtures on 2D hexagonal lattices
 Each monolayer of a lipid bilayer can easily be thought of as a quasi-2D structure, and just like any 2D surface, lipids within monolayers are, on average, coordinated with six surrounding lipids.[5] Additionally, phase-separated bilayers (paticularly macroscopic separations, visible via microscopy) show strongly regstered domains -- that is, L<sub>o</sub> domains lie on top of L<sub>o</sub> domains, and L<sub>d</sub> domains lie on top of L<sub>d</sub> domains.[6] Because of this, thinking about phase-separated lipid bilayers as finite-sized periodic 2D hexagonal lattices seems quite reasonable, as this should be similar to the conditions of a lipid bilayer simulation.
 
 [In a previous post](https://gpantel.github.io/analysis-method/mixent/) I discussed the measurement of lipid mixing entropy using voronoi tessellations of lipid leaflets. The very same definition of mixing entropy will be used here for the binary case (*E*=2),
@@ -63,12 +63,12 @@ Last, for fun, let's see what the pure domain separation and the 50% miscibility
 
 
 For more details on finite size effects in lipid bilayer phase separation, I urge you to read our recent work in JCP:
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Accepted* (2017)
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.* *Accepted* (2017)
 
 References:
-1. Bakht, O., Pathak, P. & London, E. Effect of the Structure of Lipids Favoring Disordered Domain Formation on the Stability of Cholesterol-Containing Ordered Domains (Lipid Rafts): Identification of Multiple Raft-Stabilization Mechanisms. Biophys. J. 93, 4307–4318 (2007).
-2. Megha, Bakht, O. & London, E. Cholesterol precursors stabilize ordinary and ceramide-rich ordered lipid domains (lipid rafts) to different degrees: Implications for the bloch hypothesis and sterol biosynthesis disorders. J. Biol. Chem. 281, 21903–21913 (2006).
-3. Veatch, S. L. & Keller, S. L. Separation of Liquid Phases in Giant Vesicles of Ternary Mixtures of Phospholipids and Cholesterol. Biophys. J. 85, 3074–3083 (2003).
-4. Veatch, S. L. & Keller, S. L. Seeing spots: Complex phase behavior in simple membranes. Biochim. Biophys. Acta - Mol. Cell Res. 1746, 172–185 (2005).
-5. Kim, K., Choi, S. Q., Zell, Z. A., Squires, T. M. & Zasadzinski, J. A. Effect of cholesterol nanodomains on monolayer morphology and dynamics. Proc. Natl. Acad. Sci. 110, E3054–E3060 (2013).
-6. Blosser, M. C., Honerkamp-Smith, A. R., Han, T., Haataja, M. & Keller, S. L. Transbilayer Colocalization of Lipid Domains Explained via Measurement of Strong Coupling Parameters. Biophys. J. 109, 2317–2327 (2015).
+1. O. Bakht, P. Pathak, & E. London "Effect of the Structure of Lipids Favoring Disordered Domain Formation on the Stability of Cholesterol-Containing Ordered Domains (Lipid Rafts): Identification of Multiple Raft-Stabilization Mechanisms.," *Biophys. J.* **93**, 4307–4318 (2007).
+2. Megha, O. Bakht, & E. London "Cholesterol precursors stabilize ordinary and ceramide-rich ordered lipid domains (lipid rafts) to different degrees: Implications for the bloch hypothesis and sterol biosynthesis disorders," *J. Biol. Chem.* **281**, 21903–21913 (2006).
+3. S.L. Veatch, & S.L. Keller "Separation of Liquid Phases in Giant Vesicles of Ternary Mixtures of Phospholipids and Cholesterol," *Biophys. J.* **85**, 3074–3083 (2003).
+4. S.L. Veatch, & S.L. Keller "Seeing spots: Complex phase behavior in simple membranes," *Biochim. Biophys. Acta - Mol. Cell Res.* **1746**, 172–185 (2005).
+5. K. Kim,  S.Q. Choi, Z.A. Zell, T.M. Squires, & J.A. Zasadzinski "Effect of cholesterol nanodomains on monolayer morphology and dynamics," *Proc. Natl. Acad. Sci.* **110**, E3054–E3060 (2013).
+6. M.C. Blosser, A.R. Honerkamp-Smith, T. Han, M. Haataja, & S.L. Keller "Transbilayer Colocalization of Lipid Domains Explained via Measurement of Strong Coupling Parameters," *Biophys. J.* **109**, 2317–2327 (2015).

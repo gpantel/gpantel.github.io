@@ -50,7 +50,7 @@ On these clusters I analyze the liquid crystal order parameter $$P_2$$ and the b
 A script which implements all of these measurements is available on [my github](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/compute_n_m_DPPC%2BDIPC%2BCHOL.py), which can easily be modified to perform this very same analysis with some other selected molecules. Feel free to message me if you'd like help to do this, but please read the comments first!
 
 Please cite:  
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Submitted* (2017)
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.* *Accepted* (2017)
 
 References:  
 1. M.N. Melo, H.I. Ingolfsson, & S.J. Marrink "Parameters for Martini sterols and hopanoids based on a virtual-site description," *J. Chem. Phys.* **143** 243152 (2015).

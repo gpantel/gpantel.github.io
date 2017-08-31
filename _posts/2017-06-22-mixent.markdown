@@ -46,7 +46,7 @@ In recently submitted work we used this method to calculate the mixing entropy o
 A python implementation of this method (with contribution from [Asanga Bandara](https://scholar.google.com/citations?user=fdnxyPwAAAAJ&hl=en)) used to tessel DPPC-DIPC-CHOL mixtures in the Martini coarse-grained model using scipy, MDAnalysis to get (x,y) coordinates of lipid head groups, and multiprocessing for parallization with OpenMP is available [on my github](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/ternary_lipid_voronoi_edges.py).
 
 Please cite:  
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *Submitted* (2017)
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.* *Accepted* (2017)
 
 References:
 1. M. Camesasca, M. Kaufman, & I. Manas-Zloczower "Quantifying Fluid Mixing with the Shannon Entropy," *Macromol. Theory Simulations* **15** 595–607 (2006).
