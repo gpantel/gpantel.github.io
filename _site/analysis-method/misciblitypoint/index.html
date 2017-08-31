@@ -1,0 +1,452 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>How to Determine When a Lipid Bilayer is Phase Separated - Scratchings on biomoleclar simulation and theory</title>
+
+
+
+
+<meta name="description" content="I discuss the definition of lipid miscibility point used in experiment and determine the equivalent size-depedndent binary mixing entropy for a 2D lattice.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomoleclar simulation and theory">
+<meta property="og:title" content="How to Determine When a Lipid Bilayer is Phase Separated">
+
+
+  <link rel="canonical" href="http://localhost:4000/analysis-method/misciblitypoint/">
+  <meta property="og:url" content="http://localhost:4000/analysis-method/misciblitypoint/">
+
+
+
+  <meta property="og:description" content="I discuss the definition of lipid miscibility point used in experiment and determine the equivalent size-depedndent binary mixing entropy for a 2D lattice.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2017-08-30T14:00:00+09:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomoleclar simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomoleclar simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am PhD student working with John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to the accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">RIKEN, Wako-shi, Japan</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:george.pantelopulos@riken.jp">
+            <meta itemprop="email" content="george.pantelopulos@riken.jp" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to Determine When a Lipid Bilayer is Phase Separated">
+    <meta itemprop="description" content="I discuss the definition of lipid miscibility point used in experiment and determine the equivalent size-depedndent binary mixing entropy for a 2D lattice.">
+    <meta itemprop="datePublished" content="August 30, 2017">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">How to Determine When a Lipid Bilayer is Phase Separated
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>I discuss the definition of lipid miscibility point used in experiment and determine the equivalent size-depedndent binary mixing entropy for a 2D lattice.</p>
+
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1 id="how-do-we-know-when-a-lipid-bilayer-is-phase-separated">How do we know when a lipid bilayer is phase separated?</h1>
+
+<p>Several people working on simulations of lipid phase separation have asked the question “How do I know when a bilayer is really phase separated?” There is no obvious answer. The degree of any anisotropic mixing within <em>any</em> system seems to behave as a continous transition as dependent on various variables, such as temperature, system size, or relative concentration of types of molecules.</p>
+
+<p>What would be very convenient for people performing <em>simulations</em> of phase-separating systems, though, is to find a way to relate their results to experimental observations.</p>
+
+<p>In the case of lipid bilayers, experimentalists have defined the “miscibility point”, at which they assign miscibiliy temperatures, to correspond to the point where 50% of liquid ordered (L<sub>o</sub>) domain-forming lipids are miscible with liquid disordered (L<sub>d</sub>) domain-forming lipids. For example, in the works of Bakht and London, they prepare small unilamellar vesicles (SUVs) of phase-separating lipid mixtures and measure the flourescence of probes (of fluorescence <em>F</em>) which are quenced in the presence of L<sub>d</sub> phase (of fluorescence <em>F<sub>0</sub></em>), and report the ratio <em>F/F<sub>0</sub></em>.[1,2] As a function of temperature, the ratio <em>F/F<sub>0</sub></em>  follows a sigmoid function as dependent on temperature, and the inflection point of this function is believed to correspond to 50% miscibility of L<sub>o</sub> and L<sub>d</sub> domains, where they assign the miscibility teperature.</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/FF0_T.jpg" alt="Fluorescence Miscibility" /><br />
+<strong>Figure:</strong> Illustration of <em>F/F<sub>0</sub></em> fluorescence measurement used to determing miscibility point, which is assigned as the point of inflection in <em>F/F<sub>0</sub>(T)</em>.</p>
+
+<p>Veatch and Keller also assign the “miscibility point” to corespond to the point when 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids in giant unilamellar vesicle (GUV) fluorescence experiments.[6] We can find the point where 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids simulation by evaluating the mixing entropy of a binary mixture on a hexagonal lattice monolayer, which happens to be very similar to a lipid bilayer for a few reasons.</p>
+
+<h1 id="-miscibilities-of-binary-mixture-on-a-hexagonal-lattice">% Miscibilities of binary mixture on a hexagonal lattice</h1>
+<p>Each monolayer of a lipid bilayer can easily be thought of as a quasi-2D structure, and just like any 2D surface, lipids within monolayers are, on average, coordinated with six surrounding lipids.[5] Additionally, phase-separated bilayers (paticularly macroscopic separations, visible via microscopy) show strongly regstered domains – that is, L<sub>o</sub> domains lie on top of L<sub>o</sub> domains, and L<sub>d</sub> domains lie on top of L<sub>d</sub> domains.(CITAITON) Because of this, thinking about phase-separated lipid bilayers as finite-sized periodic 2D hexagonal lattices seems quite reasonable, as this should be similar to the conditions of a lipid bilayer simulation.</p>
+
+<p><a href="https://gpantel.github.io/analysis-method/mixent/">In a previous post</a> I discussed the measurement of lipid mixing entropy using voronoi tessellations of lipid leaflets. The very same definition of mixing entropy will be used here for the binary case (<em>E</em>=2),</p>
+
+<script type="math/tex; mode=display">S_{mix} = -p_1 \log_2(p_1) -p_2 \log_2(p_2),</script>
+
+<p>in which <script type="math/tex">p_1</script> corresponds to the fraction of contacts between lipids of the same type and <script type="math/tex">p_2</script> to the fraction betweens lipids of a different type.</p>
+
+<p>A phase separation is necessarily defined by an interface. In this case, we consider the phase separation to manifest a linear interface, partitioning the system to left and right sides, as occurs in MD simulations of lipid phase separation. Assuming there are <em>N</em> lipids in the monolayer, and the x- and y-dimensions of the system are equal (as they are in the vast majority of lipid membrane simulation literature), each interface will be composed of <script type="math/tex">\sqrt{N}</script> lipids, such that the interfaces contain <script type="math/tex">2\sqrt{N}</script> lipids in total.</p>
+
+<p>In a phase separation in which the two domains are truly pure, the only contribution to mixing entropy will come from the interface, and because the interface is dependent on the number of lipids, <em>N</em>, the mixing entropy of a phase separation is dependent on <em>N</em>. As such, it happens that <script type="math/tex">p_1 = (N - 2\sqrt{N} + 2\frac{2}{3}\sqrt{N})/N</script> and <script type="math/tex">p_2 = (2\frac{1}{3}\sqrt{N})/N</script>. The following figure illustrates this point:</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/PureInterfaceCartoon.jpg" alt="Pure Interface Cartoon" /><br />
+<strong>Figure:</strong> Illustration of a pure binary phase separation on a hexagonal lattice. The two types of lipids are represented in red and blue, respectively, and the interfaces between domains are drawn with a bold green line.</p>
+
+<p>To determine the mixing entropy of a system at 50% miscibility, or more precisely, where the system should be expected to exhibit 50% of its maximum fluorescence, we add in a region consisting of 50% of all lipids in an ideally-mixed domain, such that the remaining, pure domains of the system would contribute 50% of the maximum fluorescence signal. This requires the definition of an additional interface between pure and mixed phases, and the contribution of the ideally-mixed domian to the mixing entropy.</p>
+
+<p>While developing the 50% miscibility case, we may as well write equations that describe <script type="math/tex">S_\mathrm{mix}</script> as dependent on any % miscibility as well. We can introduce another parameter, <script type="math/tex">\Phi = \frac{\%\ miscibility}{100\%}</script> to represent this. Lipids involved in the interface between pure and mixed phases contribute <script type="math/tex">p_1 = \frac{7}{10}\sqrt{N}/N</script> and <script type="math/tex">p_2 = \frac{3}{10}\sqrt{N}/N</script> to the mixing entropy while lipids in the ideally mixed phase contribute <script type="math/tex">p_1 = \frac{2}{3}N_\mathrm{D}\Phi</script> and <script type="math/tex">p_2 = \frac{1}{3}N_\mathrm{D}\Phi</script> to the mixing entropy:</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/ImpureDomainAddition.jpg" alt="Pure Interface Cartoon" /><br />
+<strong>Figure:</strong> Illustration of pure domains in a binary mixture coexisting with an ideally-mixed domain composing a fraction (<script type="math/tex">\Phi</script>) of the system. The two types of lipids are represented in red and blue, respectively, the interfaces between pure domains are drawn with a bold green line, and the interfaces between ideally-mixed and pure domains are drawn with a bold cyan line.</p>
+
+<p>With these additions, we can write</p>
+
+<p><script type="math/tex">p_1 = \left( N_\mathrm{D}\Phi + \frac{2}{3}N_\mathrm{D}\Phi + 2\frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N</script>,
+<script type="math/tex">p_2 = \left( \frac{1}{3}N_\mathrm{D}\Phi + 2\frac{1}{3}\sqrt{N} + 2 \frac{3}{10}\sqrt{N} \right) / N</script>,</p>
+
+<p>which may be used to determine the mixing entropy, <script type="math/tex">S_{mix}</script> corresponding to some % miscibility, and vice-versa. This allows us to extract a concept of “extent of mixing” of a system that is easy to conceptualize, and directly relateable to experiment from the results of lipid bilayer simulations.</p>
+
+<p>Last, let’s see what the pure domain separation and the 50% miscibility (<script type="math/tex">\Phi = 0.5</script>) mixing entropies are as dependent on <em>N</em>:</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/MiscibilityMixingEntropyN.jpg" alt="Pure Interface Cartoon" /><br />
+<strong>Figure</strong>: Binary mixing entropies computed for the case of pure domains and the case including an ideally-mixed domain of system fraction <script type="math/tex">\Phi = 0.5</script>, similar to the miscibility point used to determing miscibility temperatures in fluoresence experiments.</p>
+
+<p>For more details on finite size effects in lipid bilayer phase separation, I urge you to read our recent work in JCP:
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Accepted</em> (2017)</p>
+
+<p>References:</p>
+<ol>
+  <li>Bakht, O., Pathak, P. &amp; London, E. Effect of the Structure of Lipids Favoring Disordered Domain Formation on the Stability of Cholesterol-Containing Ordered Domains (Lipid Rafts): Identification of Multiple Raft-Stabilization Mechanisms. Biophys. J. 93, 4307–4318 (2007).</li>
+  <li>Megha, Bakht, O. &amp; London, E. Cholesterol precursors stabilize ordinary and ceramide-rich ordered lipid domains (lipid rafts) to different degrees: Implications for the bloch hypothesis and sterol biosynthesis disorders. J. Biol. Chem. 281, 21903–21913 (2006).</li>
+  <li>Veatch, S. L. &amp; Keller, S. L. Separation of Liquid Phases in Giant Vesicles of Ternary Mixtures of Phospholipids and Cholesterol. Biophys. J. 85, 3074–3083 (2003).</li>
+  <li>Veatch, S. L. &amp; Keller, S. L. Seeing spots: Complex phase behavior in simple membranes. Biochim. Biophys. Acta - Mol. Cell Res. 1746, 172–185 (2005).</li>
+  <li>Kim, K., Choi, S. Q., Zell, Z. A., Squires, T. M. &amp; Zasadzinski, J. A. Effect of cholesterol nanodomains on monolayer morphology and dynamics. Proc. Natl. Acad. Sci. 110, E3054–E3060 (2013).</li>
+  <li>Blosser, M. C., Honerkamp-Smith, A. R., Han, T., Haataja, M. &amp; Keller, S. L. Transbilayer Colocalization of Lipid Domains Explained via Measurement of Strong Coupling Parameters. Biophys. J. 109, 2317–2327 (2015).</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#analysis-method" class="page__taxonomy-item" rel="tag">analysis-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-08-30T14:00:00+09:00">August 30, 2017</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How to Determine When a Lipid Bilayer is Phase Separated http://localhost:4000/analysis-method/misciblitypoint/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/analysis-method/misciblitypoint/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/analysis-method/misciblitypoint/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/analysis-method/misciblitypoint/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/analysis-method/mixent/" class="pagination--pager" title="Lipid Mixing Entropy with Voronoi Tessellation
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2017 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>

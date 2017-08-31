@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.20)  23 JUN 2017 18:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.20)  21 AUG 2017 16:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -125,13 +125,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 1342) in paragraph at lines 256--256
+Underfull \hbox (badness 1342) in paragraph at lines 261--261
 []|\T1/cmr/m/sc/10 Poster : ``Exa-mi-ning the confor-ma-tio-nal dy-na-mics of t
 he N-
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 260--260
+Underfull \hbox (badness 10000) in alignment at lines 265--265
 [][]
  []
 
@@ -143,7 +143,7 @@ Here is how much of TeX's memory you used:
  5326 multiletter control sequences out of 15000+600000
  9066 words of font info for 22 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,8n,30p,289b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,8n,30p,291b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc
 /dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1
 /public/cm-super/sfbx1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
@@ -154,7 +154,7 @@ cm-super/sfrm1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm
 -super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-s
 uper/sfti1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-sup
 er/sftt1000.pfb>
-Output written on curriculum_vitae_GAP.pdf (2 pages, 141527 bytes).
+Output written on curriculum_vitae_GAP.pdf (2 pages, 141403 bytes).
 PDF statistics:
  44 PDF objects out of 1000 (max. 8388607)
  31 compressed objects within 1 object stream
