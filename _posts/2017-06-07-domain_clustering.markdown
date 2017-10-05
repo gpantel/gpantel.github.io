@@ -19,11 +19,11 @@ The phase separation of complex mixtures of lipids in cell membranes has been th
 ![Domain Schematic]({{ site.url }}/assets/Membrane/Domain_Schematic_RB.jpg)  
 **Figure:** Illustration of a macroscopic phase separation in a ternary lipid mixture with proteins.
 
-Of course, proteins can adopt different folded structures depending on the thermodynamic phase they sit within, and understanding the true structure of the true environment membrane proteins encounter is essential to the ultimate goal of understanding and manipulating the cell membrane.
+Of course, proteins can adopt different folded structures depending on the thermodynamic phase they sit within, and understanding the true structure of the environment membrane proteins encounter is essential to the ultimate goal of understanding and manipulating the cell membrane.
 
 # Understanding the structure of lipid domains
 
-Using molecular dynamics simulations we can understand the structure of lipids at any point in time *a priori*. With such detailed information we can ask questions like "How does the structure of a lipid depend on the *size* of a domain?"
+Using molecular dynamics simulations we can understand the structure of lipids at any point in time. With such detailed information we can ask questions like "How does the structure of a lipid depend on the *size* of a domain?"
 
 Of course we could answer this question as-is, but there is someting else very important to consider... lipid bilayers are a *bilayer* -- the distribution of lipids is not perfectly symmetric across the two leaflets. So we should consider how many lipids are part of a domain in reference to each side of the membrane. This is to say, we should decompose the number of lipids involved in a domain into intra- and inter-leaflet lipids, and then measure the mean structural order for all lipids as dependent on the number of intra- (*n*) and inter- (*m*) leaflet lipids in the domain.
 
