@@ -59,7 +59,7 @@ If you'd like to check out an example script written to analyze MARTINI DPPC, DI
 Additionally, this past year saw a very nice use of $$\Psi_6^k$$ to describe a "hexatic-like" lipid phase of DPPC with the MARTINI coarse-grained model. It's a pretty cool read.[4]
 
 Please cite:  
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.* *Accepted* (2017)
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.*  **147**, 095101 (2017)
 
 References:
 1. B.I. Halperin & D.R. Nelson "Theory of Two-Dimensional melting," *Phys. Rev. Lett.* **41**, 121–124 (1978). 

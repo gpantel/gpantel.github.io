@@ -63,7 +63,7 @@ Last, for fun, let's see what the pure domain separation and the 50% miscibility
 
 
 For more details on finite size effects in lipid bilayer phase separation, I urge you to read our recent work in JCP:
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.* *Accepted* (2017)
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.*  **147**, 095101 (2017)
 
 References:
 1. O. Bakht, P. Pathak, & E. London "Effect of the Structure of Lipids Favoring Disordered Domain Formation on the Stability of Cholesterol-Containing Ordered Domains (Lipid Rafts): Identification of Multiple Raft-Stabilization Mechanisms.," *Biophys. J.* **93**, 4307–4318 (2007).
