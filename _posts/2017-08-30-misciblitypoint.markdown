@@ -44,15 +44,15 @@ In a phase separation in which the two domains are truly pure, the only contribu
 
 To determine the mixing entropy of a system at 50% miscibility, or more precisely, where the system should be expected to exhibit 50% of its maximum fluorescence, we add in a background "phase" consisting 50% of all lipids in an ideally-mixed (miscible) state, such that the remaining, pure domains of the system would contribute 50% of the maximum fluorescence signal. This requires the definition of an additional interface between pure and mixed phases, and the contribution of the ideally-mixed domian to the mixing entropy.
 
-While developing the 50% miscibility case, we may as well write equations that describe $$S_\mathrm{mix}$$ as dependent on any % miscibility as well. We can introduce another parameter, $$\Phi = \frac{\%\ miscibility}{100\%}$$ to represent this. Lipids involved in the interface between pure and mixed phases contribute $$p_1 = \frac{7}{10}\sqrt{N}/N$$ and $$p_2 = \frac{3}{10}\sqrt{N}/N$$ to the mixing entropy while lipids in the ideally mixed phase contribute $$p_1 = \frac{2}{3}N_\mathrm{D}\Phi/N$$ and $$p_2 = \frac{1}{3}N_\mathrm{D}\Phi/N$$ to the mixing entropy, where $$N_\mathrm{D} = N - 4\sqrt{N}$$:
+While developing the 50% miscibility case, we may as well write equations that describe $$S_\mathrm{mix}$$ as dependent on any % miscibility as well. We can introduce another parameter, $$\Phi = \frac{\%\ miscibility}{100\%}$$ to represent this. Lipids involved in the interface between pure and mixed phases contribute $$p_1 = \frac{7}{10}\sqrt{N}/N$$ and $$p_2 = \frac{3}{10}\sqrt{N}/N$$ to the mixing entropy while lipids in the ideally mixed phase contribute $$p_1 = \frac{2}{3}N_\mathrm{D}\Phi/N$$ and $$p_2 = \frac{1}{3}N_\mathrm{D}\Phi/N$$ to the mixing entropy, where $$N_\mathrm{D} = N - 3\sqrt{N}$$, number of non-interfacial lipids (one of the pure-pure interfaces is no longer present):
 
 ![Pure Interface Cartoon]({{ site.url }}/assets/Membrane/ImpureDomainAddition.jpg)  
 **Figure:** Illustration of pure domains in a binary mixture coexisting with an ideally-mixed domain composing a fraction ($$\Phi$$) of the system. The two types of lipids are represented in red and blue, respectively, the interfaces between pure domains are drawn with a bold green line, and the interfaces between ideally-mixed and pure domains are drawn with a bold cyan line.
 
 With these additions, we can write
 
-$$p_1 = \left( \left(N_\mathrm{D} - N_\mathrm{D}\Phi \right) + \frac{2}{3}N_\mathrm{D}\Phi + 2\frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N$$,
-$$p_2 = \left( \frac{1}{3}N_\mathrm{D}\Phi + 2\frac{1}{3}\sqrt{N} + 2 \frac{3}{10}\sqrt{N} \right) / N$$,
+$$p_1 = \left( \left(N_\mathrm{D} - N_\mathrm{D}\Phi \right) + \frac{2}{3}N_\mathrm{D}\Phi + \frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N$$,
+$$p_2 = \left( \frac{1}{3}N_\mathrm{D}\Phi + \frac{1}{3}\sqrt{N} + 2 \frac{3}{10}\sqrt{N} \right) / N$$,
 
 which may be used to determine the mixing entropy, $$S_{mix}$$ corresponding to some % miscibility, and vice-versa. This allows us to describe the "extent of mixing" of these systems in a way that is easy to conceptualize, and is directly relateable to experiment, from the results of lipid bilayer simulations.
 
