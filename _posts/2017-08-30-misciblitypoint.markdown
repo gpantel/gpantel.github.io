@@ -56,11 +56,12 @@ $$p_2 = \left( \frac{1}{2}N_\mathrm{D}\Phi + \frac{1}{3}\sqrt{N} + 2 \frac{3}{10
 
 which may be used to determine the mixing entropy, $$S_{mix}$$ corresponding to some % miscibility, and vice-versa. This allows us to describe the "extent of mixing" of these systems in a way that is easy to conceptualize, and is directly relateable to experiment, from the results of lipid bilayer simulations.
 
-Last, for fun, let's see what the pure domain separation and the 50% miscibility ($$\Phi = 0.5$$) mixing entropies are as dependent on *N*:
+Last, for fun, let's see how several different amounts of miscible phase change with *N*:
 
-![Pure Interface Cartoon]({{ site.url }}/assets/Membrane/MiscibilityMixingEntropyN.jpg)  
-**Figure**: Binary mixing entropies computed for the case of pure domains and the case including an ideally-mixed domain of system fraction $$\Phi = 0.5$$, similar to the miscibility point used to determing miscibility temperatures in fluoresence experiments.
+![Pure Interface Cartoon]({{ site.url }}/assets/Membrane/MiscibilityMixingEntropyN.png)  
+**Figure**: Binary mixing entropies computed for various amounts of ideally-mixed domain as they depend on $$N$$.
 
+We can see that **\sqrt{10}** is very special. This is because **\sqrt{10}** is the inflection point in the positive domain of the function **\sqrt{N}**. Small values such as 10 are far, far too small to experience macroscopic phase separation, so this point does not matter very much.
 
 For more details on finite size effects in lipid bilayer phase separation, I urge you to read our recent work in JCP:
 G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.*  **147**, 095101 (2017)
