@@ -61,7 +61,7 @@ Last, for fun, let's see how several different amounts of miscible phase change 
 ![Pure Interface Cartoon]({{ site.url }}/assets/Membrane/MiscibilityMixingEntropyN.png)  
 **Figure**: Binary mixing entropies computed for various amounts of ideally-mixed domain as they depend on $$N$$.
 
-We can see that **\sqrt{10}** is very special. This is because **\sqrt{10}** is the inflection point in the positive domain of the function **\sqrt{N}**. Small values such as 10 are far, far too small to experience macroscopic phase separation, so this point does not matter very much.
+We can see that $$\sqrt{10}$$ is very special. This is because $$\sqrt{10}$$ is the inflection point in the positive domain of the function $$\sqrt{N}$$. Small values such as 10 are far, far too small to experience macroscopic phase separation, so this point does not matter very much.
 
 For more details on finite size effects in lipid bilayer phase separation, I urge you to read our recent work in JCP:
 G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.*  **147**, 095101 (2017)
