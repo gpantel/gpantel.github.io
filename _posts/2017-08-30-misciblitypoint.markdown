@@ -51,7 +51,7 @@ While developing the 50% miscibility case, we may as well write equations that d
 
 With these additions, we can write
 
-$$p_1 = \left( N_\mathrm{D}\Phi + \frac{2}{3}N_\mathrm{D}\Phi + 2\frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N$$,
+$$p_1 = \left( \left(N_\mathrm{D} - N_\mathrm{D}\Phi \right) + \frac{2}{3}N_\mathrm{D}\Phi + 2\frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N$$,
 $$p_2 = \left( \frac{1}{3}N_\mathrm{D}\Phi + 2\frac{1}{3}\sqrt{N} + 2 \frac{3}{10}\sqrt{N} \right) / N$$,
 
 which may be used to determine the mixing entropy, $$S_{mix}$$ corresponding to some % miscibility, and vice-versa. This allows us to describe the "extent of mixing" of these systems in a way that is easy to conceptualize, and is directly relateable to experiment, from the results of lipid bilayer simulations.
