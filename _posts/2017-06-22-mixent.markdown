@@ -32,7 +32,7 @@ However, this method is limited in that the solution is dependent on how the sys
 
 # Voronoi Edge Lipid Mixing Entropy
 
-In a recently submitted paper about finite size effects of lipid domain formation, we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as
+In a 2017 paper about finite size effects of lipid domain formation we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as
 
 $$S_{mix} = -\sum^{E}_{j=1} p_j \log_E(p_j),$$
 
