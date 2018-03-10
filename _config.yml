@@ -79,7 +79,7 @@ analytics:
 author:
   name             : "George A. Pantelopulos"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to the accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community."
+  bio              : "I am a PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community."
   cv               : ""
   location         : "Boston, MA, USA"
   email            : "gpantel@bu.edu"
