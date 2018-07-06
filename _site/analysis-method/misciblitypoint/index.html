@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2017-08-30T14:00:00+09:00">
+  <meta property="article:published_time" content="2017-08-31T23:00:00+09:00">
 
 
 
@@ -157,7 +157,7 @@
     <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
     
       <p class="author__bio" itemprop="description">
-        I am PhD student working with John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to the accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+        I am a PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
       </p>
     
   </div>
@@ -175,8 +175,8 @@
 
       
         <li>
-          <a href="mailto:george.pantelopulos@riken.jp">
-            <meta itemprop="email" content="george.pantelopulos@riken.jp" />
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
             <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
           </a>
         </li>
@@ -263,7 +263,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="How to Determine When a Lipid Bilayer is Phase Separated">
     <meta itemprop="description" content="I discuss the definition of lipid miscibility point used in experiment and determine the equivalent size-depedndent binary mixing entropy for a 2D lattice.">
-    <meta itemprop="datePublished" content="August 30, 2017">
+    <meta itemprop="datePublished" content="August 31, 2017">
     
 
     <div class="page__inner-wrap">
@@ -295,15 +295,15 @@
 
 <p>What would be very convenient for people performing <em>simulations</em> of phase-separating systems, though, is to find a way to relate their results to experimental observations.</p>
 
-<p>In the case of lipid bilayers, experimentalists have defined the “miscibility point”, at which they assign miscibiliy temperatures, to correspond to the point where 50% of liquid ordered (L<sub>o</sub>) domain-forming lipids are miscible with liquid disordered (L<sub>d</sub>) domain-forming lipids. For example, in the works of Bakht and London, they prepare small unilamellar vesicles (SUVs) of phase-separating lipid mixtures and measure the flourescence of probes (of fluorescence <em>F</em>) which are quenced in the presence of L<sub>d</sub> phase (of fluorescence <em>F<sub>0</sub></em>), and report the ratio <em>F/F<sub>0</sub></em>.[1,2] As a function of temperature, the ratio <em>F/F<sub>0</sub></em>  follows a sigmoid function as dependent on temperature, and the inflection point of this function is believed to correspond to 50% miscibility of L<sub>o</sub> and L<sub>d</sub> domains, where they assign the miscibility teperature.</p>
+<p>In the case of lipid bilayers, experimentalists have defined the “miscibility point,” at which they assign miscibiliy temperatures, to correspond to the point where 50% of liquid ordered (L<sub>o</sub>) domain-forming lipids are miscible with liquid disordered (L<sub>d</sub>) domain-forming lipids. For example, in the works of Bakht and London, they prepare small unilamellar vesicles (SUVs) of phase-separating lipid mixtures and measure the flourescence of probes (of fluorescence <em>F</em>) which are quenced in the presence of L<sub>d</sub> phase (of fluorescence <em>F<sub>0</sub></em>), and report the ratio <em>F/F<sub>0</sub></em>.[1,2] As a function of temperature, the ratio <em>F/F<sub>0</sub></em>  follows a sigmoid function as dependent on temperature, and the inflection point of this function is believed to correspond to 50% miscibility of L<sub>o</sub> and L<sub>d</sub> domains, where they assign the miscibility teperature.</p>
 
 <p><img src="http://localhost:4000/assets/Membrane/FF0_T.jpg" alt="Fluorescence Miscibility" /><br />
 <strong>Figure:</strong> Illustration of <em>F/F<sub>0</sub></em> fluorescence measurement used to determing miscibility point, which is assigned as the point of inflection in <em>F/F<sub>0</sub>(T)</em>.</p>
 
-<p>Veatch and Keller also assign the “miscibility point” to corespond to the point when 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids in giant unilamellar vesicle (GUV) fluorescence experiments.[6] We can find the point where 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids simulation by evaluating the mixing entropy of a binary mixture on a hexagonal lattice monolayer, which happens to be very similar to a lipid bilayer for a few reasons.</p>
+<p>Veatch and Keller also assign the “miscibility point” to corespond to the point when 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids in giant unilamellar vesicle (GUV) fluorescence experiments.[3,4] We can find the point where 50% of L<sub>o</sub> domain-forming lipids are miscible with L<sub>d</sub> domain-forming lipids simulation by evaluating the mixing entropy of a binary mixture on a hexagonal lattice monolayer, which happens to be very similar to a lipid bilayer for a few reasons.</p>
 
-<h1 id="-miscibilities-of-binary-mixture-on-a-hexagonal-lattice">% Miscibilities of binary mixture on a hexagonal lattice</h1>
-<p>Each monolayer of a lipid bilayer can easily be thought of as a quasi-2D structure, and just like any 2D surface, lipids within monolayers are, on average, coordinated with six surrounding lipids.[5] Additionally, phase-separated bilayers (paticularly macroscopic separations, visible via microscopy) show strongly regstered domains – that is, L<sub>o</sub> domains lie on top of L<sub>o</sub> domains, and L<sub>d</sub> domains lie on top of L<sub>d</sub> domains.(CITAITON) Because of this, thinking about phase-separated lipid bilayers as finite-sized periodic 2D hexagonal lattices seems quite reasonable, as this should be similar to the conditions of a lipid bilayer simulation.</p>
+<h1 id="-miscibilities-of-binary-mixtures-on-2d-hexagonal-lattices">% Miscibilities of binary mixtures on 2D hexagonal lattices</h1>
+<p>Each monolayer of a lipid bilayer can easily be thought of as a quasi-2D structure, and just like any 2D surface, lipids within monolayers are, on average, coordinated with six surrounding lipids.[5] Additionally, phase-separated bilayers (paticularly macroscopic separations, visible via microscopy) show strongly regstered domains – that is, L<sub>o</sub> domains lie on top of L<sub>o</sub> domains, and L<sub>d</sub> domains lie on top of L<sub>d</sub> domains.[6] Because of this, thinking about phase-separated lipid bilayers as finite-sized periodic 2D hexagonal lattices seems quite reasonable, as this should be similar to the conditions of a lipid bilayer simulation.</p>
 
 <p><a href="https://gpantel.github.io/analysis-method/mixent/">In a previous post</a> I discussed the measurement of lipid mixing entropy using voronoi tessellations of lipid leaflets. The very same definition of mixing entropy will be used here for the binary case (<em>E</em>=2),</p>
 
@@ -318,36 +318,40 @@
 <p><img src="http://localhost:4000/assets/Membrane/PureInterfaceCartoon.jpg" alt="Pure Interface Cartoon" /><br />
 <strong>Figure:</strong> Illustration of a pure binary phase separation on a hexagonal lattice. The two types of lipids are represented in red and blue, respectively, and the interfaces between domains are drawn with a bold green line.</p>
 
-<p>To determine the mixing entropy of a system at 50% miscibility, or more precisely, where the system should be expected to exhibit 50% of its maximum fluorescence, we add in a region consisting of 50% of all lipids in an ideally-mixed domain, such that the remaining, pure domains of the system would contribute 50% of the maximum fluorescence signal. This requires the definition of an additional interface between pure and mixed phases, and the contribution of the ideally-mixed domian to the mixing entropy.</p>
+<p>To determine the mixing entropy of a system at 50% miscibility, or more precisely, where the system should be expected to exhibit 50% of its maximum fluorescence, we add in a background “phase” consisting 50% of all lipids in an ideally-mixed (miscible) state, such that the remaining, pure domains of the system would contribute 50% of the maximum fluorescence signal. This requires the definition of an additional interface between pure and mixed phases, and the contribution of the ideally-mixed domian to the mixing entropy.</p>
 
-<p>While developing the 50% miscibility case, we may as well write equations that describe <script type="math/tex">S_\mathrm{mix}</script> as dependent on any % miscibility as well. We can introduce another parameter, <script type="math/tex">\Phi = \frac{\%\ miscibility}{100\%}</script> to represent this. Lipids involved in the interface between pure and mixed phases contribute <script type="math/tex">p_1 = \frac{7}{10}\sqrt{N}/N</script> and <script type="math/tex">p_2 = \frac{3}{10}\sqrt{N}/N</script> to the mixing entropy while lipids in the ideally mixed phase contribute <script type="math/tex">p_1 = \frac{2}{3}N_\mathrm{D}\Phi</script> and <script type="math/tex">p_2 = \frac{1}{3}N_\mathrm{D}\Phi</script> to the mixing entropy:</p>
+<p>While developing the 50% miscibility case, we may as well write equations that describe <script type="math/tex">S_\mathrm{mix}</script> as dependent on any % miscibility as well. We can introduce another parameter, <script type="math/tex">\Phi = \frac{\%\ miscibility}{100\%}</script> to represent the miscibility. Lipids involved in the interface between pure and mixed phases contribute <script type="math/tex">\frac{7}{10}\sqrt{N}/N</script> to <script type="math/tex">p_1</script> and <script type="math/tex">\frac{3}{10}\sqrt{N}/N</script> to <script type="math/tex">p_2</script> while lipids in the ideally mixed phase contribute <script type="math/tex">\frac{1}{2}N_\mathrm{D}\Phi/N</script> to <script type="math/tex">p_1</script> and <script type="math/tex">p_2</script>, where <script type="math/tex">N_\mathrm{D} = N - 3\sqrt{N}</script>, the number of lipids with phases that are not at an interface (we lose one pure-pure interface when introducing the ideally mixed phase):</p>
 
 <p><img src="http://localhost:4000/assets/Membrane/ImpureDomainAddition.jpg" alt="Pure Interface Cartoon" /><br />
 <strong>Figure:</strong> Illustration of pure domains in a binary mixture coexisting with an ideally-mixed domain composing a fraction (<script type="math/tex">\Phi</script>) of the system. The two types of lipids are represented in red and blue, respectively, the interfaces between pure domains are drawn with a bold green line, and the interfaces between ideally-mixed and pure domains are drawn with a bold cyan line.</p>
 
 <p>With these additions, we can write</p>
 
-<p><script type="math/tex">p_1 = \left( N_\mathrm{D}\Phi + \frac{2}{3}N_\mathrm{D}\Phi + 2\frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N</script>,
-<script type="math/tex">p_2 = \left( \frac{1}{3}N_\mathrm{D}\Phi + 2\frac{1}{3}\sqrt{N} + 2 \frac{3}{10}\sqrt{N} \right) / N</script>,</p>
+<p><script type="math/tex">p_1 = \left( \left(N_\mathrm{D} - N_\mathrm{D}\Phi \right) + \frac{1}{2}N_\mathrm{D}\Phi + \frac{2}{3}\sqrt{N} + 2 \frac{7}{10}\sqrt{N} \right) / N</script>,
+<script type="math/tex">p_2 = \left( \frac{1}{2}N_\mathrm{D}\Phi + \frac{1}{3}\sqrt{N} + 2 \frac{3}{10}\sqrt{N} \right) / N</script>,</p>
 
-<p>which may be used to determine the mixing entropy, <script type="math/tex">S_{mix}</script> corresponding to some % miscibility, and vice-versa. This allows us to extract a concept of “extent of mixing” of a system that is easy to conceptualize, and directly relateable to experiment from the results of lipid bilayer simulations.</p>
+<p>which may be used to determine the mixing entropy, <script type="math/tex">S_{mix}</script> corresponding to some % miscibility, and vice-versa. This allows us to describe the “extent of mixing” of these systems in a way that is easy to conceptualize, and is directly relateable to experiment, from the results of lipid bilayer simulations.</p>
 
-<p>Last, let’s see what the pure domain separation and the 50% miscibility (<script type="math/tex">\Phi = 0.5</script>) mixing entropies are as dependent on <em>N</em>:</p>
+<p>Last, for fun, let’s see how several different amounts of miscible phase change with <em>N</em>:</p>
 
-<p><img src="http://localhost:4000/assets/Membrane/MiscibilityMixingEntropyN.jpg" alt="Pure Interface Cartoon" /><br />
-<strong>Figure</strong>: Binary mixing entropies computed for the case of pure domains and the case including an ideally-mixed domain of system fraction <script type="math/tex">\Phi = 0.5</script>, similar to the miscibility point used to determing miscibility temperatures in fluoresence experiments.</p>
+<p><img src="http://localhost:4000/assets/Membrane/MiscibilityMixingEntropyN.png" alt="Pure Interface Cartoon" /><br />
+<strong>Figure</strong>: Binary mixing entropies computed for various amounts of ideally-mixed domain as they depend on <script type="math/tex">N</script>.</p>
+
+<p>We can see that <script type="math/tex">\sqrt{10}</script> is very special. This is because <script type="math/tex">\sqrt{10}</script> is the inflection point in the positive domain of the function <script type="math/tex">\sqrt{N}</script>. Small values such as 10 are far, far too small to experience macroscopic phase separation, so this point does not matter very much.</p>
 
 <p>For more details on finite size effects in lipid bilayer phase separation, I urge you to read our recent work in JCP:
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Accepted</em> (2017)</p>
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>J. Chem. Phys.</em>  <strong>147</strong>, 095101 (2017)</p>
+
+<p>Also, a special thank you to Tetsuro Nagai for helpful discussion about this post.</p>
 
 <p>References:</p>
 <ol>
-  <li>Bakht, O., Pathak, P. &amp; London, E. Effect of the Structure of Lipids Favoring Disordered Domain Formation on the Stability of Cholesterol-Containing Ordered Domains (Lipid Rafts): Identification of Multiple Raft-Stabilization Mechanisms. Biophys. J. 93, 4307–4318 (2007).</li>
-  <li>Megha, Bakht, O. &amp; London, E. Cholesterol precursors stabilize ordinary and ceramide-rich ordered lipid domains (lipid rafts) to different degrees: Implications for the bloch hypothesis and sterol biosynthesis disorders. J. Biol. Chem. 281, 21903–21913 (2006).</li>
-  <li>Veatch, S. L. &amp; Keller, S. L. Separation of Liquid Phases in Giant Vesicles of Ternary Mixtures of Phospholipids and Cholesterol. Biophys. J. 85, 3074–3083 (2003).</li>
-  <li>Veatch, S. L. &amp; Keller, S. L. Seeing spots: Complex phase behavior in simple membranes. Biochim. Biophys. Acta - Mol. Cell Res. 1746, 172–185 (2005).</li>
-  <li>Kim, K., Choi, S. Q., Zell, Z. A., Squires, T. M. &amp; Zasadzinski, J. A. Effect of cholesterol nanodomains on monolayer morphology and dynamics. Proc. Natl. Acad. Sci. 110, E3054–E3060 (2013).</li>
-  <li>Blosser, M. C., Honerkamp-Smith, A. R., Han, T., Haataja, M. &amp; Keller, S. L. Transbilayer Colocalization of Lipid Domains Explained via Measurement of Strong Coupling Parameters. Biophys. J. 109, 2317–2327 (2015).</li>
+  <li>O. Bakht, P. Pathak, &amp; E. London “Effect of the Structure of Lipids Favoring Disordered Domain Formation on the Stability of Cholesterol-Containing Ordered Domains (Lipid Rafts): Identification of Multiple Raft-Stabilization Mechanisms.,” <em>Biophys. J.</em> <strong>93</strong>, 4307–4318 (2007).</li>
+  <li>Megha, O. Bakht, &amp; E. London “Cholesterol precursors stabilize ordinary and ceramide-rich ordered lipid domains (lipid rafts) to different degrees: Implications for the bloch hypothesis and sterol biosynthesis disorders,” <em>J. Biol. Chem.</em> <strong>281</strong>, 21903–21913 (2006).</li>
+  <li>S.L. Veatch, &amp; S.L. Keller “Separation of Liquid Phases in Giant Vesicles of Ternary Mixtures of Phospholipids and Cholesterol,” <em>Biophys. J.</em> <strong>85</strong>, 3074–3083 (2003).</li>
+  <li>S.L. Veatch, &amp; S.L. Keller “Seeing spots: Complex phase behavior in simple membranes,” <em>Biochim. Biophys. Acta - Mol. Cell Res.</em> <strong>1746</strong>, 172–185 (2005).</li>
+  <li>K. Kim,  S.Q. Choi, Z.A. Zell, T.M. Squires, &amp; J.A. Zasadzinski “Effect of cholesterol nanodomains on monolayer morphology and dynamics,” <em>Proc. Natl. Acad. Sci.</em> <strong>110</strong>, E3054–E3060 (2013).</li>
+  <li>M.C. Blosser, A.R. Honerkamp-Smith, T. Han, M. Haataja, &amp; S.L. Keller “Transbilayer Colocalization of Lipid Domains Explained via Measurement of Strong Coupling Parameters,” <em>Biophys. J.</em> <strong>109</strong>, 2317–2327 (2015).</li>
 </ol>
 
         
@@ -378,7 +382,7 @@ G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critica
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-08-30T14:00:00+09:00">August 30, 2017</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-08-31T23:00:00+09:00">August 31, 2017</time></p>
         
       </footer>
 
@@ -438,7 +442,7 @@ G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critica
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2017 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2018 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
       </footer>
     </div>
 

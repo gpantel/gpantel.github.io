@@ -157,7 +157,7 @@
     <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
     
       <p class="author__bio" itemprop="description">
-        I am PhD student working with John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to the accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+        I am a PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
       </p>
     
   </div>
@@ -175,8 +175,8 @@
 
       
         <li>
-          <a href="mailto:george.pantelopulos@riken.jp">
-            <meta itemprop="email" content="george.pantelopulos@riken.jp" />
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
             <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
           </a>
         </li>
@@ -308,7 +308,7 @@
 
 <h1 id="voronoi-edge-lipid-mixing-entropy">Voronoi Edge Lipid Mixing Entropy</h1>
 
-<p>In a recently submitted paper about finite size effects of lipid domain formation, we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as</p>
+<p>In a 2017 paper about finite size effects of lipid domain formation we developed and employed a novel method of evaluating mixing entropy using Voronoi tessellations of lipid head groups. This method is quite simple in that it involves counting Voronoi edges formed between pairs of lipids. With this method there is no need to separate the system in to regions or to use arbitrary cutoffs for determining the neighbors of lipids. The mixing entropy is simply written as</p>
 
 <script type="math/tex; mode=display">S_{mix} = -\sum^{E}_{j=1} p_j \log_E(p_j),</script>
 
@@ -322,7 +322,7 @@
 <p>A python implementation of this method (with contribution from <a href="https://scholar.google.com/citations?user=fdnxyPwAAAAJ&amp;hl=en">Asanga Bandara</a>) used to tessel DPPC-DIPC-CHOL mixtures in the Martini coarse-grained model using scipy, MDAnalysis to get (x,y) coordinates of lipid head groups, and multiprocessing for parallization with OpenMP is available <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/ternary_lipid_voronoi_edges.py">on my github</a>.</p>
 
 <p>Please cite:<br />
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>Submitted</em> (2017)</p>
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>J. Chem. Phys.</em>  <strong>147</strong>, 095101 (2017)</p>
 
 <p>References:</p>
 <ol>
@@ -419,7 +419,7 @@ G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critica
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2017 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2018 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
       </footer>
     </div>
 
