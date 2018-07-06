@@ -1,0 +1,433 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Implicit Membrane REMD Structures of Full-length C99 protein - Scratchings on biomoleclar simulation and theory</title>
+
+
+
+
+<meta name="description" content="I briefly discuss preparation of full-length C99 simulations in GBSW implicit membranes using REMD and provide prepresentative structures from  clustering.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomoleclar simulation and theory">
+<meta property="og:title" content="Implicit Membrane REMD Structures of Full-length C99 protein">
+
+
+  <link rel="canonical" href="http://localhost:4000/analysis-method/implicitC99/">
+  <meta property="og:url" content="http://localhost:4000/analysis-method/implicitC99/">
+
+
+
+  <meta property="og:description" content="I briefly discuss preparation of full-length C99 simulations in GBSW implicit membranes using REMD and provide prepresentative structures from  clustering.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-07-06T20:00:00+09:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomoleclar simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomoleclar simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am a PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">RIKEN, Wako-shi, Japan</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Implicit Membrane REMD Structures of Full-length C99 protein">
+    <meta itemprop="description" content="I briefly discuss preparation of full-length C99 simulations in GBSW implicit membranes using REMD and provide prepresentative structures from  clustering.">
+    <meta itemprop="datePublished" content="July 06, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Implicit Membrane REMD Structures of Full-length C99 protein
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>I briefly discuss preparation of full-length C99 simulations in GBSW implicit membranes using REMD and provide prepresentative structures from  clustering.</p>
+
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1 id="c99-a-99-residue-long-c-terminus-of-amyloid-precursor-protein-is-the-precursor-to-amyoid-beta-abeta">C99, a 99-residue long C-terminus of Amyloid Precursor Protein, is the precursor to amyoid beta A<script type="math/tex">\beta</script>.</h1>
+
+<p><a href="https://www.uniprot.org/uniprot/P05067">Amyloid precursor protein (APP)</a> is a (canonically) 770-residue long protein central to the amyloid cascade hypothesis of Alzheimer’s Disease (AD).[1] APP is cleaved by either <script type="math/tex">\alpha</script>- or <script type="math/tex">\beta</script>-secretase outside of cellular membranes, primarily producing 83- or 99-residue long C-terminal fragments known as C83 or C99. In the amyloid cascade, C99 is then cleaved by <script type="math/tex">\gamma</script>-secretase in its transmembrane region, resulting in one of many possible lengths of <script type="math/tex">A\beta</script> (primarily 38, 40, 42, 43), which can be selected by changing the structural ensemble of C99 and thus the point of cleavage on C99 by <script type="math/tex">\gamma</script>-secretase. It is these longer fragments, <script type="math/tex">A\beta_{42}</script> and <script type="math/tex">A\beta_{43}</script>, which form oligomers, fibrils, and tangles which are implicated in AD.</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/APP_cleavageCartoon.png" alt="APP cartoon" /><br />
+<strong>Figure:</strong> Cartoon of C-terminal region of APP. Scissors show the approximate locations of <script type="math/tex">\alpha</script>-, <script type="math/tex">\beta</script>-, and <script type="math/tex">\gamma</script>-secretase cleavage sites on APP. In membranes of sufficient cholesterol concentration lipid raft domains form, rich in saturated lipid and cholesterol, to which APPs partition. In raft domains APP colocalizes with <script type="math/tex">\beta</script>-secretase and C99 with <script type="math/tex">\gamma</script>-secretase. At low cholesterol concentrations APP will colocalize with <script type="math/tex">\alpha</script>-secretase, avoiding the amyloid cascade.</p>
+
+<p>There are many important mutations that have been identified in the brains of AD patients which appear in the <em>extra</em>-membrane N- and C-terminal domains of C99. Additionally, the N-terminus of C99 is likely critical to C99-<script type="math/tex">\gamma</script>-secretase binding and the C-terminus of C99 is involved in interactions with many cytoplasmic proteins. Part of the N- and C-terminal domains of C99 have been evidenced to be intrinsically disordered, and thus the structural ensemble of C99 in these domains had not been resolved. The body of work resolving part of the N- and C-terminal structure of C99 and the key residues present in these termini were summarized in <a href="https://www.sciencedirect.com/science/article/pii/S0005273618301123">our recent publication in Biochimica et Biophysica Acta (BBA) - Biomembranes</a>. In addition to this, we summarized the body of work that has formed our understanding of membrane environment effects on the C99 transmembrane domain structural ensmeble.</p>
+
+<h1 id="preparation-of-the-full-length-c99-protein-from-experimental-data">Preparation of the full-length C99 protein from experimental data.</h1>
+<p>Though the transmembrane domain of C99 has an NMR-resolved structure (PDB: 2LP1),[2] the full-length structure of C99 has not been resolved via experimenal methods. However, there are backbone chemical shift assignments for the majority of the C99 sequence, determined via solution NMR in LMPG micelles by Sanders and coworkers (BMRB: 15775).[3]</p>
+
+<p>We modelled the initial structure of C99 via a combination of structure from simulation and backbone chemical shifts (13C, 15N, 1H) using (1) <a href="https://spin.niddk.nih.gov/NMRPipe/talos/">TALOS+</a>, an emperical method for assigning dihedral angles from backbone chemical shifts. (2) Re-assignment of the transmembrane domain (residues 23-55) dihedral angles to those observed in the “Gly-in” structure of C99 homodimers.[4] (3) Changing the <script type="math/tex">\psi</script> angle of H14 and the <script type="math/tex">\phi</script> angle Q82 both by 180° in order to recover more accurate insertion depths of C99 residues, compared to past experimental measurements in bilayers and bicelles. (4) Assignment of rotomeric states of sidechains via the <a href="http://dunbrack.fccc.edu/bbdep2010/">rotamer library of Shapovalov and Dunbrack</a>. (5) Assignment of pH 7 protonation states using the AddH program in UCSF Chimera. (6) Atom renaming for CHARMM format, addition of caps to N- and C-termini, and generation of PSF file using <a href="http://www.charmm-gui.org/">CHARMM-GUI</a>.</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/C99_preparationScheme.png" alt="APP cartoon" /><br />
+<strong>Figure:</strong> The process used to construct the initial state of full-length C99. (1) TALOS+ predicts dihedral from backbone NMR, (2) transmembrane domain dihedrals reaassigned based on “Gly-in” motif, (3) H14 <script type="math/tex">\psi</script> and Q82 <script type="math/tex">\phi</script> rotated 180° to get better agreement with EPR (stars) and NMR (cyan hydrophilic probe signal; blue hydrophobic probe signal), proposed structure insertion in dashed lines, (4) rotamer assignment, (5) protonation state assignment, and (6) atom renaming, terminal capping, and PSF file generation.</p>
+
+<h1 id="gbsw-implicit-membrane-and-remd-simulation">GBSW Implicit Membrane and REMD simulation.</h1>
+
+<p>Given the complexity and length of the extra-membrane domains of C99 we initiated studies of the full-length sequence of C99 using the Generalized Born with a simple SWitching (GBSW)[5] implicit membrane model and replica exchange molecular dynamics (REMD).[6] I may provide a brief explanation of GBSW in the future. <a href="https://gpantel.github.io/computational-method/MSST/">I wrote a brief explanation of REMD in a previous post.</a></p>
+
+<p>A Temperature REMD tutorial using REPDSTR in CHARMM has previously been written on <a href="https://www.charmmtutorial.org/index.php/Temperature_replica_exchange">charmmtutorial.org</a> by Tim Miller. A GBSW membrane tutorial has been written by Wonpil Im and Jianhan Chen on <a href="https://mmtsb.org/workshops/mmtsb-ctbp_workshop_2009/Tutorials/GBSW_Tutorial/GBSW_Tutorial.html">mmtsb.org</a>.</p>
+
+<h1 id="representative-structures-from-gbsw-remd-simulation-determined-using-calpha-and-dihedral-pca-of-n--and-c-terminal-domains">Representative structures from GBSW REMD simulation determined using C<script type="math/tex">\alpha</script> and dihedral PCA of N- and C-terminal domains.</h1>
+
+<p>To precicely form clusters of C99 structures sampled at 310 K in these 30-, 35-, and 40-Å thick membranes over 130, 160, and 460 ns REMD simulations, we performed PCA of combined C<script type="math/tex">\alpha</script> and dihedral angle data across all ensembles of N- and C-terminal domains (separately), using the three largest eigenmodes of each PCA to obtain a 12-dimensional space in which conformational clustering of principal components was performed using gaussian mixture models.</p>
+
+<p>For the benefit of other researchers, I’ve uploaded the final structure assigned to each of the 16 conformational cluster in these <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/structures/30ang_GBSWfullC99">30-</a>, <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/structures/35ang_GBSWfullC99">35-</a>, and <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/structures/40ang_GBSWfullC99">40-Å</a> thick membranes to my github, including all PSF files generated by CHARMM-GUI.</p>
+
+<p>For more details on our work, please read our manuscript:
+G.A. Pantelopulos, J.E. Straub, D. Thirumalai, &amp; Y. Sugita “Structure of APP-C991–99 and implications for role of extra-membrane domains in function and oligomerization,” <em>BBA Biomembr.</em> (2018) doi:10.1016/j.bbamem.2018.04.002</p>
+
+<p>References:</p>
+<ol>
+  <li>J.A. Hardy &amp; G.A. Higgins, “Alzhimer’s Disease: The Amyloid Cascade Hypothesis,” <em>Science</em> <strong>256</strong> 184-185 (1992).</li>
+  <li>P.J. Barrett, Y. Song, W.D. Van Horn, E.J. Hustedt, J.M. Schafer, A. Hadziselimovic, A.J. Beel, C.R. Sanders, “The Amyloid Precursor Protein Has a Flexible Transmembrane Domain and Binds Cholesterol,” <em>Science</em> <strong>336</strong> 1168-1171 (2012)</li>
+  <li>A. Beel, C. Mobley, H. Kim, F. Tian, A. Hadziselimovic, B. Jap, J. Prestegard, &amp; C. Sanders, “Structural Studies of the Transmembrane C-Terminal Domain of the Amyloid Precursor Protein (APP): Does APP Function as a Cholesterol Sensor?,”  <em>Biochemistry</em> <strong>47</strong>, 9428-9446 (2008).</li>
+  <li>L. Dominguez, L. Foster, J.E. Straub, &amp; Thirumalai, “Impact of membrane lipid composition on the structure and stability of the transmembrane domain of amyloid precursor protein,” <em>Proc. Natl. Acad. Sci.</em> <strong>113</strong> E5281–E5287 (2016).</li>
+  <li>W. Im, M. Feig, &amp; C.L. Brooks, “An Implicit Membrane Generalized Born Theory for the Study of Structure, Stability, and Interactions of Membrane Proteins,” <em>Biophys. J.</em> <strong>85</strong> 2900–2918 (2003).</li>
+  <li>Y. Sugita, &amp; Y. Okamoto, “Replica exchange molecular dynamics method for protein folding simulation,” <em>Chem. Phys. Lett.</em> <strong>314</strong> 141–151 (1999).</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#analysis-method" class="page__taxonomy-item" rel="tag">analysis-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-07-06T20:00:00+09:00">July 06, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Implicit Membrane REMD Structures of Full-length C99 protein http://localhost:4000/analysis-method/implicitC99/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/analysis-method/implicitC99/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/analysis-method/implicitC99/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/analysis-method/implicitC99/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/analysis-method/misciblitypoint/" class="pagination--pager" title="How to Determine When a Lipid Bilayer is Phase Separated
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>
