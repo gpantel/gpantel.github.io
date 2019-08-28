@@ -13,7 +13,7 @@ I present a script and JSON input file for building and running complex Lennard-
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-# The 12-6 Lennard-Jones potential.
+# The 12-6 Lennard-Jones (LJ) potential.
 
 The Lennard-Jones potential model is a very simple model that most-accurately describes the interactions of Noble gas elements The Lennard-Jones potential defines the interaction between two atoms separated by distance $$r$$:
 
