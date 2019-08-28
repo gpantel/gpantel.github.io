@@ -201,7 +201,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
         [0.4, 4]
         ],
 
-"numsteps":        500000000,
+"numsteps":         50000000,
 "data_interval":       10000,
 "coordinate_interval": 10000,
 "frcvel_interval":     10000,
