@@ -289,7 +289,7 @@
 <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-<h1 id="the-12-6-lennard-jones-potential">The 12-6 Lennard-Jones potential.</h1>
+<h1 id="the-12-6-lennard-jones-lj-potential">The 12-6 Lennard-Jones (LJ) potential.</h1>
 
 <p>The Lennard-Jones potential model is a very simple model that most-accurately describes the interactions of Noble gas elements The Lennard-Jones potential defines the interaction between two atoms separated by distance <script type="math/tex">r</script>:</p>
 
@@ -305,7 +305,7 @@
 
 <p>In thinking about real systems, we need units to understand the relative size and scale of all things. Energies we often express in units like <em>kJ/mol</em>, temperatures in <em>K</em>, volumes in <em>nm<sup>3</sup></em>, <em>et cetera</em>. However, if a system is simple enough, it is easy to express thermodynamic quantities in terms of each other, such that all quantities are unitless, but can be related directly back to real, unit-having values, which can describe many systems <em>a la</em> the <a href="https://en.wikipedia.org/wiki/Theorem_of_corresponding_states">Theorem of corresponding states</a>. This idea that we can understand many real systems via studying systems using reduced units is another reason why Lennard-Jones simulations can be attractive for exploring new ideas.</p>
 
-<p>To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<em>d</em>) dimensions, the temperature (<em>T</em>), density (<script type="math/tex">\rho</script>), integration time step <script type="math/tex">\tau</script>, and langevin damping coefficient <script type="math/tex">\gamma</script> are defined as:</p>
+<p>To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<script type="math/tex">d</script>) dimensions, the temperature (<script type="math/tex">T</script>), density (<script type="math/tex">\rho</script>), integration time step <script type="math/tex">\tau</script>, and langevin damping coefficient <script type="math/tex">\gamma</script> are defined as:</p>
 
 <table>
   <thead>
@@ -316,7 +316,7 @@
   </thead>
   <tbody>
     <tr>
-      <td>T</td>
+      <td><script type="math/tex">T</script></td>
       <td><script type="math/tex">\ k_B/ \epsilon^* T^*</script></td>
     </tr>
     <tr>
@@ -367,15 +367,15 @@
 
 <p>Here are a few examples.</p>
 
-<p>A simulation with M=2, N=2000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{22}</script> = 4, <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = 0.4 <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = 1, T = 1, <script type="math/tex">\rho</script> = 0.75, and <script type="math/tex">d</script> = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:</p>
+<p>A simulation with M=2, N=2000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{22}</script> = 4, <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = 0.4 <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = 1, <script type="math/tex">T</script> = 1, <script type="math/tex">\rho</script> = 0.75, and <script type="math/tex">d</script> = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:</p>
 
 <p><img src="http://localhost:4000/assets/Potentials/ex1.gif" alt="FlatWellPotential" /><br /></p>
 
-<p>A simulation with <script type="math/tex">M</script>=3, <script type="math/tex">N</script>=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = <script type="math/tex">\sigma_3</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = <script type="math/tex">m_3</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and <script type="math/tex">d</script> = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:</p>
+<p>A simulation with <script type="math/tex">M</script>=3, <script type="math/tex">N</script>=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = <script type="math/tex">\sigma_3</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = <script type="math/tex">m_3</script> = 1, <script type="math/tex">T</script> = 2, <script type="math/tex">\rho</script> = 0.8, and <script type="math/tex">d</script> = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:</p>
 
 <p><img src="http://localhost:4000/assets/Potentials/ex2.gif" alt="FlatWellPotential" /><br /></p>
 
-<p>A simulation with <script type="math/tex">M</script>=3, <script type="math/tex">N</script>=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and <script type="math/tex">d</script> = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):</p>
+<p>A simulation with <script type="math/tex">M</script>=3, <script type="math/tex">N</script>=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, <script type="math/tex">T</script> = 2, <script type="math/tex">\rho</script> = 0.8, and <script type="math/tex">d</script> = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):</p>
 
 <p><img src="http://localhost:4000/assets/Potentials/ex3.gif" alt="FlatWellPotential" /><br /></p>
 

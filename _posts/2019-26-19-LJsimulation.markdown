@@ -29,11 +29,11 @@ The simplicity of this model is very attractive for exploring general concepts i
 
 In thinking about real systems, we need units to understand the relative size and scale of all things. Energies we often express in units like <em>kJ/mol</em>, temperatures in <em>K</em>, volumes in <em>nm<sup>3</sup></em>, <em>et cetera</em>. However, if a system is simple enough, it is easy to express thermodynamic quantities in terms of each other, such that all quantities are unitless, but can be related directly back to real, unit-having values, which can describe many systems <em>a la</em> the [Theorem of corresponding states](https://en.wikipedia.org/wiki/Theorem_of_corresponding_states). This idea that we can understand many real systems via studying systems using reduced units is another reason why Lennard-Jones simulations can be attractive for exploring new ideas.
 
-To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<em>d</em>) dimensions, the temperature (<em>T</em>), density ($$\rho$$), integration time step $$\tau$$, and langevin damping coefficient $$\gamma$$ are defined as:
+To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of ($$d$$) dimensions, the temperature ($$T$$), density ($$\rho$$), integration time step $$\tau$$, and langevin damping coefficient $$\gamma$$ are defined as:
 
 | Real Quantity | Conversion from Reduced Quantity (*)                           |
 |---------------|----------------------------------------------------------------|
-| T                                  | $$\ k_B/ \epsilon^* T^*$$                 |
+| $$T$$                                  | $$\ k_B/ \epsilon^* T^*$$                 |
 | $$\rho$$                           | $$N \sigma^{*d} / \rho^*$$                |
 | $$\tau$$ (MD time step)            | $$\sqrt{ m^* \sigma^{*2} / \epsilon^*} $$ |
 | $$\gamma$$ (Damping coefficient)   | $$\tau/2$$                                |
@@ -51,15 +51,15 @@ I've made a little set of scripts that make it very easy to run Lennard-Jones pa
 
 Here are a few examples.
 
-A simulation with M=2, N=2000, where $$\epsilon_{11}$$ = $$\epsilon_{22}$$ = 4, $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = 0.4 $$\sigma_1$$ = $$\sigma_2$$ = 1, $$m_1$$ = $$m_2$$ = 1, T = 1, $$\rho$$ = 0.75, and $$d$$ = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:
+A simulation with M=2, N=2000, where $$\epsilon_{11}$$ = $$\epsilon_{22}$$ = 4, $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = 0.4 $$\sigma_1$$ = $$\sigma_2$$ = 1, $$m_1$$ = $$m_2$$ = 1, $$T$$ = 1, $$\rho$$ = 0.75, and $$d$$ = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex1.gif)<br/>
 
-A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, $$\sigma_1$$ = $$\sigma_2$$ = $$\sigma_3$$ = 1, $$m_1$$ = $$m_2$$ = $$m_3$$ = 1, T = 2, $$\rho$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:
+A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, $$\sigma_1$$ = $$\sigma_2$$ = $$\sigma_3$$ = 1, $$m_1$$ = $$m_2$$ = $$m_3$$ = 1, $$T$$ = 2, $$\rho$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex2.gif)<br/>
 
-A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, T = 2, $$\rho$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):
+A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, $$T$$ = 2, $$\rho$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex3.gif)<br/>
 
