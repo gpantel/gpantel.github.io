@@ -239,7 +239,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 * **"forcewall"** kwall flat-well restraint
 * **"enable_restraint"** turn the flat-well restraint on/off with the booleans "true"/"false". Might explode simulation if initiated from initial_condition": "mixed"
 
-In addition to these required inputs, LJ_simulation.py can also take restart files as inputes and write them as outputs after simulation. These are controlled by additional parameters **"rstin_prefix"** and **"rstout_prefix"**.
+In addition to these required inputs, LJ_simulation.py can also take restart files as inputs and write them as outputs after simulation. These are controlled by additional parameters **"rstin_prefix"** and **"rstout_prefix"**.
 
 
 One warning: I do not suggest using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.
