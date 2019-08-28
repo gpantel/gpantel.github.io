@@ -214,32 +214,35 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 }
 ```
 
-* "pdb_prefix" is the name prefix of .pdb files from system construction and minimization
-* "dcd_prefix" is the name prefix of a .dcd file containing the simulation trajectory
-* "nc_prefix" is the name prefix of a .nc NetCDF file contaning the simulation velocities and forces
-* "data_name" is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
+* **"pdb_prefix"** is the name prefix of .pdb files from system construction and minimization
+* **"dcd_prefix"** is the name prefix of a .dcd file containing the simulation trajectory
+* **"nc_prefix"** is the name prefix of a .nc NetCDF file contaning the simulation velocities and forces
+* **"data_name"** is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
 <br/>
-* "initial_condition" set Packmol to construct either a randomly-mixed or phase-separated initial condition
-* "N" the total number of particles in the system
-* "T_r" the reduced temperature
-* "density_r" the reduced density
-* "dimensions" the number of dimensions (2 or 3)
-* "particle_ratios" the relative ratio of each particle type, in any proportion. This gets normalized later.
-* "sigmas_r" the reduced Lennard-Jones $$\sigma$$ of each particle type
-* "masses_r" the reduced mass of each particle type
-* "epsilonAR_r" the reduced, pair-type-specific Lennard-Jones $$\epsilon$$s
-* "numsteps" the number of MD steps to perform
-* "data_interval" thermodynamic quantities and simulation progress recorded during simulation
-* "coordinate_interval" the coordinate writing frequency (.dcd file)
-* "frcvel_interval" the force and velocities writing frequency (.nc file)
-* "platform_type" choice of computation platform. CUDA, OpenCL, or CPU
+* **"initial_condition"** set Packmol to construct either a randomly-mixed or phase-separated initial condition
+* **"N"** the total number of particles in the system
+* **"T_r"** the reduced temperature
+* **"density_r"** the reduced density
+* **"dimensions"** the number of dimensions (2 or 3)
+* **"particle_ratios"** the relative ratio of each particle type, in any proportion. This gets normalized later.
+* **"sigmas_r"** the reduced Lennard-Jones $$\sigma$$ of each particle type
+* **"masses_r"** the reduced mass of each particle type
+* **"epsilonAR_r"** the reduced, pair-type-specific Lennard-Jones $$\epsilon$$s
+* **"numsteps"** the number of MD steps to perform
+* **"data_interval"** thermodynamic quantities and simulation progress recorded during simulation
+* **"coordinate_interval"** the coordinate writing frequency (.dcd file)
+* **"frcvel_interval"** the force and velocities writing frequency (.nc file)
+* **"platform_type"** choice of computation platform. CUDA, OpenCL, or CPU
 <br/>
-* "minimization" turns minimization on/off with booleans "true"/"false"
-* "restraint_widthscale" scales width of the flat-well restraint (1=edge-to-edge of the initial stripe phase), if enabled
-* "forcewall" kwall flat-well restraint
-* "enable_restraint" turn the flat-well restraint on/off with the booleans "true"/"false". Might explode simulation if initiated from initial_condition": "mixed"
+* **"minimization"** turns minimization on/off with booleans "true"/"false"
+* **"restraint_widthscale"** scales width of the flat-well restraint (1=edge-to-edge of the initial stripe phase), if enabled
+* **"forcewall"** kwall flat-well restraint
+* **"enable_restraint"** turn the flat-well restraint on/off with the booleans "true"/"false". Might explode simulation if initiated from initial_condition": "mixed"
 
-One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.
+In addition to these required inputs, LJ_simulation.py can also take restart files as inputes and write them as outputs after simulation. These are controlled by additional parameters **"rstin_prefix"** and **"rstout_prefix"**.
+
+
+One warning: I do not suggest using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.
 
 Precompiled [OpenMM](http://docs.openmm.org) can be installed using conda (I suggest using [Miniconda](https://docs.conda.io/en/latest/)). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU. Parmed is requiredto write the NetCDF .nc file containing forces and velocities, which can also be installed with conda.
 [Packmol](http://m3g.iqm.unicamp.br/Packmol/home.shtml) is  easy to compile. JSON can be installed using conda, too.
