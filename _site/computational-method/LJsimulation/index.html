@@ -305,7 +305,7 @@
 
 <p>In thinking about real systems, we need units to understand the relative size and scale of all things. Energies we often express in units like <em>kJ/mol</em>, temperatures in <em>K</em>, volumes in <em>nm<sup>3</sup></em>, <em>et cetera</em>. However, if a system is simple enough, it is easy to express thermodynamic quantities in terms of each other, such that all quantities are unitless, but can be related directly back to real, unit-having values, which can describe many systems <em>a la</em> the <a href="https://en.wikipedia.org/wiki/Theorem_of_corresponding_states">Theorem of corresponding states</a>. This idea that we can understand many real systems via studying systems using reduced units is another reason why Lennard-Jones simulations can be attractive for exploring new ideas.</p>
 
-<p>To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<em>d</em>) dimensions, the temperature (<em>T</em>), density (<script type="math/tex">\rho</script>), integration time step, and langevin damping coefficient are defined as:</p>
+<p>To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<em>d</em>) dimensions, the temperature (<em>T</em>), density (<script type="math/tex">\rho</script>), integration time step <script type="math/tex">\tau</script>, and langevin damping coefficient <script type="math/tex">\gamma</script> are defined as:</p>
 
 <table>
   <thead>
@@ -363,19 +363,19 @@
 </table>
 
 <h1 id="a-few-example-simulations">A few example simulations.</h1>
-<p>I’ve made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using PackMol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units.</p>
+<p>I’ve made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using Packmol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units, using the hacked up reducedstatedatareporter.py.</p>
 
 <p>Here are a few examples.</p>
 
-<p>A simulation with M=2, N=2000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{22}</script> = 4, <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = 0.4 <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = 1, T = 1, <script type="math/tex">\rho</script> = 0.75, and d = 2 and the system composition is at 50% type 1, 50% type 2, and 5% type 3, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:</p>
+<p>A simulation with M=2, N=2000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{22}</script> = 4, <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = 0.4 <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = 1, T = 1, <script type="math/tex">\rho</script> = 0.75, and <script type="math/tex">d</script> = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:</p>
 
 <p><img src="http://localhost:4000/assets/Potentials/ex1.gif" alt="FlatWellPotential" /><br /></p>
 
-<p>A simulation with M=3, N=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = <script type="math/tex">\sigma_3</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = <script type="math/tex">m_3</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and d = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:</p>
+<p>A simulation with <script type="math/tex">M</script>=3, <script type="math/tex">N</script>=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = <script type="math/tex">\sigma_3</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = <script type="math/tex">m_3</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and <script type="math/tex">d</script> = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:</p>
 
 <p><img src="http://localhost:4000/assets/Potentials/ex2.gif" alt="FlatWellPotential" /><br /></p>
 
-<p>A simulation with M=3, N=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and d = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):</p>
+<p>A simulation with <script type="math/tex">M</script>=3, <script type="math/tex">N</script>=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and <script type="math/tex">d</script> = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):</p>
 
 <p><img src="http://localhost:4000/assets/Potentials/ex3.gif" alt="FlatWellPotential" /><br /></p>
 
@@ -383,23 +383,23 @@
 
 <p>OpenMM uses SWIG to generate C++ code from strings at the python API level to define custom potentials and integrators, and to modify simulation parameters during simulation. OpenMM also upports reading of the matured MD force field parameter file formats of CHARMM, AMBER, and GROMACS. This makes it possible to use OpenMM as a testbed for development of creative simulation methods by using simple models that can later be scaled up to production simulations. It also makes it possible to create totally new simulation methods that can be used without recompiling OpenMM.</p>
 
-<p>Sometimes, understanding how to write strings that will correctly interpreted by OpenMM to do what you want can be difficult, so I will present how I do that for this LJ simulator as another example of how to use OpenMM. Understanding how to write new functions in OpenMM can be challenging. Reading the C++ code is the most sure-fire way to really get an idea of what to do at the python level if it’s not clear.</p>
+<p>Sometimes, understanding how to write strings that will correctly interpreted by OpenMM to do what you want can be difficult, so I will present how I do that for this LJ simulator as another example of how to use OpenMM. Reading the C++ code is the most sure-fire way to really get an idea of what to do at the python level if it’s not clear.</p>
 
 <p>For example, to accomplish two-dimensional simulations I needed to:</p>
 <ol>
   <li>Create a custom velocity verlet langevin integrator (LJ_simulation.py)</li>
   <li>Add a new integrator variable that is the Vec3 vector &lt;1,1,0&gt; (LJ_simulation.py)</li>
   <li>Multiply all velocities by this new &lt;1,1,0&gt; vector when determining displacement, and later before determining kinetic energy (LJ_simulation.py)</li>
-  <li>Re-define the instantaneous temperature determination to account for the missing dimension in kinetic energy (reducedstatedatareporter.py)</li>
+  <li>Re-define the instantaneous temperature to account for the missing dimension in kinetic energy when printing output (reducedstatedatareporter.py)</li>
 </ol>
 
 <p>But I had not seen a demonstration of how to do steps 1-3 anywhere, so I had to determine what to do by reading how variables are defined in the C++ program openmmapi/include/CustomIntegrator.h in the OpenMM source (not distributed with the conda installation – <a href="https://github.com/openmm/openmm">see the github</a>) Step 4 was straightforward because it does not rely on interpreting and compiling a string.</p>
 
 <h1 id="constructing-a-pair-interaction-specific-lennard-jones-potential-in-openmm">Constructing a pair-interaction-specific Lennard-Jones potential in OpenMM.</h1>
 
-<p>A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of lennard-jones particle. We want to be able to freely define how different LJ interaction energies will be formed (<script type="math/tex">\epsilon_{ij}</script>). The user is enable to define this in the “epsilonAR_r” section of the JSON input file. We could also freely define how different LJ interaction lengths (<script type="math/tex">\sigma_{ij}</script>) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the <script type="math/tex">\sigma_{ij}</script> paramters from each particle’s radius described by <script type="math/tex">\sigma_i</script>.</p>
+<p>A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each <script type="math/tex">i^{th}</script> and <script type="math/tex">j^{th}</script> atom type, <script type="math/tex">\epsilon_{ij}</script>). The user is able to define this in the “epsilonAR_r” section of the JSON input file. We could also freely define how different LJ interaction lengths (<script type="math/tex">\sigma_{ij}</script>) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the <script type="math/tex">\sigma_{ij}</script> paramters from each particle’s radius described by <script type="math/tex">\sigma_i</script>.</p>
 
-<p>Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has M=2 particle types:</p>
+<p>Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has <script type="math/tex">M</script>=2 particle types:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># epsilons are in reduced units, kJ/mol in OpenMM (i.e. 1.0 = epsilon, 2.0 = 2epislon)</span>
 <span class="n">epsilonAR_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="c">#eps1-1, eps1-2</span>
@@ -489,7 +489,7 @@
 
 <h1 id="parameters-of-the-json-input-file">Parameters of the JSON input file.</h1>
 
-<p>To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using PackMol can be controlled externally using JSON input files whcih are loaded as a command line argument.</p>
+<p>To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using Packmol can be controlled externally using JSON input files whcih are loaded as a command line argument.</p>
 
 <p>For example 1, we run use the following JSON file as an input “python LJ_simulation.py ex1.config”</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
@@ -530,7 +530,7 @@
   <li>“nc_prefix” is the name prefix of a .nc NetCDF file contaning the simulation velocities and forces</li>
   <li>“data_name” is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
 <br /></li>
-  <li>“initial_condition” set PackMol to construct either a randomly-mixed or phase-separated initial condition</li>
+  <li>“initial_condition” set Packmol to construct either a randomly-mixed or phase-separated initial condition</li>
   <li>“N” the total number of particles in the system</li>
   <li>“T_r” the reduced temperature</li>
   <li>“density_r” the reduced density</li>
@@ -551,11 +551,11 @@
   <li>“enable_restraint” turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode simulation if initiated from initial_condition”: “mixed”</li>
 </ul>
 
-<p>One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, PackMol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.</p>
+<p>One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.</p>
 
 <p>Precompiled <a href="http://docs.openmm.org">OpenMM</a> can be installed using conda (I suggest using <a href="https://docs.conda.io/en/latest/">Miniconda</a>). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU.
-<a href="http://m3g.iqm.unicamp.br/packmol/home.shtml">PackMol</a> is  easy to compile. JSON can be installed using conda, too.
-You need to set the path to packmol on your local computer in LJ_simulator.py for the variable “path_to_packmol”.</p>
+<a href="http://m3g.iqm.unicamp.br/Packmol/home.shtml">Packmol</a> is  easy to compile. JSON can be installed using conda, too.
+You need to set the path to Packmol on your local computer in LJ_simulator.py for the variable “path_to_Packmol”.</p>
 
 <p>The python scripts that perform these simulations are available on my github at <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator">https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator</a>, in addition to input files to perform these three example simulations.</p>
 

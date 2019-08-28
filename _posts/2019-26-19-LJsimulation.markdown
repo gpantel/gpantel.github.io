@@ -29,7 +29,7 @@ The simplicity of this model is very attractive for exploring general concepts i
 
 In thinking about real systems, we need units to understand the relative size and scale of all things. Energies we often express in units like <em>kJ/mol</em>, temperatures in <em>K</em>, volumes in <em>nm<sup>3</sup></em>, <em>et cetera</em>. However, if a system is simple enough, it is easy to express thermodynamic quantities in terms of each other, such that all quantities are unitless, but can be related directly back to real, unit-having values, which can describe many systems <em>a la</em> the [Theorem of corresponding states](https://en.wikipedia.org/wiki/Theorem_of_corresponding_states). This idea that we can understand many real systems via studying systems using reduced units is another reason why Lennard-Jones simulations can be attractive for exploring new ideas.
 
-To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<em>d</em>) dimensions, the temperature (<em>T</em>), density ($$\rho$$), integration time step, and langevin damping coefficient are defined as:
+To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<em>d</em>) dimensions, the temperature (<em>T</em>), density ($$\rho$$), integration time step $$\tau$$, and langevin damping coefficient $$\gamma$$ are defined as:
 
 | Real Quantity | Conversion from Reduced Quantity (*)                           |
 |---------------|----------------------------------------------------------------|
@@ -47,19 +47,19 @@ The reduced $$\epsilon$$, $$\sigma$$, and mass ($$m$$), for these equations use 
 | $$\left< m^* \right>$$        | $$\sum_i^M \alpha_i m_i$$                                                             |
 
 # A few example simulations.
-I've made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using PackMol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units.
+I've made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using Packmol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units, using the hacked up reducedstatedatareporter.py.
 
 Here are a few examples.
 
-A simulation with M=2, N=2000, where $$\epsilon_{11}$$ = $$\epsilon_{22}$$ = 4, $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = 0.4 $$\sigma_1$$ = $$\sigma_2$$ = 1, $$m_1$$ = $$m_2$$ = 1, T = 1, $$\rho$$ = 0.75, and d = 2 and the system composition is at 50% type 1, 50% type 2, and 5% type 3, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:
+A simulation with M=2, N=2000, where $$\epsilon_{11}$$ = $$\epsilon_{22}$$ = 4, $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = 0.4 $$\sigma_1$$ = $$\sigma_2$$ = 1, $$m_1$$ = $$m_2$$ = 1, T = 1, $$\rho$$ = 0.75, and $$d$$ = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex1.gif)<br/>
 
-A simulation with M=3, N=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, $$\sigma_1$$ = $$\sigma_2$$ = $$\sigma_3$$ = 1, $$m_1$$ = $$m_2$$ = $$m_3$$ = 1, T = 2, $$\rho$$ = 0.8, and d = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:
+A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, $$\sigma_1$$ = $$\sigma_2$$ = $$\sigma_3$$ = 1, $$m_1$$ = $$m_2$$ = $$m_3$$ = 1, T = 2, $$\rho$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex2.gif)<br/>
 
-A simulation with M=3, N=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, T = 2, $$\rho$$ = 0.8, and d = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):
+A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\epsilon_{21}$$ = $$\epsilon_{22}$$ = $$\epsilon_{23}$$ = $$\epsilon_{32}$$ = $$\epsilon_{33}$$ = $$\epsilon_{13}$$ = $$\epsilon_{31}$$ = 1, T = 2, $$\rho$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex3.gif)<br/>
 
@@ -67,21 +67,21 @@ A simulation with M=3, N=1000, where $$\epsilon_{11}$$ = $$\epsilon_{12}$$ = $$\
 
 OpenMM uses SWIG to generate C++ code from strings at the python API level to define custom potentials and integrators, and to modify simulation parameters during simulation. OpenMM also upports reading of the matured MD force field parameter file formats of CHARMM, AMBER, and GROMACS. This makes it possible to use OpenMM as a testbed for development of creative simulation methods by using simple models that can later be scaled up to production simulations. It also makes it possible to create totally new simulation methods that can be used without recompiling OpenMM.
 
-Sometimes, understanding how to write strings that will correctly interpreted by OpenMM to do what you want can be difficult, so I will present how I do that for this LJ simulator as another example of how to use OpenMM. Understanding how to write new functions in OpenMM can be challenging. Reading the C++ code is the most sure-fire way to really get an idea of what to do at the python level if it's not clear.
+Sometimes, understanding how to write strings that will correctly interpreted by OpenMM to do what you want can be difficult, so I will present how I do that for this LJ simulator as another example of how to use OpenMM. Reading the C++ code is the most sure-fire way to really get an idea of what to do at the python level if it's not clear.
 
 For example, to accomplish two-dimensional simulations I needed to:
 1. Create a custom velocity verlet langevin integrator (LJ_simulation.py)
 2. Add a new integrator variable that is the Vec3 vector <1,1,0> (LJ_simulation.py)
 3. Multiply all velocities by this new <1,1,0> vector when determining displacement, and later before determining kinetic energy (LJ_simulation.py)
-4. Re-define the instantaneous temperature determination to account for the missing dimension in kinetic energy (reducedstatedatareporter.py)
+4. Re-define the instantaneous temperature to account for the missing dimension in kinetic energy when printing output (reducedstatedatareporter.py)
 
 But I had not seen a demonstration of how to do steps 1-3 anywhere, so I had to determine what to do by reading how variables are defined in the C++ program openmmapi/include/CustomIntegrator.h in the OpenMM source (not distributed with the conda installation -- [see the github](https://github.com/openmm/openmm)) Step 4 was straightforward because it does not rely on interpreting and compiling a string.
 
 # Constructing a pair-interaction-specific Lennard-Jones potential in OpenMM.
 
-A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of lennard-jones particle. We want to be able to freely define how different LJ interaction energies will be formed ($$\epsilon_{ij}$$). The user is enable to define this in the "epsilonAR_r" section of the JSON input file. We could also freely define how different LJ interaction lengths ($$\sigma_{ij}$$) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the $$\sigma_{ij}$$ paramters from each particle's radius described by $$\sigma_i$$.
+A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each $$i^{th}$$ and $$j^{th}$$ atom type, $$\epsilon_{ij}$$). The user is able to define this in the "epsilonAR_r" section of the JSON input file. We could also freely define how different LJ interaction lengths ($$\sigma_{ij}$$) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the $$\sigma_{ij}$$ paramters from each particle's radius described by $$\sigma_i$$.
 
-Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has M=2 particle types:
+Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has $$M$$=2 particle types:
 ```python
 # epsilons are in reduced units, kJ/mol in OpenMM (i.e. 1.0 = epsilon, 2.0 = 2epislon)
 epsilonAR_r = np.array([
@@ -178,7 +178,7 @@ where periodicdistance is a special function in CustomExternalForce that enforce
 
 # Parameters of the JSON input file.
 
-To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using PackMol can be controlled externally using JSON input files whcih are loaded as a command line argument.
+To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using Packmol can be controlled externally using JSON input files whcih are loaded as a command line argument.
 
 For example 1, we run use the following JSON file as an input "python LJ_simulation.py ex1.config"
 ```python
@@ -219,7 +219,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 * "nc_prefix" is the name prefix of a .nc NetCDF file contaning the simulation velocities and forces
 * "data_name" is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
 <br/>
-* "initial_condition" set PackMol to construct either a randomly-mixed or phase-separated initial condition
+* "initial_condition" set Packmol to construct either a randomly-mixed or phase-separated initial condition
 * "N" the total number of particles in the system
 * "T_r" the reduced temperature
 * "density_r" the reduced density
@@ -239,11 +239,11 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 * "forcewall" kwall flat-well restraint
 * "enable_restraint" turn the flat-well restraint on/off with the booleans "true"/"false". Might explode simulation if initiated from initial_condition": "mixed"
 
-One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, PackMol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.
+One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.
 
 Precompiled [OpenMM](http://docs.openmm.org) can be installed using conda (I suggest using [Miniconda](https://docs.conda.io/en/latest/)). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU.
-[PackMol](http://m3g.iqm.unicamp.br/packmol/home.shtml) is  easy to compile. JSON can be installed using conda, too.
-You need to set the path to packmol on your local computer in LJ_simulator.py for the variable "path_to_packmol".
+[Packmol](http://m3g.iqm.unicamp.br/Packmol/home.shtml) is  easy to compile. JSON can be installed using conda, too.
+You need to set the path to Packmol on your local computer in LJ_simulator.py for the variable "path_to_Packmol".
 
 The python scripts that perform these simulations are available on my github at [https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator](https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator), in addition to input files to perform these three example simulations. 
 
