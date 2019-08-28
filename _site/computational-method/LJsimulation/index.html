@@ -1,0 +1,667 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Generic LJ Simulator in OpenMM - Scratchings on biomoleclar simulation and theory</title>
+
+
+
+
+<meta name="description" content="I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomoleclar simulation and theory">
+<meta property="og:title" content="Generic LJ Simulator in OpenMM">
+
+
+  <link rel="canonical" href="http://localhost:4000/computational-method/LJsimulation/">
+  <meta property="og:url" content="http://localhost:4000/computational-method/LJsimulation/">
+
+
+
+  <meta property="og:description" content="I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2019-08-27T21:30:00-04:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomoleclar simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomoleclar simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am a PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">RIKEN, Wako-shi, Japan</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Generic LJ Simulator in OpenMM">
+    <meta itemprop="description" content="I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.">
+    <meta itemprop="datePublished" content="August 27, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Generic LJ Simulator in OpenMM
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.</p>
+
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1 id="the-12-6-lennard-jones-potential">The 12-6 Lennard-Jones potential.</h1>
+
+<p>The Lennard-Jones potential model is a very simple model that most-accurately describes the interactions of Noble gas elements The Lennard-Jones potential defines the interaction between two atoms separated by distance <script type="math/tex">r</script>:</p>
+
+<p><script type="math/tex">U(r) = 4 \epsilon \left[ \left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6} \right]</script>.</p>
+
+<p>The positive term, <script type="math/tex">4 \epsilon \left(\frac{\sigma}{r}\right)^{12}</script> approximates the Pauli exclusion of electron-electron interactions (at short distance). The negative term, <script type="math/tex">-4 \epsilon \left(\frac{\sigma}{r}\right)^{6}</script>, approximates the instantaneous dipole attraction between atoms; the London dispersion force. Each part of the potential and their sum look like this:
+<img src="http://localhost:4000/assets/Potentials/LennardJonesplot.png" alt="FlatWellPotential" /><br />
+<strong>Figure</strong> The 12-6 Lennard-Jones potential (green) and its’ constituent parts.</p>
+
+<p>The simplicity of this model is very attractive for exploring general concepts in physics. Many coarse-grained force fields mostly consist of atoms described using Lennard-Jones potentials with harmonic potentials describing their connectivity. Particles described using only the Lennard-Jones potential are often called “Lennard-Jones particles”.</p>
+
+<h1 id="reduced-units-of-the-lennard-jones-model">Reduced units of the Lennard-Jones model.</h1>
+
+<p>In thinking about real systems, we need units to understand the relative size and scale of all things. Energies we often express in units like <em>kJ/mol</em>, temperatures in <em>K</em>, volumes in <em>nm<sup>3</sup></em>, <em>et cetera</em>. However, if a system is simple enough, it is easy to express thermodynamic quantities in terms of each other, such that all quantities are unitless, but can be related directly back to real, unit-having values, which can describe many systems <em>a la</em> the <a href="https://en.wikipedia.org/wiki/Theorem_of_corresponding_states">Theorem of corresponding states</a>. This idea that we can understand many real systems via studying systems using reduced units is another reason why Lennard-Jones simulations can be attractive for exploring new ideas.</p>
+
+<p>To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (<em>d</em>) dimensions, the temperature (<em>T</em>), density (<script type="math/tex">\rho</script>), integration time step, and langevin damping coefficient are defined as:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Real Quantity</th>
+      <th>Conversion from Reduced Quantity (*)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>T</td>
+      <td><script type="math/tex">\ k_B/ \epsilon^* T^*</script></td>
+    </tr>
+    <tr>
+      <td><script type="math/tex">\rho</script></td>
+      <td><script type="math/tex">N \sigma^{*d} / \rho^*</script></td>
+    </tr>
+    <tr>
+      <td><script type="math/tex">\tau</script> (MD time step)</td>
+      <td><script type="math/tex">\sqrt{ m^* \sigma^{*2} / \epsilon^*}</script></td>
+    </tr>
+    <tr>
+      <td><script type="math/tex">\gamma</script> (Damping coefficient)</td>
+      <td><script type="math/tex">\tau/2</script></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The reduced <script type="math/tex">\epsilon</script>, <script type="math/tex">\sigma</script>, and mass (<script type="math/tex">m</script>), for these equations use the weighted average of these quanitites for each <script type="math/tex">i^{th}</script> LJ particle type relative to their ratio of system composition (<script type="math/tex">\alpha_i</script>), out of <script type="math/tex">M</script> particle types:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weighted Average of Reduced Quantity</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><script type="math/tex">% <![CDATA[
+\left< \sigma^* \right> %]]></script></td>
+      <td><script type="math/tex">\sum_i^M \alpha_i \sigma_i</script>, <script type="math/tex">\ \ \ \ \ \ \ \ \ \ \alpha_i = n_i / \sum_i^M n_i</script></td>
+    </tr>
+    <tr>
+      <td><script type="math/tex">% <![CDATA[
+\left< \epsilon^* \right> %]]></script></td>
+      <td><script type="math/tex">\frac{1}{M} \sum_i^M \sum_j^M \epsilon_{ij} \alpha_i</script></td>
+    </tr>
+    <tr>
+      <td><script type="math/tex">% <![CDATA[
+\left< m^* \right> %]]></script></td>
+      <td><script type="math/tex">\sum_i^M \alpha_i m_i</script></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="a-few-example-simulations">A few example simulations.</h1>
+<p>I’ve made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using PackMol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units.</p>
+
+<p>Here are a few examples.</p>
+
+<p>A simulation with M=2, N=2000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{22}</script> = 4, <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = 0.4 <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = 1, T = 1, <script type="math/tex">\rho</script> = 0.75, and d = 2 and the system composition is at 50% type 1, 50% type 2, and 5% type 3, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:</p>
+
+<p><img src="http://localhost:4000/assets/Potentials/ex1.gif" alt="FlatWellPotential" /><br /></p>
+
+<p>A simulation with M=3, N=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, <script type="math/tex">\sigma_1</script> = <script type="math/tex">\sigma_2</script> = <script type="math/tex">\sigma_3</script> = 1, <script type="math/tex">m_1</script> = <script type="math/tex">m_2</script> = <script type="math/tex">m_3</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and d = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:</p>
+
+<p><img src="http://localhost:4000/assets/Potentials/ex2.gif" alt="FlatWellPotential" /><br /></p>
+
+<p>A simulation with M=3, N=1000, where <script type="math/tex">\epsilon_{11}</script> = <script type="math/tex">\epsilon_{12}</script> = <script type="math/tex">\epsilon_{21}</script> = <script type="math/tex">\epsilon_{22}</script> = <script type="math/tex">\epsilon_{23}</script> = <script type="math/tex">\epsilon_{32}</script> = <script type="math/tex">\epsilon_{33}</script> = <script type="math/tex">\epsilon_{13}</script> = <script type="math/tex">\epsilon_{31}</script> = 1, T = 2, <script type="math/tex">\rho</script> = 0.8, and d = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):</p>
+
+<p><img src="http://localhost:4000/assets/Potentials/ex3.gif" alt="FlatWellPotential" /><br /></p>
+
+<h1 id="a-bit-about-openmm-what-makes-it-nice-for-quickly-exploring-ideas-and-what-can-make-it-difficult-to-use">A bit about OpenMM: What makes it nice for quickly exploring ideas and what can make it difficult to use.</h1>
+
+<p>OpenMM uses SWIG to generate C++ code from strings at the python API level to define custom potentials and integrators, and to modify simulation parameters during simulation. OpenMM also upports reading of the matured MD force field parameter file formats of CHARMM, AMBER, and GROMACS. This makes it possible to use OpenMM as a testbed for development of creative simulation methods by using simple models that can later be scaled up to production simulations. It also makes it possible to create totally new simulation methods that can be used without recompiling OpenMM.</p>
+
+<p>Sometimes, understanding how to write strings that will correctly interpreted by OpenMM to do what you want can be difficult, so I will present how I do that for this LJ simulator as another example of how to use OpenMM. Understanding how to write new functions in OpenMM can be challenging. Reading the C++ code is the most sure-fire way to really get an idea of what to do at the python level if it’s not clear.</p>
+
+<p>For example, to accomplish two-dimensional simulations I needed to:</p>
+<ol>
+  <li>Create a custom velocity verlet langevin integrator (LJ_simulation.py)</li>
+  <li>Add a new integrator variable that is the Vec3 vector &lt;1,1,0&gt; (LJ_simulation.py)</li>
+  <li>Multiply all velocities by this new &lt;1,1,0&gt; vector when determining displacement, and later before determining kinetic energy (LJ_simulation.py)</li>
+  <li>Re-define the instantaneous temperature determination to account for the missing dimension in kinetic energy (reducedstatedatareporter.py)</li>
+</ol>
+
+<p>But I had not seen a demonstration of how to do steps 1-3 anywhere, so I had to determine what to do by reading how variables are defined in the C++ program openmmapi/include/CustomIntegrator.h in the OpenMM source (not distributed with the conda installation – <a href="https://github.com/openmm/openmm">see the github</a>) Step 4 was straightforward because it does not rely on interpreting and compiling a string.</p>
+
+<h1 id="constructing-a-pair-interaction-specific-lennard-jones-potential-in-openmm">Constructing a pair-interaction-specific Lennard-Jones potential in OpenMM.</h1>
+
+<p>A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of lennard-jones particle. We want to be able to freely define how different LJ interaction energies will be formed (<script type="math/tex">\epsilon_{ij}</script>). The user is enable to define this in the “epsilonAR_r” section of the JSON input file. We could also freely define how different LJ interaction lengths (<script type="math/tex">\sigma_{ij}</script>) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the <script type="math/tex">\sigma_{ij}</script> paramters from each particle’s radius described by <script type="math/tex">\sigma_i</script>.</p>
+
+<p>Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has M=2 particle types:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># epsilons are in reduced units, kJ/mol in OpenMM (i.e. 1.0 = epsilon, 2.0 = 2epislon)</span>
+<span class="n">epsilonAR_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="c">#eps1-1, eps1-2</span>
+<span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span> <span class="c">#eps2-1, eps2-2</span>
+<span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s">"float64"</span><span class="p">)</span>
+<span class="n">sigmas_r</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span> <span class="c"># LJ sigmas in reduced units in order of particle type, nanometers in OpenMM</span>
+<span class="n">sigmaAR_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span><span class="n">M</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">"float64"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">M</span><span class="p">):</span>
+        <span class="n">sigmaAR_r</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">true_divide</span><span class="p">(</span><span class="n">sigmas_r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">sigmas_r</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">sigmaAR_r</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sigmaAR_r</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+
+<span class="c"># the Lennard-Jones potential we will create in OpenMM accepts these arrays in list form</span>
+<span class="n">epsilonLST_r</span> <span class="o">=</span> <span class="p">(</span><span class="n">epsilonAR_r</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">sigmaLST_r</span>   <span class="o">=</span> <span class="p">(</span><span class="n">sigmaAR_r</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>We now want to add a nonbonded force to the system that describe how all types of LJ particle interact. We can write out the standard 12-6 LJ potential, but with terms that describe specific pairs of atom types, a feature which is enabled by using the expressions “eps=epsilon(type1, type2)” and “sig=sigma(type1, type2)”…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Constructing OpenMM simulation'</span><span class="p">)</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">System</span><span class="p">()</span>
+<span class="n">system</span><span class="o">.</span><span class="n">setDefaultPeriodicBoxVectors</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="n">box_edge_r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">mm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">box_edge_r</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">mm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">box_edge_r</span><span class="p">))</span>
+<span class="n">customNonbondedForce</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">CustomNonbondedForce</span><span class="p">(</span><span class="s">'4*eps*((sig/r)^12-(sig/r)^6); eps=epsilon(type1, type2); sig=sigma(type1, type2)'</span><span class="p">)</span>
+<span class="n">customNonbondedForce</span><span class="o">.</span><span class="n">setNonbondedMethod</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">NonbondedForce</span><span class="o">.</span><span class="n">CutoffPeriodic</span><span class="p">)</span>
+<span class="n">customNonbondedForce</span><span class="o">.</span><span class="n">setCutoffDistance</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">box_edge_r</span><span class="o">*</span><span class="mf">0.49</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">nanometers</span><span class="p">,</span> <span class="n">cutoff_r</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">nanometers</span><span class="p">))</span>
+<span class="n">customNonbondedForce</span><span class="o">.</span><span class="n">addTabulatedFunction</span><span class="p">(</span><span class="s">'epsilon'</span><span class="p">,</span> <span class="n">mm</span><span class="o">.</span><span class="n">Discrete2DFunction</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">epsilonLST_r</span><span class="p">))</span>
+<span class="n">customNonbondedForce</span><span class="o">.</span><span class="n">addTabulatedFunction</span><span class="p">(</span><span class="s">'sigma'</span><span class="p">,</span> <span class="n">mm</span><span class="o">.</span><span class="n">Discrete2DFunction</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">sigmaLST_r</span><span class="p">))</span>
+<span class="n">customNonbondedForce</span><span class="o">.</span><span class="n">addPerParticleParameter</span><span class="p">(</span><span class="s">'type'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>After that we need to tell every particle to use this force, then add the force to the system.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># set the particle parameters</span>
+<span class="n">particle_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">particle_index</span><span class="p">,</span> <span class="n">particle_numbers</span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span> <span class="o">+</span> <span class="n">particle_index</span><span class="p">):</span>
+        <span class="n">system</span><span class="o">.</span><span class="n">addParticle</span><span class="p">(</span><span class="n">masses_r</span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">amu</span><span class="p">)</span>
+        <span class="n">customNonbondedForce</span><span class="o">.</span><span class="n">addParticle</span><span class="p">([</span><span class="n">alpha</span><span class="p">])</span>
+        <span class="n">particle_index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">system</span><span class="o">.</span><span class="n">addForce</span><span class="p">(</span><span class="n">customNonbondedForce</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="disabling-changes-to-the-z-axial-positions-to-achieve-two-dimensional-simulations">Disabling changes to the z-axial positions to achieve two-dimensional simulations.</h1>
+
+<p>OpenMM does not support simualtions in two-dimensions, however we can create a custom integrator that ignores the z-axis in computing velocity-related quantities, like displacement in the z-dimension and the z-dimention contribution to the kinetic energy. There are a few examples of how to make and manipulate custom integratiors within the</p>
+
+<p>To do this, a “dummy” variable, a Vec3 Vector of &lt;1,1,0&gt; needs to be created. This is used to multiply the velocities of each atom to remove z-axis kinetic energy. This also disables displacements into the z-dimension. I call this variable “dumv”.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">dimensions</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">integrator</span><span class="o">.</span><span class="n">addPerDofVariable</span><span class="p">(</span><span class="s">"dumv"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="c"># makes a &lt;1,1,1&gt; vector</span>
+    <span class="n">integrator</span><span class="o">.</span><span class="n">setPerDofVariableByName</span><span class="p">(</span><span class="s">"dumv"</span><span class="p">,</span> <span class="p">[</span><span class="n">mm</span><span class="o">.</span><span class="n">Vec3</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)])</span>
+</code></pre></div></div>
+<p>In the custom integrator, we’ll multiply the velocity of each atom by “dumv” (&lt;1,1,0&gt;) to remove z-axial displacements.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">dimensions</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c"># To get a 2D system, make z-velocities zero when moving x</span>
+    <span class="n">integrator</span><span class="o">.</span><span class="n">addComputePerDof</span><span class="p">(</span><span class="s">"x"</span><span class="p">,</span> <span class="s">"x + v*dumv*dt"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">integrator</span><span class="o">.</span><span class="n">addComputePerDof</span><span class="p">(</span><span class="s">"x"</span><span class="p">,</span> <span class="s">"x + v*dt"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The resulting velocities from each step of integration will be multiplied by “dumv” to remove the z-axial contribution to the kinetic energy.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">dimensions</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c"># Remove the resulting z-velocities to get the correct Kinetic Energy</span>
+    <span class="n">integrator</span><span class="o">.</span><span class="n">addComputePerDof</span><span class="p">(</span><span class="s">"v"</span><span class="p">,</span> <span class="s">"v*dumv"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>This is not quite everything that needs to be done. In two-dimensional systems the integrator will run just fine at a reference temperature of <script type="math/tex">T^{*}</script>, but the reported instantaneous temperature will be off by 2/3. This is corrected in the hacked up “ReducedStateDataReporter” class that is imported from “reducedstatedatareporter.py”.</p>
+
+<h1 id="creating-a-periodic-external-potential-to-restrain-particles-to-stripe-phases">Creating a periodic external potential to restrain particles to stripe phases.</h1>
+
+<p>Phase separtions that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites phases. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[1] Simulating lipid bilayers that <em>should</em> phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a “wall” using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[2] We express this potential with the equation</p>
+
+<p><script type="math/tex">U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left( \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2</script>,</p>
+
+<p>where <script type="math/tex">x_0</script> is the center of a stripe phase, <script type="math/tex">w</script> is the radius of the restraint from the center, widthscale is a scaling factor on <script type="math/tex">w</script>, and <script type="math/tex">k_{\mathrm{wall}}</script> is the biasing force.</p>
+
+<p>Here is an illustration:</p>
+
+<p><img src="http://localhost:4000/assets/Membrane/FlatWellPotential.png" alt="FlatWellPotential" /><br />
+<strong>Figure</strong>: Flat well potential effectively creating a soft wall enforcing a phase separation in an equimolar binary mixture.</p>
+
+<p>This flat-well potential can be expressed in the following form in OpenMM:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flatres</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">CustomExternalForce</span><span class="p">(</span><span class="s">'forcewall * (px^2); </span><span class="se">\
+</span><span class="s">                               px = max(0, delta); </span><span class="se">\
+</span><span class="s">                               delta = r - droff; </span><span class="se">\
+</span><span class="s">                               r = abs(periodicdistance(x, y, z, x0, y, z));'</span><span class="p">)</span>
+<span class="n">flatres</span><span class="o">.</span><span class="n">addGlobalParameter</span><span class="p">(</span><span class="s">'forcewall'</span><span class="p">,</span> <span class="n">forcewall</span><span class="p">)</span>
+<span class="n">flatres</span><span class="o">.</span><span class="n">addGlobalParameter</span><span class="p">(</span><span class="s">'droff'</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+<span class="n">flatres</span><span class="o">.</span><span class="n">addPerParticleParameter</span><span class="p">(</span><span class="s">'x0'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>where periodicdistance is a special function in CustomExternalForce that enforces distances are measured over the PBC. Without this, particles will fly from one side of the box to the other once passing through the PBC. It would be very easy to use this potential to restrain “dot” phases too.</p>
+
+<h1 id="parameters-of-the-json-input-file">Parameters of the JSON input file.</h1>
+
+<p>To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using PackMol can be controlled externally using JSON input files whcih are loaded as a command line argument.</p>
+
+<p>For example 1, we run use the following JSON file as an input “python LJ_simulation.py ex1.config”</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+<span class="s">"pdb_prefix"</span><span class="p">:</span> <span class="s">"ex1"</span><span class="p">,</span>
+<span class="s">"dcd_prefix"</span><span class="p">:</span> <span class="s">"ex1"</span><span class="p">,</span>
+<span class="s">"nc_prefix"</span><span class="p">:</span> <span class="s">"ex1"</span><span class="p">,</span>
+<span class="s">"data_name"</span><span class="p">:</span> <span class="s">"ex1.dat"</span><span class="p">,</span>
+
+<span class="s">"initial_condition"</span><span class="p">:</span> <span class="s">"mixed"</span><span class="p">,</span>
+<span class="s">"N"</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+<span class="s">"T_r"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s">"density_r"</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span>
+<span class="s">"dimensions"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="s">"particle_ratios"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="s">"sigmas_r"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="s">"masses_r"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="s">"epsilonAR_r"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+        <span class="p">],</span>
+
+<span class="s">"numsteps"</span><span class="p">:</span>        <span class="mi">500000000</span><span class="p">,</span>
+<span class="s">"data_interval"</span><span class="p">:</span>       <span class="mi">10000</span><span class="p">,</span>
+<span class="s">"coordinate_interval"</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+<span class="s">"frcvel_interval"</span><span class="p">:</span>     <span class="mi">10000</span><span class="p">,</span>
+<span class="s">"platform_type"</span><span class="p">:</span> <span class="s">"CUDA"</span><span class="p">,</span>
+
+<span class="s">"minimization"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+<span class="s">"restraint_widthscale"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="s">"forcewall"</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
+<span class="s">"enable_restraint"</span><span class="p">:</span> <span class="n">false</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>“pdb_prefix” is the name prefix of .pdb files from system construction and minimization</li>
+  <li>“dcd_prefix” is the name prefix of a .dcd file containing the simulation trajectory</li>
+  <li>“nc_prefix” is the name prefix of a .nc NetCDF file contaning the simulation velocities and forces</li>
+  <li>“data_name” is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
+<br /></li>
+  <li>“initial_condition” set PackMol to construct either a randomly-mixed or phase-separated initial condition</li>
+  <li>“N” the total number of particles in the system</li>
+  <li>“T_r” the reduced temperature</li>
+  <li>“density_r” the reduced density</li>
+  <li>“dimensions” the number of dimensions (2 or 3)</li>
+  <li>“particle_ratios” the relative ratio of each particle type, in any proportion. This gets normalized later.</li>
+  <li>“sigmas_r” the reduced Lennard-Jones <script type="math/tex">\sigma</script> of each particle type</li>
+  <li>“masses_r” the reduced mass of each particle type</li>
+  <li>“epsilonAR_r” the reduced, pair-type-specific Lennard-Jones <script type="math/tex">\epsilon</script>s</li>
+  <li>“numsteps” the number of MD steps to perform</li>
+  <li>“data_interval” thermodynamic quantities and simulation progress recorded during simulation</li>
+  <li>“coordinate_interval” the coordinate writing frequency (.dcd file)</li>
+  <li>“frcvel_interval” the force and velocities writing frequency (.nc file)</li>
+  <li>“platform_type” choice of computation platform. CUDA, OpenCL, or CPU
+<br /></li>
+  <li>“minimization” turns minimization on/off with booleans “true”/”false”</li>
+  <li>“restraint_widthscale” scales width of the flat-well restraint (1=edge-to-edge of the initial stripe phase), if enabled</li>
+  <li>“forcewall” kwall flat-well restraint</li>
+  <li>“enable_restraint” turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode simulation if initiated from initial_condition”: “mixed”</li>
+</ul>
+
+<p>One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, PackMol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.</p>
+
+<p>Precompiled <a href="http://docs.openmm.org">OpenMM</a> can be installed using conda (I suggest using <a href="https://docs.conda.io/en/latest/">Miniconda</a>). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU.
+<a href="http://m3g.iqm.unicamp.br/packmol/home.shtml">PackMol</a> is  easy to compile. JSON can be installed using conda, too.
+You need to set the path to packmol on your local computer in LJ_simulator.py for the variable “path_to_packmol”.</p>
+
+<p>The python scripts that perform these simulations are available on my github at <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator">https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator</a>, in addition to input files to perform these three example simulations.</p>
+
+<p>References:</p>
+<ol>
+  <li>Pantelopulos, G. A., Nagai, T., Bandara, A., Panahi, A. &amp; Straub, J. E. Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures. J. Chem. Phys. 147, 095101 (2017).</li>
+  <li>Park, S. &amp; Im, W. Quantitative Characterization of Cholesterol Partitioning between Binary Bilayers. J. Chem. Theory Comput. 14, 2829–2833 (2018).</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#computational-method" class="page__taxonomy-item" rel="tag">computational-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-08-27T21:30:00-04:00">August 27, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Generic LJ Simulator in OpenMM http://localhost:4000/computational-method/LJsimulation/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/computational-method/LJsimulation/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/computational-method/LJsimulation/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/computational-method/LJsimulation/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/analysis-method/implicitC99/" class="pagination--pager" title="Implicit Membrane REMD Structures of Full-length C99 protein
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>
