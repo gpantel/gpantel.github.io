@@ -241,7 +241,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 
 One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.
 
-Precompiled [OpenMM](http://docs.openmm.org) can be installed using conda (I suggest using [Miniconda](https://docs.conda.io/en/latest/)). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU.
+Precompiled [OpenMM](http://docs.openmm.org) can be installed using conda (I suggest using [Miniconda](https://docs.conda.io/en/latest/)). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU. Parmed is requiredto write the NetCDF .nc file containing forces and velocities, which can also be installed with conda.
 [Packmol](http://m3g.iqm.unicamp.br/Packmol/home.shtml) is  easy to compile. JSON can be installed using conda, too.
 You need to set the path to Packmol on your local computer in LJ_simulator.py for the variable "path_to_Packmol".
 
