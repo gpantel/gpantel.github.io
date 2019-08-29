@@ -191,7 +191,7 @@ where periodicdistance is a special function in CustomExternalForce that enforce
 
 To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using Packmol can be controlled externally using JSON input files which are loaded as a command line argument.
 
-For example 1, we run use the following JSON file as an input "python LJ_simulation.py ex1.config"
+For example 1, we run use the following JSON file as an input "python LJ_simulation.py ex1.json"
 ```python
 {
 "pdb_prefix": "ex1",
