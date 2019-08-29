@@ -185,7 +185,7 @@ flatres.addGlobalParameter('forcewall', forcewall)
 flatres.addGlobalParameter('droff', width)
 flatres.addPerParticleParameter('x0')
 ```
-where periodicdistance is a special function in CustomExternalForce that enforces distances are measured over the PBC. Without this, particles will fly from one side of the box to the other once passing through the PBC. It would be very easy to use this potential to restrain "dot" phases too.
+where periodicdistance is a special function in CustomExternalForce that enforces distances are measured over the PBC. Without this, particles will fly from one side of the box to the other once passing through the PBC. It would be easy to change this potential to restrain "dot" phases too.
 
 # Parameters of the JSON input file.
 
