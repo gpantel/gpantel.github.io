@@ -50,7 +50,7 @@ There is another, not so general reduced unit we use to think about conditions f
 
 | Quantity | Definition                           |
 |----------------|-----------------------------------------------------------------|
-| $$\chi$$   | $$-\left( \epsilon_{12} - \left( \frac{\epsilon_{11} + \epsilon_{22}}{2} \right) \right)$$ |
+| $$\chi$$   | $$-\epsilon_{12} - \left( \frac{-\epsilon_{11} - \epsilon_{22}}{2} \right))$$ |
 | $$T^*$$    | $$\frac{k_B T^*}{\chi} \frac{\chi}{k_B}$$                                                      |
 | $$T$$      | $$\ k_B/ \epsilon^* T^*$$                                           |
 
