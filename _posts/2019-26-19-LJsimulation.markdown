@@ -48,11 +48,12 @@ The reduced $$\epsilon$$, $$\sigma$$, and mass ($$m$$), for these equations use 
 
 There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter $$\chi$$. The reduced unit in these models is then expressed as the ratio $$\frac{k_B T^*}{\chi}$$. We can define $$T$$ in our simulations using these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.
 
-| Quantity | Definition                           |
-|----------------|-----------------------------------------------------------------|
+| Quantity | Definition                                                                      |
+|------------|-------------------------------------------------------------------------------|
 | $$\chi$$   | $$-\epsilon_{12} - \left( \frac{-\epsilon_{11} - \epsilon_{22}}{2} \right))$$ |
-| $$T^*$$    | $$\frac{k_B T^*}{\chi} \frac{\chi}{k_B}$$                                                      |
-| $$T$$      | $$\ k_B/ \epsilon^* T^*$$                                           |
+| $$T^*$$    | $$\frac{k_B T^*}{\chi} \frac{\chi}{k_B}$$                                     |
+| $$T$$      | $$\ k_B/ \epsilon^* T^*$$                                                     |
+
 
 # A few example simulations.
 I've made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using Packmol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units, using the hacked up reducedstatedatareporter.py.
@@ -226,7 +227,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 
 * **"pdb_prefix"** is the name prefix of .pdb files from system construction and minimization
 * **"dcd_prefix"** is the name prefix of a .dcd file containing the simulation trajectory
-* **"nc_prefix"** is the name prefix of a .nc NetCDF file containing the simulation velocities and forces
+* **"nc_prefix"** is the name prefix of a .nc NetCDF file containing the simulation velocities and forces (Optional)
 * **"data_name"** is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
 <br/>
 * **"initial_condition"** set Packmol to construct either a randomly-mixed or phase-separated initial condition
@@ -241,7 +242,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 * **"numsteps"** the number of MD steps to perform
 * **"data_interval"** thermodynamic quantities and simulation progress recorded during simulation
 * **"coordinate_interval"** the coordinate writing frequency (.dcd file)
-* **"frcvel_interval"** the force and velocities writing frequency (.nc file)
+* **"frcvel_interval"** the force and velocities writing frequency (.nc file; Optional)
 * **"platform_type"** choice of computation platform. CUDA, OpenCL, or CPU
 <br/>
 * **"minimization"** turns minimization on/off with booleans "true"/"false"
@@ -249,7 +250,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 * **"forcewall"** kwall flat-well restraint
 * **"enable_restraint"** turn the flat-well restraint on/off with the booleans "true"/"false". Might explode if simulation is initiated from "initial_condition": "mixed"
 
-As mentioned earlier, LJ_simulation.py can also take temperature defined via $$\frac{k_B T^*}{\chi}$$ instead of $$T^*$$. This can be done by defining **"kbT_chi** instead of **"T_r"**. An example of this is given in ex1-alt.json.
+As mentioned earlier, LJ_simulation.py can also take temperature defined via $$\frac{k_B T^*}{\chi}$$ instead of $$T^*$$. This can be done by defining **"kbT_chi** instead of **"T_r"**. An example of this is given in ex1-kbT_chi.json.
 
 LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters **"rstin_prefix"** and **"rstout_prefix"**, which name these files without an extension.
 

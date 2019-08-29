@@ -277,7 +277,7 @@
 
 
 
-  12 minute read
+  13 minute read
 </p>
           
         </header>
@@ -374,7 +374,7 @@
   <tbody>
     <tr>
       <td><script type="math/tex">\chi</script></td>
-      <td><script type="math/tex">-\left( \epsilon_{12} - \left( \frac{\epsilon_{11} + \epsilon_{22}}{2} \right) \right)</script></td>
+      <td><script type="math/tex">-\epsilon_{12} - \left( \frac{-\epsilon_{11} - \epsilon_{22}}{2} \right))</script></td>
     </tr>
     <tr>
       <td><script type="math/tex">T^*</script></td>
@@ -554,7 +554,7 @@
 <ul>
   <li><strong>“pdb_prefix”</strong> is the name prefix of .pdb files from system construction and minimization</li>
   <li><strong>“dcd_prefix”</strong> is the name prefix of a .dcd file containing the simulation trajectory</li>
-  <li><strong>“nc_prefix”</strong> is the name prefix of a .nc NetCDF file containing the simulation velocities and forces</li>
+  <li><strong>“nc_prefix”</strong> is the name prefix of a .nc NetCDF file containing the simulation velocities and forces (Optional)</li>
   <li><strong>“data_name”</strong> is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
 <br /></li>
   <li><strong>“initial_condition”</strong> set Packmol to construct either a randomly-mixed or phase-separated initial condition</li>
@@ -569,7 +569,7 @@
   <li><strong>“numsteps”</strong> the number of MD steps to perform</li>
   <li><strong>“data_interval”</strong> thermodynamic quantities and simulation progress recorded during simulation</li>
   <li><strong>“coordinate_interval”</strong> the coordinate writing frequency (.dcd file)</li>
-  <li><strong>“frcvel_interval”</strong> the force and velocities writing frequency (.nc file)</li>
+  <li><strong>“frcvel_interval”</strong> the force and velocities writing frequency (.nc file; Optional)</li>
   <li><strong>“platform_type”</strong> choice of computation platform. CUDA, OpenCL, or CPU
 <br /></li>
   <li><strong>“minimization”</strong> turns minimization on/off with booleans “true”/”false”</li>
@@ -578,9 +578,11 @@
   <li><strong>“enable_restraint”</strong> turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode if simulation is initiated from “initial_condition”: “mixed”</li>
 </ul>
 
-<p>As mentioned earlier, LJ_simulation.py can also take temperature defined via <script type="math/tex">\frac{k_B T^*}{\chi}</script> instead of <script type="math/tex">T^*</script>. This can be done by defining <strong>“kbT_chi</strong> instead of <strong>“T_r”</strong>. An example of this is given in ex1-alt.json.</p>
+<p>As mentioned earlier, LJ_simulation.py can also take temperature defined via <script type="math/tex">\frac{k_B T^*}{\chi}</script> instead of <script type="math/tex">T^*</script>. This can be done by defining <strong>“kbT_chi</strong> instead of <strong>“T_r”</strong>. An example of this is given in ex1-kbT_chi.json.</p>
 
-<p>LJ_simulation.py can also take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters <strong>“rstin_prefix”</strong> and <strong>“rstout_prefix”</strong>, which name these files without an extension.</p>
+<p>LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters <strong>“rstin_prefix”</strong> and <strong>“rstout_prefix”</strong>, which name these files without an extension.</p>
+
+<p>LJ_simulation.py can also optionally <em>not</em> save the NetCDF file containing positions, forces, and velocities. If you don’t want this, or want to save space, you can choose to not define <strong>“nc_prefix”</strong> and <strong>“frcvel_interval”</strong>.</p>
 
 <p>One warning: I do not suggest using minimization. For two-dimensional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in three-dimensional systems either.</p>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-29T15:43:01-04:00</updated><id>http://localhost:4000/</id><title type="html">Scratchings on biomoleclar simulation and theory</title><subtitle>Posts from a PhD student about biomolecular simulation methods and analyses</subtitle><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><entry><title type="html">Generic LJ Simulator in OpenMM</title><link href="http://localhost:4000/computational-method/LJsimulation/" rel="alternate" type="text/html" title="Generic LJ Simulator in OpenMM" /><published>2019-08-29T02:30:00-04:00</published><updated>2019-08-29T02:30:00-04:00</updated><id>http://localhost:4000/computational-method/LJsimulation</id><content type="html" xml:base="http://localhost:4000/computational-method/LJsimulation/">&lt;p&gt;I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-29T17:19:42-04:00</updated><id>http://localhost:4000/</id><title type="html">Scratchings on biomoleclar simulation and theory</title><subtitle>Posts from a PhD student about biomolecular simulation methods and analyses</subtitle><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><entry><title type="html">Generic LJ Simulator in OpenMM</title><link href="http://localhost:4000/computational-method/LJsimulation/" rel="alternate" type="text/html" title="Generic LJ Simulator in OpenMM" /><published>2019-08-29T02:30:00-04:00</published><updated>2019-08-29T02:30:00-04:00</updated><id>http://localhost:4000/computational-method/LJsimulation</id><content type="html" xml:base="http://localhost:4000/computational-method/LJsimulation/">&lt;p&gt;I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.&lt;/p&gt;
 
 &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
 &lt;/script&gt;
@@ -88,7 +88,7 @@
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;\chi&lt;/script&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;-\left( \epsilon_{12} - \left( \frac{\epsilon_{11} + \epsilon_{22}}{2} \right) \right)&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;-\epsilon_{12} - \left( \frac{-\epsilon_{11} - \epsilon_{22}}{2} \right))&lt;/script&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt;&lt;/td&gt;
@@ -268,7 +268,7 @@
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;“pdb_prefix”&lt;/strong&gt; is the name prefix of .pdb files from system construction and minimization&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“dcd_prefix”&lt;/strong&gt; is the name prefix of a .dcd file containing the simulation trajectory&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;“nc_prefix”&lt;/strong&gt; is the name prefix of a .nc NetCDF file containing the simulation velocities and forces&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“nc_prefix”&lt;/strong&gt; is the name prefix of a .nc NetCDF file containing the simulation velocities and forces (Optional)&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“data_name”&lt;/strong&gt; is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
 &lt;br /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“initial_condition”&lt;/strong&gt; set Packmol to construct either a randomly-mixed or phase-separated initial condition&lt;/li&gt;
@@ -283,7 +283,7 @@
   &lt;li&gt;&lt;strong&gt;“numsteps”&lt;/strong&gt; the number of MD steps to perform&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“data_interval”&lt;/strong&gt; thermodynamic quantities and simulation progress recorded during simulation&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“coordinate_interval”&lt;/strong&gt; the coordinate writing frequency (.dcd file)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;“frcvel_interval”&lt;/strong&gt; the force and velocities writing frequency (.nc file)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“frcvel_interval”&lt;/strong&gt; the force and velocities writing frequency (.nc file; Optional)&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“platform_type”&lt;/strong&gt; choice of computation platform. CUDA, OpenCL, or CPU
 &lt;br /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;“minimization”&lt;/strong&gt; turns minimization on/off with booleans “true”/”false”&lt;/li&gt;
@@ -292,9 +292,11 @@
   &lt;li&gt;&lt;strong&gt;“enable_restraint”&lt;/strong&gt; turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode if simulation is initiated from “initial_condition”: “mixed”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;As mentioned earlier, LJ_simulation.py can also take temperature defined via &lt;script type=&quot;math/tex&quot;&gt;\frac{k_B T^*}{\chi}&lt;/script&gt; instead of &lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt;. This can be done by defining &lt;strong&gt;“kbT_chi&lt;/strong&gt; instead of &lt;strong&gt;“T_r”&lt;/strong&gt;. An example of this is given in ex1-alt.json.&lt;/p&gt;
+&lt;p&gt;As mentioned earlier, LJ_simulation.py can also take temperature defined via &lt;script type=&quot;math/tex&quot;&gt;\frac{k_B T^*}{\chi}&lt;/script&gt; instead of &lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt;. This can be done by defining &lt;strong&gt;“kbT_chi&lt;/strong&gt; instead of &lt;strong&gt;“T_r”&lt;/strong&gt;. An example of this is given in ex1-kbT_chi.json.&lt;/p&gt;
 
-&lt;p&gt;LJ_simulation.py can also take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters &lt;strong&gt;“rstin_prefix”&lt;/strong&gt; and &lt;strong&gt;“rstout_prefix”&lt;/strong&gt;, which name these files without an extension.&lt;/p&gt;
+&lt;p&gt;LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters &lt;strong&gt;“rstin_prefix”&lt;/strong&gt; and &lt;strong&gt;“rstout_prefix”&lt;/strong&gt;, which name these files without an extension.&lt;/p&gt;
+
+&lt;p&gt;LJ_simulation.py can also optionally &lt;em&gt;not&lt;/em&gt; save the NetCDF file containing positions, forces, and velocities. If you don’t want this, or want to save space, you can choose to not define &lt;strong&gt;“nc_prefix”&lt;/strong&gt; and &lt;strong&gt;“frcvel_interval”&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;One warning: I do not suggest using minimization. For two-dimensional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in three-dimensional systems either.&lt;/p&gt;
 
