@@ -251,8 +251,9 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 
 As mentioned earlier, LJ_simulation.py can also take temperature defined via $$\frac{k_B T^*}{\chi}$$ instead of $$T^*$$. This can be done by defining **"kbT_chi** instead of **"T_r"**. An example of this is given in ex1-alt.json.
 
-LJ_simulation.py can also take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters **"rstin_prefix"** and **"rstout_prefix"**, which name these files without an extension.
+LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters **"rstin_prefix"** and **"rstout_prefix"**, which name these files without an extension.
 
+LJ_simulation.py can also optionally <em>not</em> save the NetCDF file containing positions, forces, and velocities. If you don't want this, or want to save space, you can choose to not define **"nc_prefix"** and **"frcvel_interval"**.
 
 One warning: I do not suggest using minimization. For two-dimensional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in three-dimensional systems either.
 
