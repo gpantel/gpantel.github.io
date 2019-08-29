@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-28T14:58:11-04:00</updated><id>http://localhost:4000/</id><title type="html">Scratchings on biomoleclar simulation and theory</title><subtitle>Posts from a PhD student about biomolecular simulation methods and analyses</subtitle><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><entry><title type="html">Generic LJ Simulator in OpenMM</title><link href="http://localhost:4000/computational-method/LJsimulation/" rel="alternate" type="text/html" title="Generic LJ Simulator in OpenMM" /><published>2019-08-27T21:30:00-04:00</published><updated>2019-08-27T21:30:00-04:00</updated><id>http://localhost:4000/computational-method/LJsimulation</id><content type="html" xml:base="http://localhost:4000/computational-method/LJsimulation/">&lt;p&gt;I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-29T15:43:01-04:00</updated><id>http://localhost:4000/</id><title type="html">Scratchings on biomoleclar simulation and theory</title><subtitle>Posts from a PhD student about biomolecular simulation methods and analyses</subtitle><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><entry><title type="html">Generic LJ Simulator in OpenMM</title><link href="http://localhost:4000/computational-method/LJsimulation/" rel="alternate" type="text/html" title="Generic LJ Simulator in OpenMM" /><published>2019-08-29T02:30:00-04:00</published><updated>2019-08-29T02:30:00-04:00</updated><id>http://localhost:4000/computational-method/LJsimulation</id><content type="html" xml:base="http://localhost:4000/computational-method/LJsimulation/">&lt;p&gt;I present a script and JSON input file for building and running complex Lennard-Jones particle mixtures in 2D and 3D in a variety of conditions using OpenMM.&lt;/p&gt;
 
 &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
 &lt;/script&gt;
 
 &lt;h1 id=&quot;the-12-6-lennard-jones-lj-potential&quot;&gt;The 12-6 Lennard-Jones (LJ) potential.&lt;/h1&gt;
 
-&lt;p&gt;The Lennard-Jones potential model is a very simple model that most-accurately describes the interactions of Noble gas elements The Lennard-Jones potential defines the interaction between two atoms separated by distance &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt;:&lt;/p&gt;
+&lt;p&gt;The Lennard-Jones potential model is a very simple model that most-accurately describes the interactions of Noble gas elements. The Lennard-Jones potential defines the interaction between two atoms separated by distance &lt;script type=&quot;math/tex&quot;&gt;r&lt;/script&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;U(r) = 4 \epsilon \left[ \left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6} \right]&lt;/script&gt;.&lt;/p&gt;
 
@@ -19,7 +19,7 @@
 
 &lt;p&gt;In thinking about real systems, we need units to understand the relative size and scale of all things. Energies we often express in units like &lt;em&gt;kJ/mol&lt;/em&gt;, temperatures in &lt;em&gt;K&lt;/em&gt;, volumes in &lt;em&gt;nm&lt;sup&gt;3&lt;/sup&gt;&lt;/em&gt;, &lt;em&gt;et cetera&lt;/em&gt;. However, if a system is simple enough, it is easy to express thermodynamic quantities in terms of each other, such that all quantities are unitless, but can be related directly back to real, unit-having values, which can describe many systems &lt;em&gt;a la&lt;/em&gt; the &lt;a href=&quot;https://en.wikipedia.org/wiki/Theorem_of_corresponding_states&quot;&gt;Theorem of corresponding states&lt;/a&gt;. This idea that we can understand many real systems via studying systems using reduced units is another reason why Lennard-Jones simulations can be attractive for exploring new ideas.&lt;/p&gt;
 
-&lt;p&gt;To perform MD simulations, it is necessary to define paramters like the time step, temperature, density. For equilateral systems of (&lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt;) dimensions, the temperature (&lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt;), density (&lt;script type=&quot;math/tex&quot;&gt;\rho&lt;/script&gt;), integration time step &lt;script type=&quot;math/tex&quot;&gt;\tau&lt;/script&gt;, and langevin damping coefficient &lt;script type=&quot;math/tex&quot;&gt;\gamma&lt;/script&gt; are defined as:&lt;/p&gt;
+&lt;p&gt;To perform MD simulations, it is necessary to define parameters like the time step, temperature, density. For equilateral systems of (&lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt;) dimensions, the temperature (&lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt;), density (&lt;script type=&quot;math/tex&quot;&gt;\rho&lt;/script&gt;), integration time step &lt;script type=&quot;math/tex&quot;&gt;\tau&lt;/script&gt;, and langevin damping coefficient &lt;script type=&quot;math/tex&quot;&gt;\gamma&lt;/script&gt; are defined as:&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -76,28 +76,55 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;p&gt;There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter &lt;script type=&quot;math/tex&quot;&gt;\chi&lt;/script&gt;. The reduced unit in these models is then expressed as the ratio &lt;script type=&quot;math/tex&quot;&gt;\frac{k_B T^*}{\chi}&lt;/script&gt;. We can define &lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt; in our simulations using these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Quantity&lt;/th&gt;
+      &lt;th&gt;Definition&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;\chi&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;-\left( \epsilon_{12} - \left( \frac{\epsilon_{11} + \epsilon_{22}}{2} \right) \right)&lt;/script&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{k_B T^*}{\chi} \frac{\chi}{k_B}&lt;/script&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;script type=&quot;math/tex&quot;&gt;\ k_B/ \epsilon^* T^*&lt;/script&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
 &lt;h1 id=&quot;a-few-example-simulations&quot;&gt;A few example simulations.&lt;/h1&gt;
 &lt;p&gt;I’ve made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using Packmol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units, using the hacked up reducedstatedatareporter.py.&lt;/p&gt;
 
 &lt;p&gt;Here are a few examples.&lt;/p&gt;
 
-&lt;p&gt;A simulation with M=2, N=2000, where &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{11}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{22}&lt;/script&gt; = 4, &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{12}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{21}&lt;/script&gt; = 0.4 &lt;script type=&quot;math/tex&quot;&gt;\sigma_1&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_2&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;m_1&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_2&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;\rho&lt;/script&gt; = 0.75, and &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:&lt;/p&gt;
+&lt;p&gt;A simulation with M=2, N=2000, where &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{11}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{22}^*&lt;/script&gt; = 4, &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{12}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{21}^*&lt;/script&gt; = 0.4, &lt;script type=&quot;math/tex&quot;&gt;\sigma_1^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_2^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;m_1^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_2^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;\rho^*&lt;/script&gt; = 0.75, and &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; = 2 and the system composition is at 50% type 1, and 50% type 2, running for 50,000,000 steps (at a rate of approx. 60,000,000 steps / hour on a GTX 2080 super), initiated from a mixed state:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/Potentials/ex1.gif&quot; alt=&quot;FlatWellPotential&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;A simulation with &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt;=3, &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;=1000, where &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{11}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{12}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{21}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{22}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{23}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{32}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{33}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{13}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{31}&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;\sigma_1&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_2&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_3&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;m_1&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_2&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_3&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt; = 2, &lt;script type=&quot;math/tex&quot;&gt;\rho&lt;/script&gt; = 0.8, and &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:&lt;/p&gt;
+&lt;p&gt;The above simulation could also be defined using &lt;script type=&quot;math/tex&quot;&gt;\frac{k_B T^*}{\chi}&lt;/script&gt; = 2.3096 as the user input, rather than &lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt; = 1.&lt;/p&gt;
+
+&lt;p&gt;A simulation with &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt;=3, &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;=1000, where &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{11}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{12}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{21}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{22}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{23}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{32}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{33}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{13}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{31}^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;\sigma_1^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_2^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_3^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;m_1^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_2^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_3^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt; = 2, &lt;script type=&quot;math/tex&quot;&gt;\rho^*&lt;/script&gt; = 0.8, and &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/Potentials/ex2.gif&quot; alt=&quot;FlatWellPotential&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;A simulation with &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt;=3, &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;=1000, where &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{11}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{12}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{21}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{22}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{23}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{32}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{33}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{13}&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{31}&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt; = 2, &lt;script type=&quot;math/tex&quot;&gt;\rho&lt;/script&gt; = 0.8, and &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):&lt;/p&gt;
+&lt;p&gt;A simulation with &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt;=3, &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;=1000, where &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{11}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{12}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{21}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{22}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{23}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{32}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{33}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{13}^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{31}^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;\sigma_1^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_2^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;\sigma_3^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;m_1^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_2^*&lt;/script&gt; = &lt;script type=&quot;math/tex&quot;&gt;m_3^*&lt;/script&gt; = 1, &lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt; = 2, &lt;script type=&quot;math/tex&quot;&gt;\rho^*&lt;/script&gt; = 0.8, and &lt;script type=&quot;math/tex&quot;&gt;d&lt;/script&gt; = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation. Now including an external potential to restrain particles to the stripe phase with widthscale = 0.95 and kwall = 20 (this potential is described later):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/Potentials/ex3.gif&quot; alt=&quot;FlatWellPotential&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;a-bit-about-openmm-what-makes-it-nice-for-quickly-exploring-ideas-and-what-can-make-it-difficult-to-use&quot;&gt;A bit about OpenMM: What makes it nice for quickly exploring ideas and what can make it difficult to use.&lt;/h1&gt;
 
-&lt;p&gt;OpenMM uses SWIG to generate C++ code from strings at the python API level to define custom potentials and integrators, and to modify simulation parameters during simulation. OpenMM also upports reading of the matured MD force field parameter file formats of CHARMM, AMBER, and GROMACS. This makes it possible to use OpenMM as a testbed for development of creative simulation methods by using simple models that can later be scaled up to production simulations. It also makes it possible to create totally new simulation methods that can be used without recompiling OpenMM.&lt;/p&gt;
+&lt;p&gt;OpenMM uses SWIG to generate C++ code from strings at the python API level to define custom potentials and integrators, and to modify simulation parameters during simulation. OpenMM also supports reading of the matured MD force field parameter file formats of CHARMM, AMBER, and GROMACS. This makes it possible to use OpenMM as a testbed for development of creative simulation methods by using simple models that can later be scaled up to production simulations. It also makes it possible to create totally new simulation methods that can be used without recompiling OpenMM.&lt;/p&gt;
 
-&lt;p&gt;Sometimes, understanding how to write strings that will correctly interpreted by OpenMM to do what you want can be difficult, so I will present how I do that for this LJ simulator as another example of how to use OpenMM. Reading the C++ code is the most sure-fire way to really get an idea of what to do at the python level if it’s not clear.&lt;/p&gt;
+&lt;p&gt;Sometimes, understanding how to write strings that will be correctly interpreted by OpenMM to do what you want can be difficult, so I will present how I do that for this LJ simulator as another example of how to use OpenMM. Reading the C++ code is the most sure-fire way to really get an idea of what to do at the python level if it’s not clear.&lt;/p&gt;
 
 &lt;p&gt;For example, to accomplish two-dimensional simulations I needed to:&lt;/p&gt;
 &lt;ol&gt;
@@ -111,7 +138,7 @@
 
 &lt;h1 id=&quot;constructing-a-pair-interaction-specific-lennard-jones-potential-in-openmm&quot;&gt;Constructing a pair-interaction-specific Lennard-Jones potential in OpenMM.&lt;/h1&gt;
 
-&lt;p&gt;A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each &lt;script type=&quot;math/tex&quot;&gt;i^{th}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;j^{th}&lt;/script&gt; atom type, &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{ij}&lt;/script&gt;). The user is able to define this in the “epsilonAR_r” section of the JSON input file. We could also freely define how different LJ interaction lengths (&lt;script type=&quot;math/tex&quot;&gt;\sigma_{ij}&lt;/script&gt;) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the &lt;script type=&quot;math/tex&quot;&gt;\sigma_{ij}&lt;/script&gt; paramters from each particle’s radius described by &lt;script type=&quot;math/tex&quot;&gt;\sigma_i&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each &lt;script type=&quot;math/tex&quot;&gt;i^{th}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;j^{th}&lt;/script&gt; atom type, &lt;script type=&quot;math/tex&quot;&gt;\epsilon_{ij}&lt;/script&gt;). The user is able to define this in the “epsilonAR_r” section of the JSON input file. We could also freely define how different LJ interaction lengths (&lt;script type=&quot;math/tex&quot;&gt;\sigma_{ij}&lt;/script&gt;) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the &lt;script type=&quot;math/tex&quot;&gt;\sigma_{ij}&lt;/script&gt; parameters from each particle’s radius described by &lt;script type=&quot;math/tex&quot;&gt;\sigma_i&lt;/script&gt;.&lt;/p&gt;
 
 &lt;p&gt;Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt;=2 particle types:&lt;/p&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# epsilons are in reduced units, kJ/mol in OpenMM (i.e. 1.0 = epsilon, 2.0 = 2epislon)&lt;/span&gt;
@@ -131,7 +158,7 @@
 &lt;span class=&quot;n&quot;&gt;sigmaLST_r&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sigmaAR_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ravel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We now want to add a nonbonded force to the system that describe how all types of LJ particle interact. We can write out the standard 12-6 LJ potential, but with terms that describe specific pairs of atom types, a feature which is enabled by using the expressions “eps=epsilon(type1, type2)” and “sig=sigma(type1, type2)”…&lt;/p&gt;
+&lt;p&gt;We now want to add a nonbonded force to the system that describes how all types of LJ particle interact. We can write out the standard 12-6 LJ potential, but with terms that describe specific pairs of atom types, a feature which is enabled by using the expressions “eps=epsilon(type1, type2)” and “sig=sigma(type1, type2)”…&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Constructing OpenMM simulation'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;system&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
@@ -157,7 +184,7 @@
 
 &lt;h1 id=&quot;disabling-changes-to-the-z-axial-positions-to-achieve-two-dimensional-simulations&quot;&gt;Disabling changes to the z-axial positions to achieve two-dimensional simulations.&lt;/h1&gt;
 
-&lt;p&gt;OpenMM does not support simualtions in two-dimensions, however we can create a custom integrator that ignores the z-axis in computing velocity-related quantities, like displacement in the z-dimension and the z-dimention contribution to the kinetic energy. There are a few examples of how to make and manipulate custom integratiors within the&lt;/p&gt;
+&lt;p&gt;OpenMM does not support two-dimensional simulations, however we can create a custom integrator that ignores the z-axis in computing velocity-related quantities, like displacement in the z-dimension and the z-dimension contribution to the kinetic energy. There are a few examples of how to make and manipulate custom integratiors within the comments of openmmapi/include/openmm/CustomIntegrator.h in the OpenMM source.&lt;/p&gt;
 
 &lt;p&gt;To do this, a “dummy” variable, a Vec3 Vector of &amp;lt;1,1,0&amp;gt; needs to be created. This is used to multiply the velocities of each atom to remove z-axis kinetic energy. This also disables displacements into the z-dimension. I call this variable “dumv”.&lt;/p&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dimensions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -178,7 +205,7 @@
 
 &lt;h1 id=&quot;creating-a-periodic-external-potential-to-restrain-particles-to-stripe-phases&quot;&gt;Creating a periodic external potential to restrain particles to stripe phases.&lt;/h1&gt;
 
-&lt;p&gt;Phase separtions that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites phases. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[1] Simulating lipid bilayers that &lt;em&gt;should&lt;/em&gt; phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a “wall” using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[2] We express this potential with the equation&lt;/p&gt;
+&lt;p&gt;Phase separations that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites type. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[1] Simulating lipid bilayers that &lt;em&gt;should&lt;/em&gt; phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a “wall” using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[2] We express this potential with the equation&lt;/p&gt;
 
 &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left( \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2&lt;/script&gt;,&lt;/p&gt;
 
@@ -203,7 +230,7 @@
 
 &lt;h1 id=&quot;parameters-of-the-json-input-file&quot;&gt;Parameters of the JSON input file.&lt;/h1&gt;
 
-&lt;p&gt;To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using Packmol can be controlled externally using JSON input files whcih are loaded as a command line argument.&lt;/p&gt;
+&lt;p&gt;To easily run Lennard-Jones simulation with reduced units in OpenMM, the script LJ_simulation.py, which loads reducedstatedatareporter.py to record thermodynamic quantities and build systems using Packmol can be controlled externally using JSON input files which are loaded as a command line argument.&lt;/p&gt;
 
 &lt;p&gt;For example 1, we run use the following JSON file as an input “python LJ_simulation.py ex1.config”&lt;/p&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -239,35 +266,39 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;“pdb_prefix” is the name prefix of .pdb files from system construction and minimization&lt;/li&gt;
-  &lt;li&gt;“dcd_prefix” is the name prefix of a .dcd file containing the simulation trajectory&lt;/li&gt;
-  &lt;li&gt;“nc_prefix” is the name prefix of a .nc NetCDF file contaning the simulation velocities and forces&lt;/li&gt;
-  &lt;li&gt;“data_name” is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
+  &lt;li&gt;&lt;strong&gt;“pdb_prefix”&lt;/strong&gt; is the name prefix of .pdb files from system construction and minimization&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“dcd_prefix”&lt;/strong&gt; is the name prefix of a .dcd file containing the simulation trajectory&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“nc_prefix”&lt;/strong&gt; is the name prefix of a .nc NetCDF file containing the simulation velocities and forces&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“data_name”&lt;/strong&gt; is the name of an output text file written from ReducedStateDataReporter. This also names a .tcl script for quickly loading a rudimentary visualization in VMD.
 &lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;“initial_condition” set Packmol to construct either a randomly-mixed or phase-separated initial condition&lt;/li&gt;
-  &lt;li&gt;“N” the total number of particles in the system&lt;/li&gt;
-  &lt;li&gt;“T_r” the reduced temperature&lt;/li&gt;
-  &lt;li&gt;“density_r” the reduced density&lt;/li&gt;
-  &lt;li&gt;“dimensions” the number of dimensions (2 or 3)&lt;/li&gt;
-  &lt;li&gt;“particle_ratios” the relative ratio of each particle type, in any proportion. This gets normalized later.&lt;/li&gt;
-  &lt;li&gt;“sigmas_r” the reduced Lennard-Jones &lt;script type=&quot;math/tex&quot;&gt;\sigma&lt;/script&gt; of each particle type&lt;/li&gt;
-  &lt;li&gt;“masses_r” the reduced mass of each particle type&lt;/li&gt;
-  &lt;li&gt;“epsilonAR_r” the reduced, pair-type-specific Lennard-Jones &lt;script type=&quot;math/tex&quot;&gt;\epsilon&lt;/script&gt;s&lt;/li&gt;
-  &lt;li&gt;“numsteps” the number of MD steps to perform&lt;/li&gt;
-  &lt;li&gt;“data_interval” thermodynamic quantities and simulation progress recorded during simulation&lt;/li&gt;
-  &lt;li&gt;“coordinate_interval” the coordinate writing frequency (.dcd file)&lt;/li&gt;
-  &lt;li&gt;“frcvel_interval” the force and velocities writing frequency (.nc file)&lt;/li&gt;
-  &lt;li&gt;“platform_type” choice of computation platform. CUDA, OpenCL, or CPU
+  &lt;li&gt;&lt;strong&gt;“initial_condition”&lt;/strong&gt; set Packmol to construct either a randomly-mixed or phase-separated initial condition&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“N”&lt;/strong&gt; the total number of particles in the system&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“T_r”&lt;/strong&gt; the reduced temperature&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“density_r”&lt;/strong&gt; the reduced density&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“dimensions”&lt;/strong&gt; the number of dimensions (2 or 3)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“particle_ratios”&lt;/strong&gt; the relative ratio of each particle type, in any proportion. This gets normalized later.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“sigmas_r”&lt;/strong&gt; the reduced Lennard-Jones &lt;script type=&quot;math/tex&quot;&gt;\sigma&lt;/script&gt; of each particle type&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“masses_r”&lt;/strong&gt; the reduced mass of each particle type&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“epsilonAR_r”&lt;/strong&gt; the reduced, pair-type-specific Lennard-Jones &lt;script type=&quot;math/tex&quot;&gt;\epsilon&lt;/script&gt;s&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“numsteps”&lt;/strong&gt; the number of MD steps to perform&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“data_interval”&lt;/strong&gt; thermodynamic quantities and simulation progress recorded during simulation&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“coordinate_interval”&lt;/strong&gt; the coordinate writing frequency (.dcd file)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“frcvel_interval”&lt;/strong&gt; the force and velocities writing frequency (.nc file)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“platform_type”&lt;/strong&gt; choice of computation platform. CUDA, OpenCL, or CPU
 &lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;“minimization” turns minimization on/off with booleans “true”/”false”&lt;/li&gt;
-  &lt;li&gt;“restraint_widthscale” scales width of the flat-well restraint (1=edge-to-edge of the initial stripe phase), if enabled&lt;/li&gt;
-  &lt;li&gt;“forcewall” kwall flat-well restraint&lt;/li&gt;
-  &lt;li&gt;“enable_restraint” turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode simulation if initiated from initial_condition”: “mixed”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“minimization”&lt;/strong&gt; turns minimization on/off with booleans “true”/”false”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“restraint_widthscale”&lt;/strong&gt; scales width of the flat-well restraint (1=edge-to-edge of the initial stripe phase), if enabled&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“forcewall”&lt;/strong&gt; kwall flat-well restraint&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;“enable_restraint”&lt;/strong&gt; turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode if simulation is initiated from “initial_condition”: “mixed”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;One warning: I do not suggest ever using minimization. For two-dimenional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in tree-dimensional systems either.&lt;/p&gt;
+&lt;p&gt;As mentioned earlier, LJ_simulation.py can also take temperature defined via &lt;script type=&quot;math/tex&quot;&gt;\frac{k_B T^*}{\chi}&lt;/script&gt; instead of &lt;script type=&quot;math/tex&quot;&gt;T^*&lt;/script&gt;. This can be done by defining &lt;strong&gt;“kbT_chi&lt;/strong&gt; instead of &lt;strong&gt;“T_r”&lt;/strong&gt;. An example of this is given in ex1-alt.json.&lt;/p&gt;
 
-&lt;p&gt;Precompiled &lt;a href=&quot;http://docs.openmm.org&quot;&gt;OpenMM&lt;/a&gt; can be installed using conda (I suggest using &lt;a href=&quot;https://docs.conda.io/en/latest/&quot;&gt;Miniconda&lt;/a&gt;). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU.
+&lt;p&gt;LJ_simulation.py can also take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters &lt;strong&gt;“rstin_prefix”&lt;/strong&gt; and &lt;strong&gt;“rstout_prefix”&lt;/strong&gt;, which name these files without an extension.&lt;/p&gt;
+
+&lt;p&gt;One warning: I do not suggest using minimization. For two-dimensional systems minimization can move particles along the z-axis, and I do not think it is possible to correct this behavior without modifiying code that would need to be recompiled. Additionally, Packmol does a good job of constructing the system, so minimization should not be necessary in three-dimensional systems either.&lt;/p&gt;
+
+&lt;p&gt;Precompiled &lt;a href=&quot;http://docs.openmm.org&quot;&gt;OpenMM&lt;/a&gt; can be installed using conda (I suggest using &lt;a href=&quot;https://docs.conda.io/en/latest/&quot;&gt;Miniconda&lt;/a&gt;). I strongly suggest reading the User manual and following the instructions to set up CUDA if you have a NVIDIA GPU. Parmed is requiredto write the NetCDF .nc file containing forces and velocities, which can also be installed with conda.
 &lt;a href=&quot;http://m3g.iqm.unicamp.br/Packmol/home.shtml&quot;&gt;Packmol&lt;/a&gt; is  easy to compile. JSON can be installed using conda, too.
 You need to set the path to Packmol on your local computer in LJ_simulator.py for the variable “path_to_Packmol”.&lt;/p&gt;
 
@@ -323,6 +354,8 @@ G.A. Pantelopulos, J.E. Straub, D. Thirumalai, &amp;amp; Y. Sugita “Structure 
   &lt;li&gt;W. Im, M. Feig, &amp;amp; C.L. Brooks, “An Implicit Membrane Generalized Born Theory for the Study of Structure, Stability, and Interactions of Membrane Proteins,” &lt;em&gt;Biophys. J.&lt;/em&gt; &lt;strong&gt;85&lt;/strong&gt; 2900–2918 (2003).&lt;/li&gt;
   &lt;li&gt;Y. Sugita, &amp;amp; Y. Okamoto, “Replica exchange molecular dynamics method for protein folding simulation,” &lt;em&gt;Chem. Phys. Lett.&lt;/em&gt; &lt;strong&gt;314&lt;/strong&gt; 141–151 (1999).&lt;/li&gt;
 &lt;/ol&gt;</content><author><name>George A. Pantelopulos</name><email>gpantel@bu.edu</email></author><summary type="html">I briefly discuss preparation of full-length C99 simulations in GBSW implicit membranes using REMD and provide prepresentative structures from clustering.</summary></entry><entry><title type="html">Lipid Bilayer Phase Diagrams and Phase Diagram Evaluation Methods</title><link href="http://localhost:4000/computational-method/phasediagramsampling/" rel="alternate" type="text/html" title="Lipid Bilayer Phase Diagrams and Phase Diagram Evaluation Methods" /><published>2017-10-06T10:00:00-04:00</published><updated>2017-10-06T10:00:00-04:00</updated><id>http://localhost:4000/computational-method/phasediagramsampling</id><content type="html" xml:base="http://localhost:4000/computational-method/phasediagramsampling/">&lt;p&gt;I post some notes I wrote about ternary lipid bilayer phase diagrams and phase diagram sampling methods.&lt;/p&gt;
+
+&lt;p&gt;An embedded PDF window displaying &lt;a href=&quot;http://localhost:4000/assets/PDF/lipidPhaseNotes.pdf&quot;&gt;this file&lt;/a&gt; should pop up.&lt;/p&gt;
 
 &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
 &lt;/script&gt;
