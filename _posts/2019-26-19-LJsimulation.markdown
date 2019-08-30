@@ -50,9 +50,9 @@ There is another, not so general reduced unit we use to think about conditions f
 
 | Quantity | Definition                                                                      |
 |------------|-------------------------------------------------------------------------------|
-| $$\chi$$   | $$-\epsilon_{12} - \left( \frac{-\epsilon_{11} - \epsilon_{22}}{2} \right)$$ |
-| $$T^*$$    | $$\frac{k_B T^*}{\chi_{int}} \frac{\chi_{int}}{k_B}$$                                     |
-| $$T$$      | $$\ k_B/ \epsilon^* T^*$$                                                     |
+| $$\chi_{int}$$ | $$-\epsilon_{12} - \left( \frac{-\epsilon_{11} - \epsilon_{22}}{2} \right)$$   |
+| $$T^*$$    | $$\frac{k_B T^*}{\chi_{int}} \frac{\chi_{int}}{k_B}$$                              |
+| $$T$$      | $$\ k_B/ \epsilon^* T^*$$                                                          |
 
 In this case we refer to this as $$\chi_{internal}$$, as the Flory-Huggins theory parameter $$\chi$$ is meant to fold in the contrubutions from entropy, and thus there is some difference between the results of the LJ model and Flory-Huggins theory at this value of $$\chi$$.[1]
 
