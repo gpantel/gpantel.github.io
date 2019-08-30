@@ -90,7 +90,7 @@ But I had not seen a demonstration of how to do steps 1-3 anywhere, so I had to 
 
 # Constructing a pair-interaction-specific Lennard-Jones potential in OpenMM.
 
-A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each $$i^{th}$$ and $$j^{th}$$ atom type, $$\epsilon_{ij}$$). The user is able to define this in the "epsilonAR_r" section of the JSON input file. We could also freely define how different LJ interaction lengths ($$\sigma_{ij}$$) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the $$\sigma_{ij}$$ parameters from each particle's radius described by $$\sigma_i$$.
+A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each $$i^{th}$$ and $$j^{th}$$ atom type, $$\epsilon_{ij}$$. The user is able to define this in the "epsilonAR_r" section of the JSON input file. We could also freely define how different LJ interaction lengths ($$\sigma_{ij}$$) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the $$\sigma_{ij}$$ parameters from each particle's radius described by $$\sigma_i$$.
 
 Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has $$M$$=2 particle types:
 ```python
