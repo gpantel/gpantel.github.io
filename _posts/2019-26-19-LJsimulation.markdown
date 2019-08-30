@@ -65,7 +65,7 @@ A simulation with M=2, N=2000, where $$\epsilon_{11}^*$$ = $$\epsilon_{22}^*$$ =
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex1.gif)<br/>
 
-The above simulation could also be defined using $$\frac{k_B T^*}{\chi_{int}$$ = 2.3096 as the user input, rather than $$T^*$$ = 1.
+The above simulation could also be defined using $$\frac{k_B T^*}{\chi_{int}}$$ = 2.3096 as the user input, rather than $$T^*$$ = 1.
 
 A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}^*$$ = $$\epsilon_{12}^*$$ = $$\epsilon_{21}^*$$ = $$\epsilon_{22}^*$$ = $$\epsilon_{23}^*$$ = $$\epsilon_{32}^*$$ = $$\epsilon_{33}^*$$ = $$\epsilon_{13}^*$$ = $$\epsilon_{31}^*$$ = 1, $$\sigma_1^*$$ = $$\sigma_2^*$$ = $$\sigma_3^*$$ = 1, $$m_1^*$$ = $$m_2^*$$ = $$m_3^*$$ = 1, $$T^*$$ = 2, $$\rho^*$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:
 
