@@ -46,7 +46,7 @@ The reduced $$\epsilon$$, $$\sigma$$, and mass ($$m$$), for these equations use 
 | $$\left< \epsilon^* \right>$$ | $$\frac{1}{M} \sum_i^M \sum_j^M \epsilon_{ij} \alpha_i$$                              |
 | $$\left< m^* \right>$$        | $$\sum_i^M \alpha_i m_i$$                                                             |
 
-There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter $$\chi$$. The reduced unit in these models is then expressed as the ratio $$\frac{k_B T^*}{\chi}$$. We can define $$T$$ in our simulations using these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.
+There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the energetic cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter $$\chi$$. The reduced unit in these models is then expressed as the ratio $$\frac{k_B T^*}{\chi}$$. We can define $$T$$ in our simulations using these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.
 
 | Quantity | Definition                                                                      |
 |------------|-------------------------------------------------------------------------------|
@@ -54,6 +54,7 @@ There is another, not so general reduced unit we use to think about conditions f
 | $$T^*$$    | $$\frac{k_B T^*}{\chi} \frac{\chi}{k_B}$$                                     |
 | $$T$$      | $$\ k_B/ \epsilon^* T^*$$                                                     |
 
+It should be noted that results at this $$\chi$$ will not be equal to results with $$\chi$$ from Flory-Huggins theories, due to the entropy of the LJ model.[1]
 
 # A few example simulations.
 I've made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using Packmol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units, using the hacked up reducedstatedatareporter.py.
@@ -163,7 +164,7 @@ This is not quite everything that needs to be done. In two-dimensional systems t
 
 # Creating a periodic external potential to restrain particles to stripe phases.
 
-Phase separations that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites type. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[1] Simulating lipid bilayers that <em>should</em> phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a "wall" using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[2] We express this potential with the equation
+Phase separations that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites type. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[2] Simulating lipid bilayers that <em>should</em> phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a "wall" using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[3] We express this potential with the equation
 
 $$U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left( \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2$$,
 
@@ -265,5 +266,6 @@ You need to set the path to Packmol on your local computer in LJ_simulator.py fo
 The python scripts that perform these simulations are available on my github at [https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator](https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator), in addition to input files to perform these three example simulations. 
 
 References:
-1. Pantelopulos, G. A., Nagai, T., Bandara, A., Panahi, A. & Straub, J. E. Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures. J. Chem. Phys. 147, 095101 (2017).
-2. Park, S. & Im, W. Quantitative Characterization of Cholesterol Partitioning between Binary Bilayers. J. Chem. Theory Comput. 14, 2829–2833 (2018).
+1. Chremos, A., Nikoubashman, A. & Panagiotopoulos, A. Z. Flory-Huggins parameter χ, from binary mixtures of Lennard-Jones particles to block copolymer melts. J. Chem. Phys. 140, 1–10 (2014).
+2. Pantelopulos, G. A., Nagai, T., Bandara, A., Panahi, A. & Straub, J. E. Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures. J. Chem. Phys. 147, 095101 (2017).
+3. Park, S. & Im, W. Quantitative Characterization of Cholesterol Partitioning between Binary Bilayers. J. Chem. Theory Comput. 14, 2829–2833 (2018).
