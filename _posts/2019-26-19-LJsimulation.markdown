@@ -251,7 +251,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 * **"forcewall"** kwall flat-well restraint
 * **"enable_restraint"** turn the flat-well restraint on/off with the booleans "true"/"false". Might explode if simulation is initiated from "initial_condition": "mixed"
 
-As mentioned earlier, LJ_simulation.py can also take temperature defined via $$\frac{k_B T^*}{\chi_{int}$$ instead of $$T^*$$. This can be done by defining **"kbT_chi** instead of **"T_r"**. An example of this is given in ex1-kbT_chi.json.
+As mentioned earlier, LJ_simulation.py can also take temperature defined via $$\frac{k_B T^*}{\chi_{int}}$$ instead of $$T^*$$. This can be done by defining **"kbT_chi** instead of **"T_r"**. An example of this is given in ex1-kbT_chi.json.
 
 LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters **"rstin_prefix"** and **"rstout_prefix"**, which name these files without an extension.
 
