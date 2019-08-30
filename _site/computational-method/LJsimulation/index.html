@@ -362,7 +362,7 @@
   </tbody>
 </table>
 
-<p>There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter <script type="math/tex">\chi</script>. The reduced unit in these models is then expressed as the ratio <script type="math/tex">\frac{k_B T^*}{\chi}</script>. We can define <script type="math/tex">T</script> in our simulations using these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.</p>
+<p>There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the energetic cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter <script type="math/tex">\chi</script>. The reduced unit in these models is then expressed as the ratio <script type="math/tex">\frac{k_B T^*}{\chi}</script>. We can define <script type="math/tex">T</script> in our simulations using a these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.</p>
 
 <table>
   <thead>
@@ -378,7 +378,7 @@
     </tr>
     <tr>
       <td><script type="math/tex">T^*</script></td>
-      <td><script type="math/tex">\frac{k_B T^*}{\chi} \frac{\chi}{k_B}</script></td>
+      <td><script type="math/tex">\frac{k_B T^*}{\chi_{int}} \frac{\chi_{int}}{k_B}</script></td>
     </tr>
     <tr>
       <td><script type="math/tex">T</script></td>
@@ -386,6 +386,8 @@
     </tr>
   </tbody>
 </table>
+
+<p>In this case we refer to this as <script type="math/tex">\chi_{internal}</script>, as the Flory-Huggins theory parameter <script type="math/tex">\chi</script> is meant to fold in the contrubutions from entropy, and thus there is some difference between the results of the LJ model and Flory-Huggins theory at this value of <script type="math/tex">\chi</script>.[1]</p>
 
 <h1 id="a-few-example-simulations">A few example simulations.</h1>
 <p>I’ve made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using Packmol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units, using the hacked up reducedstatedatareporter.py.</p>
@@ -396,7 +398,7 @@
 
 <p><img src="http://localhost:4000/assets/Potentials/ex1.gif" alt="FlatWellPotential" /><br /></p>
 
-<p>The above simulation could also be defined using <script type="math/tex">\frac{k_B T^*}{\chi}</script> = 2.3096 as the user input, rather than <script type="math/tex">T^*</script> = 1.</p>
+<p>The above simulation could also be defined using <script type="math/tex">\frac{k_B T^*}{\chi_{int}</script> = 2.3096 as the user input, rather than <script type="math/tex">T^*</script> = 1.</p>
 
 <p>A simulation with <script type="math/tex">M</script>=3, <script type="math/tex">N</script>=1000, where <script type="math/tex">\epsilon_{11}^*</script> = <script type="math/tex">\epsilon_{12}^*</script> = <script type="math/tex">\epsilon_{21}^*</script> = <script type="math/tex">\epsilon_{22}^*</script> = <script type="math/tex">\epsilon_{23}^*</script> = <script type="math/tex">\epsilon_{32}^*</script> = <script type="math/tex">\epsilon_{33}^*</script> = <script type="math/tex">\epsilon_{13}^*</script> = <script type="math/tex">\epsilon_{31}^*</script> = 1, <script type="math/tex">\sigma_1^*</script> = <script type="math/tex">\sigma_2^*</script> = <script type="math/tex">\sigma_3^*</script> = 1, <script type="math/tex">m_1^*</script> = <script type="math/tex">m_2^*</script> = <script type="math/tex">m_3^*</script> = 1, <script type="math/tex">T^*</script> = 2, <script type="math/tex">\rho^*</script> = 0.8, and <script type="math/tex">d</script> = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:</p>
 
@@ -424,7 +426,7 @@
 
 <h1 id="constructing-a-pair-interaction-specific-lennard-jones-potential-in-openmm">Constructing a pair-interaction-specific Lennard-Jones potential in OpenMM.</h1>
 
-<p>A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each <script type="math/tex">i^{th}</script> and <script type="math/tex">j^{th}</script> atom type, <script type="math/tex">\epsilon_{ij}</script>). The user is able to define this in the “epsilonAR_r” section of the JSON input file. We could also freely define how different LJ interaction lengths (<script type="math/tex">\sigma_{ij}</script>) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the <script type="math/tex">\sigma_{ij}</script> parameters from each particle’s radius described by <script type="math/tex">\sigma_i</script>.</p>
+<p>A pretty flexible Lennard-Jones model should be able to adopt different interactions strengths between different types of Lennard-Jones particle. We want to be able to freely define how different LJ interaction energies will be formed between each <script type="math/tex">i^{th}</script> and <script type="math/tex">j^{th}</script> atom type, <script type="math/tex">\epsilon_{ij}</script>. The user is able to define this in the “epsilonAR_r” section of the JSON input file. We could also freely define how different LJ interaction lengths (<script type="math/tex">\sigma_{ij}</script>) are formed, but we should stick with something more sane in this case, and apply the standard Lorentz combination rule to determine the <script type="math/tex">\sigma_{ij}</script> parameters from each particle’s radius described by <script type="math/tex">\sigma_i</script>.</p>
 
 <p>Here, the array epsilonAR_r and the list sigmas_r correspond to the first example simulation, which has <script type="math/tex">M</script>=2 particle types:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># epsilons are in reduced units, kJ/mol in OpenMM (i.e. 1.0 = epsilon, 2.0 = 2epislon)</span>
@@ -491,7 +493,7 @@
 
 <h1 id="creating-a-periodic-external-potential-to-restrain-particles-to-stripe-phases">Creating a periodic external potential to restrain particles to stripe phases.</h1>
 
-<p>Phase separations that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites type. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[1] Simulating lipid bilayers that <em>should</em> phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a “wall” using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[2] We express this potential with the equation</p>
+<p>Phase separations that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites type. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[2] Simulating lipid bilayers that <em>should</em> phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a “wall” using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[3] We express this potential with the equation</p>
 
 <p><script type="math/tex">U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left( \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2</script>,</p>
 
@@ -578,7 +580,7 @@
   <li><strong>“enable_restraint”</strong> turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode if simulation is initiated from “initial_condition”: “mixed”</li>
 </ul>
 
-<p>As mentioned earlier, LJ_simulation.py can also take temperature defined via <script type="math/tex">\frac{k_B T^*}{\chi}</script> instead of <script type="math/tex">T^*</script>. This can be done by defining <strong>“kbT_chi</strong> instead of <strong>“T_r”</strong>. An example of this is given in ex1-kbT_chi.json.</p>
+<p>As mentioned earlier, LJ_simulation.py can also take temperature defined via <script type="math/tex">\frac{k_B T^*}{\chi_{int}</script> instead of <script type="math/tex">T^*</script>. This can be done by defining <strong>“kbT_chi</strong> instead of <strong>“T_r”</strong>. An example of this is given in ex1-kbT_chi.json.</p>
 
 <p>LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters <strong>“rstin_prefix”</strong> and <strong>“rstout_prefix”</strong>, which name these files without an extension.</p>
 
@@ -594,6 +596,7 @@ You need to set the path to Packmol on your local computer in LJ_simulator.py fo
 
 <p>References:</p>
 <ol>
+  <li>Chremos, A., Nikoubashman, A. &amp; Panagiotopoulos, A. Z. Flory-Huggins parameter χ, from binary mixtures of Lennard-Jones particles to block copolymer melts. J. Chem. Phys. 140, 1–10 (2014).</li>
   <li>Pantelopulos, G. A., Nagai, T., Bandara, A., Panahi, A. &amp; Straub, J. E. Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures. J. Chem. Phys. 147, 095101 (2017).</li>
   <li>Park, S. &amp; Im, W. Quantitative Characterization of Cholesterol Partitioning between Binary Bilayers. J. Chem. Theory Comput. 14, 2829–2833 (2018).</li>
 </ol>

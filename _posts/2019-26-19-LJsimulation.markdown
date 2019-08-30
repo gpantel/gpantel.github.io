@@ -46,15 +46,15 @@ The reduced $$\epsilon$$, $$\sigma$$, and mass ($$m$$), for these equations use 
 | $$\left< \epsilon^* \right>$$ | $$\frac{1}{M} \sum_i^M \sum_j^M \epsilon_{ij} \alpha_i$$                              |
 | $$\left< m^* \right>$$        | $$\sum_i^M \alpha_i m_i$$                                                             |
 
-There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the energetic cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter $$\chi$$. The reduced unit in these models is then expressed as the ratio $$\frac{k_B T^*}{\chi}$$. We can define $$T$$ in our simulations using these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.
+There is another, not so general reduced unit we use to think about conditions for phase separation in binary mixtures that is available as an input for this LJ simulator. In Flory-Huggins models the energetic cost of forming lattice contacts with a lattice site of differing type is expressed by the parameter $$\chi$$. The reduced unit in these models is then expressed as the ratio $$\frac{k_B T^*}{\chi}$$. We can define $$T$$ in our simulations using a these reduced units, too, to perform LJ simulations to explore theories developed in such simple theoretical models or lattice simulations.
 
 | Quantity | Definition                                                                      |
 |------------|-------------------------------------------------------------------------------|
 | $$\chi$$   | $$-\epsilon_{12} - \left( \frac{-\epsilon_{11} - \epsilon_{22}}{2} \right)$$ |
-| $$T^*$$    | $$\frac{k_B T^*}{\chi} \frac{\chi}{k_B}$$                                     |
+| $$T^*$$    | $$\frac{k_B T^*}{\chi_{int}} \frac{\chi_{int}}{k_B}$$                                     |
 | $$T$$      | $$\ k_B/ \epsilon^* T^*$$                                                     |
 
-It should be noted that results at this $$\chi$$ will not be equal to results with $$\chi$$ from Flory-Huggins theories, due to the entropy of the LJ model.[1]
+In this case we refer to this as $$\chi_{internal}$$, as the Flory-Huggins theory parameter $$\chi$$ is meant to fold in the contrubutions from entropy, and thus there is some difference between the results of the LJ model and Flory-Huggins theory at this value of $$\chi$$.[1]
 
 # A few example simulations.
 I've made a little set of scripts that make it very easy to run Lennard-Jones particle simulations in OpenMM using a simple input script. The script LJ_simulation.py takes care of building the system using Packmol, setting up the system in OpenMM, and handling two- and three-dimensional molecular dynamics simulations of these systems. It can run any number of different types of Lennard-Jones particles in any proportion, with the option of two different initial conditions. It outputs all information in reduced units, using the hacked up reducedstatedatareporter.py.
@@ -65,7 +65,7 @@ A simulation with M=2, N=2000, where $$\epsilon_{11}^*$$ = $$\epsilon_{22}^*$$ =
 
 ![FlatWellPotential]({{ site.url }}/assets/Potentials/ex1.gif)<br/>
 
-The above simulation could also be defined using $$\frac{k_B T^*}{\chi}$$ = 2.3096 as the user input, rather than $$T^*$$ = 1.
+The above simulation could also be defined using $$\frac{k_B T^*}{\chi_{int}$$ = 2.3096 as the user input, rather than $$T^*$$ = 1.
 
 A simulation with $$M$$=3, $$N$$=1000, where $$\epsilon_{11}^*$$ = $$\epsilon_{12}^*$$ = $$\epsilon_{21}^*$$ = $$\epsilon_{22}^*$$ = $$\epsilon_{23}^*$$ = $$\epsilon_{32}^*$$ = $$\epsilon_{33}^*$$ = $$\epsilon_{13}^*$$ = $$\epsilon_{31}^*$$ = 1, $$\sigma_1^*$$ = $$\sigma_2^*$$ = $$\sigma_3^*$$ = 1, $$m_1^*$$ = $$m_2^*$$ = $$m_3^*$$ = 1, $$T^*$$ = 2, $$\rho^*$$ = 0.8, and $$d$$ = 3 and the system composition is at 40% type 1, 40% type 2 and 20% type3, running for 200,000 steps, initiated from a stripe-shaped phase separation:
 
@@ -251,7 +251,7 @@ For example 1, we run use the following JSON file as an input "python LJ_simulat
 * **"forcewall"** kwall flat-well restraint
 * **"enable_restraint"** turn the flat-well restraint on/off with the booleans "true"/"false". Might explode if simulation is initiated from "initial_condition": "mixed"
 
-As mentioned earlier, LJ_simulation.py can also take temperature defined via $$\frac{k_B T^*}{\chi}$$ instead of $$T^*$$. This can be done by defining **"kbT_chi** instead of **"T_r"**. An example of this is given in ex1-kbT_chi.json.
+As mentioned earlier, LJ_simulation.py can also take temperature defined via $$\frac{k_B T^*}{\chi_{int}$$ instead of $$T^*$$. This can be done by defining **"kbT_chi** instead of **"T_r"**. An example of this is given in ex1-kbT_chi.json.
 
 LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters **"rstin_prefix"** and **"rstout_prefix"**, which name these files without an extension.
 
