@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en"
-title                    : "Scratchings on biomoleclar simulation and theory"
+title                    : "Scratchings on biomolecular simulation and theory"
 title_separator          : "-"
 name                     : "George Pantelopulos"
 description              : "Posts from a PhD student about biomolecular simulation methods and analyses"
