@@ -166,7 +166,7 @@ This is not quite everything that needs to be done. In two-dimensional systems t
 
 Phase separations that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites type. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[2] Simulating lipid bilayers that <em>should</em> phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a "wall" using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[3] We express this potential with the equation
 
-$$U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left( \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2$$,
+$$U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left(0,  \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2$$,
 
 where $$x_0$$ is the center of a stripe phase, $$w$$ is the radius of the restraint from the center, widthscale is a scaling factor on $$w$$, and $$k_{\mathrm{wall}}$$ is the biasing force.
 
