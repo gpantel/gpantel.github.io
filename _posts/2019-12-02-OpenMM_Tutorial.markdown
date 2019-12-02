@@ -12,7 +12,7 @@ An embedded PDF window displaying [this file]({{ site.url }}/assets/PDF/OpenMM_T
 
 This tutorial was run on December 2, 2019 for the Sugita group.
 
-The tutorial files (without output) can be found here [https://github.com/gpantel/MD_methods-and-analysis/blob/master/LJsimulator](https://github.com/gpantel/MD_methods-and-analysis/blob/master/OpenMM_Tutorial)
+The tutorial files (without output) can be found here [https://github.com/gpantel/MD_methods-and-analysis/blob/master/OpenMM_Tutorial](https://github.com/gpantel/MD_methods-and-analysis/blob/master/OpenMM_Tutorial)
 
 [comment]: <> This must be added to enable MathJax with kramdown on github pages
 <script type="text/javascript" async
