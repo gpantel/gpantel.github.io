@@ -6,7 +6,9 @@ date:   2020-09-16 01:00:00 -0500
 categories: computational-method
 ---
 
-Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical. Sometimes, we are only interested in a *smalll* subset of atoms. This might be true for enhanced sampling methods like Umbrella Sampling, where we might want to write *one* or a *few* coordinates every 1 ps or so, while we may only otherwise want to save the coordinates of the full system every 1 ns.
+Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical.
+
+Sometimes, we are only interested in a *smalll* subset of atoms. This might be true for enhanced sampling methods like Umbrella Sampling, where we might want to write *one* or a *few* coordinates every 1 ps or so, while we may only otherwise want to save the coordinates of the full system every 1 ns.
 
 The DCD-format coordinate trajectory writer packaged with OpenMM provides no way to do this out of the box. However, it is pretty easy to hack it to perform this function. Here I'll briefly talk about how that can be done, and I will provide the two necessary modified scripts.
 
