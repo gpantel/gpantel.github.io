@@ -6,7 +6,7 @@ date:   2020-09-16 01:00:00 -0500
 categories: computational-method
 ---
 
-Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical.
+Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical.\
 
 
 
