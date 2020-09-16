@@ -82,4 +82,4 @@ simulation.reporters.append(DCDSubsetReporter('trajectory_subset.dcd', subset_wr
 
 
 
-I've placed dcdsubsetfily.py and dcdsubsetreporter.py at https://github.com/gpantel/MD_methods-and-analysis/tree/master/OpenMM_DCDSubset.
+I've placed dcdsubsetfily.py and dcdsubsetreporter.py at [https://github.com/gpantel/MD_methods-and-analysis/tree/master/OpenMM_DCDSubset].
