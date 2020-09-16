@@ -2,7 +2,7 @@
 layout: single
 References:
 title:  "Writing a Subset of Atom Coordinates in OpenMM"
-date:   2020-09-16 15:30:00 +0900
+date:   2020-09-16 01:00:00 -0500
 categories: computational-method
 ---
 
