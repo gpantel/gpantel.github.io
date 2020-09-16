@@ -1,0 +1,573 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>MolPainter Tutorial 1: Lo Phase Midplane Cholesterol - Scratchings on biomolecular simulation and theory</title>
+
+
+
+
+<meta name="description" content="This is the first tutorial for MolPainter.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomolecular simulation and theory">
+<meta property="og:title" content="MolPainter Tutorial 1: Lo Phase Midplane Cholesterol">
+
+
+  <link rel="canonical" href="http://localhost:4000/computational-method/MolPanter_Tutorial01_midplaneChol/">
+  <meta property="og:url" content="http://localhost:4000/computational-method/MolPanter_Tutorial01_midplaneChol/">
+
+
+
+  <meta property="og:description" content="This is the first tutorial for MolPainter.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-03-31T11:00:00-04:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomolecular simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomolecular simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am a PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Boston, MA, USA</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:gpantel@bu.edu">
+            <meta itemprop="email" content="gpantel@bu.edu" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="MolPainter Tutorial 1: Lo Phase Midplane Cholesterol">
+    <meta itemprop="description" content="This is the first tutorial for MolPainter.">
+    <meta itemprop="datePublished" content="March 31, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">MolPainter Tutorial 1: Lo Phase Midplane Cholesterol
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>This is the first tutorial for MolPainter.</p>
+
+<script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h1 id="cholesterol-can-be-metastable-between-the-upper-and-lower-leaflets-of-liquid-ordered-domains">Cholesterol can be metastable between the upper and lower leaflets of liquid ordered domains</h1>
+
+<p>Discussion here mostly referring to Younghoon’s paper [Oh, Y. &amp; Sung, B. J. Facilitated and Non-Gaussian Diffusion of Cholesterol in Liquid Ordered Phase Bilayers Depends on the Flip-Flop and Spatial Arrangement of Cholesterol. J. Phys. Chem. Lett. 9, 6529–6535 (2018)]</p>
+
+<h1 id="pdbs-for-dppc-cholesterol-and-a-cholesterol-resting-on-the-side">PDBs for DPPC, cholesterol, and a cholesterol resting on the side</h1>
+
+<p>Link to GitHub repository containing these PDBs.</p>
+
+<h1 id="painting-a-lipid-bilayer-with-a-midplane-layer-containing-15-cholesterol">Painting a lipid bilayer with a midplane layer containing 15 Cholesterol</h1>
+
+<p>Using a PSM:Chol  330:670 lipid bilayer equilibrated for 1 microsecond with the MARTINI 2 parameters, we observe 15 Cholesterols in the midplane region. Though we could back-map this MARTINI system to an all-atom system [URL], we could also build this system using MolPainter.</p>
+
+<p>We will use a 23x23 grid such that there are 529 lattice sites per layer. We’ll fill in just 493 of these sites in the top leaflet, of which we’ll have 328 Chol and 165 PSM. In the bottom leaflet we’ll fill in 492 of these sites, 327 Chol and 165 PSM. We’ll add a midplane layer for 15 copies of the cholesterol that was flipped onto its’ side. We’ll use an area per lattice site of 65 A^2 and we will randomly rotate all molecules around the z-axis.</p>
+
+<p>First let’s load up all of the molecules we’ll need via “New Molecle”. Load DPPC.pdb (“DPPC”), CHL1.pdb (“Chol”), and CHL1side.pdb (“Cholside” cholesterol resting along the xy-plane). Check off the flag to randomly rotate around z for each. You can choose different colors for these if you like. Next, load DPPC.pdb and CHL1.pdb again, and also check the flag to flip over the x-axis, such that these molecules will be upside-down to build the bottom leaflet (“DPPCflip” and “DOPCflip”). We’ll also have these molecules randomly roated around the z-axis, so check that flag too.</p>
+
+<p>Next we should configure the grid parameters. Via “Grid Size” set “Lattice width” to 23 and “Lattice height” to 23. Set “Cell area” to 65 A^2. We can also set “Major gridlines” to 6 – it will be useful later to help us uniformly place the 15 Chol in the midplane.</p>
+
+<p>Next let’s build and modify the three layers we’ll need. Set the height of layer 1, which we’ll make the UpperLeaflet, to 20 A. Make a new layer to be the LowerLeaflet and set it to -20 A. Then make a new layer to be the midplane and leave it at 0 A.</p>
+
+<p>Now let’s make Blends to help us make initial, quick paintings of the upper and lower leaflets. We can use any integer numbers for Blends, but in this case let’s make Blends of exactly the number of Empty, DPPC, and Chol cells we want to have for the upper and lower leaflet. We can then easily paint the whole lattice using these Blends using the box selection tool (ctrl+click+drag) or the spray can tool (shift+click+drag). We can touch up our painting with the pencil tool (click+drag), selecting Empty, DPPC, or Chol as needed.</p>
+
+<p>Paint the UpperLeaflet and LowerLeaflet layers, making sure you hit exactly the right number of DPPC and Chol in each layer. After this, place in 15 Cholside molecules uniformly. The major gridlines we’ve set to a spacing of 6 should make it easy. You can now save your painting via “Save” for modification later.</p>
+
+<p>Now let’s “Export” the system. Via “Export”, set the path of the output molecular system and choose to export your paintint as a Square or Hexagonal lattice as you prefer.</p>
+
+<p>Now we can look at our creation in VMD[LINK].</p>
+
+<p>[PICTURE]</p>
+
+<p>Awesome.</p>
+
+<h1 id="determining-amount-of-solvent">Determining amount of solvent</h1>
+<p>We’ll notice immediately that, unless we want water inside the membrane, we won’t want to try to insert water everywhere in this system. Instead, we’re going to want to place water <em>above</em> the upper leaflet and <em>below</em> the lower leaflet. We’ll also want to insert NaCl to the system at, most likely, the conventional 0.150 M conentration (after neutralizing charges, which we don’t need to do right now).</p>
+
+<p>First, the number of waters per lipid… this is a relatively normal simulation aside from the midplane cholesterol. As such, we might want to use 40 waters/lipid. Not too much, not too little. This is my favorite number of water/lipid to use, based in part this paper [Dvinskikh, S. V, Castro, V. &amp; Sandström, D. Probing segmental order in lipid bilayers at variable hydration levels by amplitude- and phase-modulated cross-polarization NMR. Phys Chem Chem Phys 7, 3255–3257 (2005)] which demonstrates that NMR-measured order parameter is near to the infinite solvation limit at 40 water/lipid. 40 water/lipid is also a good number to avoid strange effects on the lipid bilayer surface due to PBC artifacts.</p>
+
+<p>Now for the number of ions… let’s assume that the water layer in our system is effectively modeling a much, much higher concentration of water relative to lipid (would that we could afford to actually do that), such that we do not need to consider the lipids when considering the molar concentration of the NaCl solution. The density of a low concentration NaCl aqueous solution (like 0.150 M NaCl) is approximately <script type="math/tex">\rho</script> = 1 g/L. The mass of water <script type="math/tex">m_{wat}</script> = 18.02 g/mol. The molar concentration of water is <script type="math/tex">\rho / m_{wat}</script> = 1000 (g/L) / 18.02 (g/mol) = 55.5 mol/L = 55.5 M. For a NaCl salt at the typical concentration of 0.150 M, we will have one Na+ and one Cl- for every 55.5 M / 0.150 M = 370 waters. We have 1000 lipids and 40 water/lipid, so we will insert 40,000 water and 40,000 / 370 = 108 Na and 108 Cl ions. Were this system to require counterions to attain a neutral net charge, these solvating ions would be included <em>in addition</em> to the counterions.</p>
+
+<h1 id="solvating-the-system">Solvating the system</h1>
+<p>We will now insert water and ions into the system. We will define two rectilinear boxes, one above and one below the lipid bilayer, to which we will insert 20,000 water, 54 Na+, and 54 Cl-. The x- and y-edge lengths of these boxes will be just the same as those written by MolPainter. Because we will be using a barostat when preparing and running the system with MD, we will just choose the z-edge lengths to define volumes that are a bit larger than that needed to contain 20,108 water molecules.</p>
+
+<p>The density of water is 1 g/mL and the mass of water is 18.02 g/mol. 18.0152 (g/mol)/(g/mL) = 18.0152 mL/mol. mL/mol = 1x10<sup>24</sup>/6.02214x10<sup>23</sup> Å<sup>3</sup>/molecule = 1.66054 Å<sup>3</sup>/molecule. Thus the volume of a water molecule is 18.0152 (mL/mol) x 1.6604 (Å<sup>3</sup>/molecule) (mol/ml) = 29.91496 Å<sup>3</sup>/molecule <script type="math/tex">\cong</script> 30 Å<sup>3</sup>/molecule. We can make our target volume V = 20,108 molecules x 30 Å<sup>3</sup>/molecule = 603240 Å<sup>3</sup>.</p>
+
+<p>We will make the x- and y-edge lengths of the volume to which we will insert water 90% smaller than those set by the grids of MolPainter becase we expect that the xy-plane will significantly compress during equilibration to both fill in the holes we placed in the membrane and the compression that will naturally happen during formation of the liquid ordered phase. Thus we set x-edge<sub>water</sub> = y-edge<sub>water</sub> = 174.1446 Å.</p>
+
+<p>z = V/xy = 19.89 Å. Let’s add a little to that target z-edge and make it 21.0 Å. We’ll make our first box within the volume defined between z = 20 Å and z = 41 Å. We’ll make our second box within the volume defined between z = -20 Å and z = -41 Å. Our equilibration scheme will take care of the work of getting this system to the correct water density later.</p>
+
+<p>There are many tools available to rapidly add solvent to these two volumes without clashing with lipids or other solvent molecules. We’ll use PackMol[LINK].</p>
+
+<p>The following packmol input, which sets the center of the system at (x,y,z) = (0,0,0) with maxima and minima of (x-edge/2, y-edge/2, z-edge/2) and (-x-edge/2, -y-edge/2, -z-edge/2), accomplishes this.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tolerance 2.0
+filetype pdb
+output midplaneChol+water+ion.pdb
+
+# the system build by MolPainter
+structure midplaneChol.pdb
+  number 1
+  center
+  fixed 0. 0. 0. 0. 0. 0.
+end structure
+
+# upper solvent box
+structure water.pdb
+  number 20000
+  inside box -87.0723 -87.0723 20.0 87.0723 87.0723 41.0
+end structure
+structure calcium.pdb
+  number 54
+  inside box -87.0723 -87.0723 20.0 87.0723 87.0723 41.0
+end structure
+structure sodium.pdb
+  number 54
+  inside box -87.0723 -87.0723 20.0 87.0723 87.0723 41.0
+end structure
+
+# lower solvent box
+structure water.pdb
+  number 20000
+  inside box -87.0723 -87.0723 -41.0 87.0723 87.0723 -20.0
+end structure
+structure calcium.pdb
+  number 54
+  inside box -87.0723 -87.0723 -41.0 87.0723 87.0723 -20.0
+end structure
+structure sodium.pdb
+  number 54
+  inside box -87.0723 -87.0723 -41.0 87.0723 87.0723 -20.0
+end structure
+
+</code></pre></div></div>
+
+<h1 id="preparing-parameter-and-restraint-files-for-gromacs">Preparing parameter and restraint files for GROMACS</h1>
+<p>Now we can start preparing files for the simulation. In this tutorial we’ll use GROMACS. If you wish to use CHARMM files a simple solution is to construct the exact same system in CHARMM-GUI and cannibalize the output parameter files (psf, rtf, and str files) for simulation in other programs. Otherwise, learn about how to make CHARMM PSF files (a good resource here: http://www.charmm-gui.org/?doc=lecture&amp;module=molecules_and_topology&amp;lesson=2) and obtain the RTF and STR files from MacKerell Lab website (http://mackerell.umaryland.edu/charmm_ff.shtml). In general you may want to adopt similar protocols to those of this tutorial for equilibraitng your system. Doing this for GROMACS is very easy and straightforward.</p>
+
+<p>In the tutorial files, the folder “toppar” contains GROMACS itp files generated via CHARMM-GUI (you could alternatively get these via pdb2gmx if you’ve imported the CHARMM36 parameter files[LINK] to your GROMACS installation). There is also a folder “restraints” which itp files for each molecule load if restraints are enabled in the “define” argument of GROMACS mdp files with flag -DREST_ON, and other corresponding flags in the files defining restraints in the folder “restraints” that -DREST_ON will load.</p>
+
+<p>The GROMACS top file will look like this:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>; Include forcefield parameters
+; An easy way to get these is to construct an equivalent system with CHARMM-GUI
+; DPPC and CHL1 itp files have IF statements that allow for z-axis restraints
+; on the head groups (P, O3) and tail groups (C216, C316, C25)
+#include "toppar/charmm36.itp"
+#include "toppar/DPPC.itp"
+#include "toppar/CHL1.itp"
+#include "toppar/TIP3.itp"
+#include "toppar/SOD.itp"
+#include "toppar/CLA.itp"
+
+[ system ]
+; Name
+DPPC:Chol 33:67, 1000 lipids+chol, 15 mid-plane Chol
+
+[ molecules ]
+; Compound  #molecules
+; layer 1
+DPPC 165
+CHL1 328
+; layer 2
+DPPC 165
+CHL1 327
+; layer 3
+CHL1 15
+; upper solvent layer
+TIP3 20000
+SOD  54
+CLA  54
+; lower solvent layer
+TIP3 20000
+SOD  54
+CLA  54
+</code></pre></div></div>
+
+<p>You can see that a nice consequence of how MolPainter builds systems is that the layers will add residues to the system and number them in order, making it very easy to write the GROMACS top file by hand like so.</p>
+
+<p>Now the next thing we’re going to do is discuss restraints. To prevent lipids and cholesterol from flipping or collapsing in a strange way around the midplane vacuum we’ve created, we are going to restrain the z-axis positions of both the head (DPPC P. Chol O3.) and tail (DPPC C216, C316. Chol C25.). Another more esoteric action we will take is to employ a flat bottom restraint potential to the solvent molecules. This restraint potential will keep water and ions within a slab of z-axial positions, preventing the unphysical invasion of solvent to the lipid bilayer. (See page GROMACS 2020 manual, pages 365, 409) This flat potential will allow these solvents to move up to a certain distance away from the center of the slab, beyond which they will be subjected to a harmonic potential pushing them back into the slab. Here, we’ll set the centers of the two slabs we need to 3 nm and -3 nm, each with flat-well distances of 1.3 nm (thicknesses of 2.6 nm).</p>
+
+<p>To set the center of these flat-well slabs we need to make a second PDB of the system which places the z-axial positions of these atoms at the center of this slab, then feed this PDB file to grompp with the “-r” flag, setting them at the center of the restraint.</p>
+
+<p>The following simple python script using MDAnalysis accomplishes this. This python script also sets the origin of the system to (x,y,z) = (0,0,0) (rather than (-x-edge/2, -y-edge/2, -z-edge/2)), where GROMACS places the origin.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="n">mda</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="c"># load our system</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s">'midplaneChol+water+ion.pdb'</span><span class="p">)</span>
+
+<span class="c"># set the edge lengths of the system</span>
+<span class="n">xedge</span><span class="p">,</span> <span class="n">yedge</span><span class="p">,</span> <span class="n">zedge</span> <span class="o">=</span> <span class="mf">174.1446</span><span class="p">,</span> <span class="mf">174.1446</span><span class="p">,</span> <span class="mf">82.0</span>
+<span class="n">buff</span> <span class="o">=</span> <span class="mi">10</span> <span class="c"># add a 10-angstrom buffer to add to help lipid minimization</span>
+<span class="n">u</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xedge</span><span class="o">+</span><span class="n">buff</span><span class="p">,</span> <span class="n">yedge</span><span class="o">+</span><span class="n">buff</span><span class="p">,</span> <span class="n">zedge</span><span class="p">,</span> <span class="mf">90.</span><span class="p">,</span> <span class="mf">90.</span><span class="p">,</span> <span class="mf">90.</span><span class="p">])</span>
+
+<span class="c"># translate the positions to +xedge/2, +yedge/2, +zedge/2</span>
+<span class="n">xyz</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span>
+<span class="n">xyz</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">xedge</span><span class="o">/</span><span class="mf">2.</span>
+<span class="n">xyz</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">yedge</span><span class="o">/</span><span class="mf">2.</span>
+<span class="n">xyz</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">zedge</span><span class="o">/</span><span class="mf">2.</span>
+
+<span class="c"># write out a PDB file now of the translated system for gromacs (as a gro file)</span>
+<span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">xyz</span>
+<span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'midplaneChol+water+ion.gro'</span><span class="p">)</span>
+
+<span class="c"># set the z-axial positions of the upper and lower solvent to the center of restraining slab</span>
+<span class="c"># for defining the center of this restraint</span>
+<span class="n">upperslabcenter</span> <span class="o">=</span> <span class="mf">30.</span> <span class="o">+</span> <span class="n">zedge</span><span class="o">/</span><span class="mf">2.</span>
+<span class="n">uppersolvent</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">'(resname TIP3 SOD CLA) and prop z &gt; </span><span class="si">%</span><span class="s">f'</span><span class="o">%</span><span class="p">(</span><span class="n">zedge</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">lowerslabcenter</span> <span class="o">=</span> <span class="o">-</span><span class="mf">30.</span> <span class="o">+</span> <span class="n">zedge</span><span class="o">/</span><span class="mf">2.</span>
+<span class="n">lowersolvent</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">'(resname TIP3 SOD CLA) and prop z &lt; </span><span class="si">%</span><span class="s">f'</span><span class="o">%</span><span class="p">(</span><span class="n">zedge</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xyz</span><span class="p">[</span> <span class="n">uppersolvent</span><span class="o">.</span><span class="n">indices</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xyz</span><span class="p">[</span><span class="n">uppersolvent</span><span class="o">.</span><span class="n">indices</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span>\
+                                        <span class="n">xyz</span><span class="p">[</span><span class="n">uppersolvent</span><span class="o">.</span><span class="n">indices</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span>\
+                                        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">upperslabcenter</span><span class="p">]</span><span class="o">*</span><span class="n">uppersolvent</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">xyz</span><span class="p">[</span> <span class="n">lowersolvent</span><span class="o">.</span><span class="n">indices</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xyz</span><span class="p">[</span><span class="n">lowersolvent</span><span class="o">.</span><span class="n">indices</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span>\
+                                        <span class="n">xyz</span><span class="p">[</span><span class="n">lowersolvent</span><span class="o">.</span><span class="n">indices</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span>\
+                                        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lowerslabcenter</span><span class="p">]</span><span class="o">*</span><span class="n">lowersolvent</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">xyz</span>
+<span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'midplaneChol+water+ion_reference.gro'</span><span class="p">)</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#computational-method" class="page__taxonomy-item" rel="tag">computational-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-03-31T11:00:00-04:00">March 31, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=MolPainter Tutorial 1: Lo Phase Midplane Cholesterol http://localhost:4000/computational-method/MolPanter_Tutorial01_midplaneChol/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/computational-method/MolPanter_Tutorial01_midplaneChol/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/computational-method/MolPanter_Tutorial01_midplaneChol/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/computational-method/MolPanter_Tutorial01_midplaneChol/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/computational-method/OpenMM_Tutorial/" class="pagination--pager" title="OpenMM Tutorial
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>

@@ -33,7 +33,7 @@ To perform MD simulations, it is necessary to define parameters like the time st
 
 | Real Quantity | Conversion from Reduced Quantity (*)                           |
 |---------------|----------------------------------------------------------------|
-| $$T$$                                  | $$\ k_B/ \epsilon^* T^*$$                 |
+| $$T$$                              | $$\ k_B/ \epsilon^* T^*$$                 |
 | $$\rho$$                           | $$N \sigma^{*d} / \rho^*$$                |
 | $$\tau$$ (MD time step)            | $$\sqrt{ m^* \sigma^{*2} / \epsilon^*} $$ |
 | $$\gamma$$ (Damping coefficient)   | $$\tau/2$$                                |

@@ -19,7 +19,7 @@
 
 
 
-<title>Generic LJ Simulator in OpenMM - Scratchings on biomoleclar simulation and theory</title>
+<title>Generic LJ Simulator in OpenMM - Scratchings on biomolecular simulation and theory</title>
 
 
 
@@ -32,7 +32,7 @@
 <meta name="author" content="George A. Pantelopulos">
 
 <meta property="og:locale" content="en">
-<meta property="og:site_name" content="Scratchings on biomoleclar simulation and theory">
+<meta property="og:site_name" content="Scratchings on biomolecular simulation and theory">
 <meta property="og:title" content="Generic LJ Simulator in OpenMM">
 
 
@@ -83,7 +83,7 @@
 <!-- end SEO -->
 
 
-<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomoleclar simulation and theory Feed">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomolecular simulation and theory Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -129,7 +129,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="http://localhost:4000/">Scratchings on biomoleclar simulation and theory</a>
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomolecular simulation and theory</a>
         <ul class="visible-links">
           
         </ul>
@@ -382,7 +382,7 @@
     </tr>
     <tr>
       <td><script type="math/tex">T</script></td>
-      <td><script type="math/tex">\ k_B/ \epsilon^* T^*</script></td>
+      <td><script type="math/tex">\ \epsilon^* T^* /  k_B</script></td>
     </tr>
   </tbody>
 </table>
@@ -495,7 +495,7 @@
 
 <p>Phase separations that form in the thermodynamic limit can become unstable at insufficient system sizes given a system temperature and the interaction cost for forming contacts between species of opposites type. We explored this idea in lipid bilayers and an analytical two-dimensional Flory-Huggins lattice model in 2017.[2] Simulating lipid bilayers that <em>should</em> phase separate, but will not phase separate at the small system sizes required to run sufficiently fast simulations in MD, can be biased to remain in a phase separated state by effectively creating a “wall” using a flat-well harmonic potential. Park and Im recently applied such a flat-well potential to stabilize a phase separations of POPC-DPPC and DOPC-DPPC binary lipid bilayers including unrestrained cholesterol to determine the partition coefficient of cholesterol to either phase.[3] We express this potential with the equation</p>
 
-<p><script type="math/tex">U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left( \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2</script>,</p>
+<p><script type="math/tex">U_{\mathrm{wall}}(x) = k_{\mathrm{wall}} \max\left(0,  \mid x - x_0 \mid - (w \times \mathrm{widthscale}) \right)^2</script>,</p>
 
 <p>where <script type="math/tex">x_0</script> is the center of a stripe phase, <script type="math/tex">w</script> is the radius of the restraint from the center, widthscale is a scaling factor on <script type="math/tex">w</script>, and <script type="math/tex">k_{\mathrm{wall}}</script> is the biasing force.</p>
 
@@ -580,7 +580,7 @@
   <li><strong>“enable_restraint”</strong> turn the flat-well restraint on/off with the booleans “true”/”false”. Might explode if simulation is initiated from “initial_condition”: “mixed”</li>
 </ul>
 
-<p>As mentioned earlier, LJ_simulation.py can also take temperature defined via <script type="math/tex">\frac{k_B T^*}{\chi_{int}</script> instead of <script type="math/tex">T^*</script>. This can be done by defining <strong>“kbT_chi</strong> instead of <strong>“T_r”</strong>. An example of this is given in ex1-kbT_chi.json.</p>
+<p>As mentioned earlier, LJ_simulation.py can also take temperature defined via <script type="math/tex">\frac{k_B T^*}{\chi_{int}}</script> instead of <script type="math/tex">T^*</script>. This can be done by defining <strong>“kbT_chi</strong> instead of <strong>“T_r”</strong>. An example of this is given in ex1-kbT_chi.json.</p>
 
 <p>LJ_simulation.py can take restart files as inputs and write them as outputs after simulation. These are controlled by the optional, additional parameters <strong>“rstin_prefix”</strong> and <strong>“rstout_prefix”</strong>, which name these files without an extension.</p>
 
@@ -655,7 +655,8 @@ You need to set the path to Packmol on your local computer in LJ_simulator.py fo
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="http://localhost:4000/computational-method/OpenMM_Tutorial/" class="pagination--pager" title="OpenMM Tutorial
+">Next</a>
     
   </nav>
 
@@ -689,7 +690,7 @@ You need to set the path to Packmol on your local computer in LJ_simulator.py fo
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2019 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2020 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
       </footer>
     </div>
 

@@ -33,6 +33,14 @@
 <lastmod>2019-08-29T02:30:00-04:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/computational-method/OpenMM_Tutorial/</loc>
+<lastmod>2019-12-02T01:30:00-05:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/computational-method/MolPanter_Tutorial01_midplaneChol/</loc>
+<lastmod>2020-03-31T11:00:00-04:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/</loc>
 </url>
 <url>
@@ -40,7 +48,11 @@
 </url>
 <url>
 <loc>http://localhost:4000/CV/curriculum_vitae_GAP.pdf</loc>
-<lastmod>2019-08-30T13:47:26-04:00</lastmod>
+<lastmod>2019-10-31T13:13:17-04:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/assets/PDF/OpenMM_Tutorial.pdf</loc>
+<lastmod>2019-12-02T00:56:36-05:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/assets/PDF/lipidPhaseNotes.pdf</loc>
