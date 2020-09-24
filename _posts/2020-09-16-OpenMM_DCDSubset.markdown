@@ -2,7 +2,7 @@
 layout: single
 References:
 title:  "Writing a Subset of Atom Coordinates in OpenMM"
-date:   2020-09-16 01:00:00 -0500
+date:   2020-09-23 01:00:00 -0500
 categories: computational-method
 ---
 
@@ -26,11 +26,16 @@ Where *writing_interval* is an integer that specifies how many time steps betwee
 
 To make a new DCDReporter that writes the coordinates for just a subset of atoms in the system, let's say the list is called *indices_list*, we will add this list as a new input to DCDReporter. We will also need to very slightly modify DCDFile. Let's call these new scripts (and corresponding classes) dcdsubsetreporter.py (DCDSubsetReporter) and dcdsubsetfile.py (DCDSubsetFile).
 
-First, we'll make DCDSubsetFile, since DCDSubsetReporter will end up calling this. The *only* thing we need to do here is remove an exception that is raised if DCDFile is not writing a file with the same number of atoms as the system topology.
+First, we'll make DCDSubsetFile, since DCDSubsetReporter will end up calling this. The *only* things we need to do here is make the DCDSubsetFile class accept *indices_list* as an input, change the number of atoms in the DCD header to match the number of atoms in *indices_list*, and change an *if* statement to check that the DCD file already has the exact number of atoms in *indices list* rather than the number of atoms of the whole system
 
 ```python
-#if len(list(self._topology.atoms())) != len(positions):
-#    raise ValueError('The number of positions must match the number of atoms')
+    def __init__(self, file, topology, dt, indices_list, firstStep=0, interval=1, append=False):
+        ...
+        self._indices_list = indices_list
+        ...
+            if numAtoms != len(self._indices_list): # changed this from checking len(list(topology.atoms()))
+            ...
+            header += struct.pack('<4i', 164, 4, len(self._indices_list), 4)
 ```
 
 And we'll also rename the class just to differentiate it from the DCDFile class...
@@ -82,4 +87,5 @@ simulation.reporters.append(DCDSubsetReporter('trajectory_subset.dcd', subset_wr
 
 
 
-I've placed dcdsubsetfily.py and dcdsubsetreporter.py at [https://github.com/gpantel/MD_methods-and-analysis/tree/master/OpenMM_DCDSubset].
+I've placed dcdsubsetfily.py and dcdsubsetreporter.py at [https://github.com/gpantel/MD_methods-and-analysis/tree/master/OpenMM_DCDSubset](https://github.com/gpantel/MD_methods-and-analysis/tree/master/OpenMM_DCDSubset).
+
