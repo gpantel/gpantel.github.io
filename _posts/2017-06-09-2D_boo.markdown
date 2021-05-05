@@ -20,7 +20,7 @@ $$\Psi_n^k = \frac{1}{n}\sum^n_{l\ \epsilon\ nn(k)} \exp[in\theta_{lk}] = \frac{
 
 But typically only $$\Psi_6^k$$ is used as an order parameter:
 
-$$\Psi_6^k = \frac{1/n}\sum^n_{l\ \epsilon\ nn(k)} \exp[i6\theta_{lk}]$$
+$$\Psi_6^k = \frac{1}{n}\sum^n_{l\ \epsilon\ nn(k)} \exp[i6\theta_{lk}]$$
 
 where the angle $$\theta_{lk}$$ is evaluated using an arbitrary, constant reference vector. By doing this measurement, we get a complex vector which tells us the orientation of the hexagon and when we take norm of this complex vector (\|$$\Psi_6^k$$\|) we get a number between 0 and 1 which tells us how close to a hexagon the orientation of *l* points around *k* are.
 
