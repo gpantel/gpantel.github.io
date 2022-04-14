@@ -2,7 +2,7 @@
 layout: single
 References:
 title:  "An Introduction to Bilayer Phases, Cholesterol, Amyloid Precursor Protein, and their Relation"
-date:   2022-04-03 01:00:00 -0500
+date:   2022-04-14 01:00:00 -0500
 categories: literature-review
 ---
 Introduction to L<sub>o</sub> phases, cholesterol induction of L<sub>o</sub> phase and modulating APP-C99, and the role of L<sub>o</sub> phase and subcellular compartments in Aβ generation.
