@@ -1,0 +1,454 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.4.1 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Writing a Subset of Atom Coordinates in OpenMM - Scratchings on biomolecular simulation and theory</title>
+
+
+
+
+<meta name="description" content="Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical.">
+
+
+
+
+<meta name="author" content="George A. Pantelopulos">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Scratchings on biomolecular simulation and theory">
+<meta property="og:title" content="Writing a Subset of Atom Coordinates in OpenMM">
+
+
+  <link rel="canonical" href="http://localhost:4000/computational-method/OpenMM_DCDSubset/">
+  <meta property="og:url" content="http://localhost:4000/computational-method/OpenMM_DCDSubset/">
+
+
+
+  <meta property="og:description" content="Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-09-23T02:00:00-04:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "George Pantelopulos",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Scratchings on biomolecular simulation and theory Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://localhost:4000/">Scratchings on biomolecular simulation and theory</a>
+        <ul class="visible-links">
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">George A. Pantelopulos</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I am a post-doctoral scholar working under the supervision of Robert Best and the Laboratory of Chemical Physics at NIH/NIDDK.<br/><br/> I recently completed my PhD with John E. Straub of the Boston University Chemistry Department. My new focus is on modeling of collagen and the extracellular matrix with atomistic accuracy with a focus toward reproduction of multiscale mechanics. This website is used to occasionally catalogue write-ups on theory, analysis, and software for sharing with colleagues.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Bethesda, MD, USA</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:george.pantelopulos@nih.gov">
+            <meta itemprop="email" content="george.pantelopulos@nih.gov" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/gpantel" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+
+<li>
+  <a href="https://scholar.google.com/citations?user=NmvME4QAAAAJ&hl=en">
+    <i class="fa fa-fw fa-gscholar" aria-hidden="true"></i> Google Scholar
+  </a>
+</li>
+
+<li>
+  <a href=/CV/curriculum_vitae_GAP.pdf>
+    <i class="fa fa-fw fa-cv" aria-hidden="true"></i> Curriculum Vitae
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Writing a Subset of Atom Coordinates in OpenMM">
+    <meta itemprop="description" content="Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical.">
+    <meta itemprop="datePublished" content="September 23, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Writing a Subset of Atom Coordinates in OpenMM
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>Often times in MD there are cases where we would like to write the coordinates of a system at a much higher frequency than is typical.</p>
+
+<p>Sometimes, we are only interested in a <em>smalll</em> subset of atoms. This might be true for enhanced sampling methods like Umbrella Sampling, where we might want to write <em>one</em> or a <em>few</em> coordinates every 1 ps or so, while we may only otherwise want to save the coordinates of the full system every 1 ns.</p>
+
+<p>The DCD-format coordinate trajectory writer packaged with OpenMM provides no way to do this out of the box. However, it is pretty easy to hack it to perform this function. Here I’ll briefly talk about how that can be done, and I will provide the two necessary modified scripts.</p>
+
+<p>In OpenMM the DCDReporter is in wrappers/python/simtk/openmm/app/dcdreporter.py (simtk.openmm.app.DCDReporter). Normally, this is added to a list of “data reporters” in OpenMM belonging to a simulation, like this.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">simulation</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">DCDReporter</span><span class="p">(</span><span class="s">'trajectory.dcd'</span><span class="p">,</span> <span class="n">writing_interval</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Where <em>writing_interval</em> is an integer that specifies how many time steps between which the full system coordinates are written to ‘trajectory.dcd’. The DCDReporter uses the DCDFile class to actually format and write the DCD file. DCDFile is in wrappers/python/simtk/openmm/app/dcdfile.py.</p>
+
+<p>To make a new DCDReporter that writes the coordinates for just a subset of atoms in the system, let’s say the list is called <em>indices_list</em>, we will add this list as a new input to DCDReporter. We will also need to very slightly modify DCDFile. Let’s call these new scripts (and corresponding classes) dcdsubsetreporter.py (DCDSubsetReporter) and dcdsubsetfile.py (DCDSubsetFile).</p>
+
+<p>First, we’ll make DCDSubsetFile, since DCDSubsetReporter will end up calling this. The <em>only</em> things we need to do here is make the DCDSubsetFile class accept <em>indices_list</em> as an input, change the number of atoms in the DCD header to match the number of atoms in <em>indices_list</em>, and change an <em>if</em> statement to check that the DCD file already has the exact number of atoms in <em>indices list</em> rather than the number of atoms of the whole system</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">indices_list</span><span class="p">,</span> <span class="n">firstStep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="o">...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span> <span class="o">=</span> <span class="n">indices_list</span>
+        <span class="o">...</span>
+            <span class="k">if</span> <span class="n">numAtoms</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="p">):</span> <span class="c"># changed this from checking len(list(topology.atoms()))</span>
+            <span class="o">...</span>
+            <span class="n">header</span> <span class="o">+=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s">'&lt;4i'</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And we’ll also rename the class just to differentiate it from the DCDFile class…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DCDSubsetFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</code></pre></div></div>
+
+<p>That’s it. Now we’ll do the real work in making dcdsubsetreporter.py. First, we’ll import DCDSubsetFile and numpy…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dcdsubsetfile</span> <span class="kn">import</span> <span class="n">DCDSubsetFile</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+
+<p>Next we’ll rename the class to DCDSubsetReporter and add <em>indices_list</em> as a new input to the class…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DCDSubsetReporter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">,</span> <span class="n">reportInterval</span><span class="p">,</span> <span class="n">indices_list</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">enforcePeriodicBox</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_reportInterval</span> <span class="o">=</span> <span class="n">reportInterval</span>
+</code></pre></div></div>
+
+<p>And, finally, we’ll only pass the subset of atom indices defined in <em>indices_list</em> to DCDSubsetReporter…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcd</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_dcd</span> <span class="o">=</span> <span class="n">DCDSubsetFile</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_out</span><span class="p">,</span> <span class="n">simulation</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">simulation</span><span class="o">.</span><span class="n">integrator</span><span class="o">.</span><span class="n">getStepSize</span><span class="p">(),</span>
+        <span class="n">simulation</span><span class="o">.</span><span class="n">currentStep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reportInterval</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_append</span>
+        <span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_dcd</span><span class="o">.</span><span class="n">writeModel</span><span class="p">(</span><span class="n">nanometer</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">getPositions</span><span class="p">(</span><span class="n">asNumpy</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_indices_list</span><span class="p">]),</span> <span class="n">periodicBoxVectors</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">getPeriodicBoxVectors</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>That’s it!</p>
+
+<p>So, to use this in a typical OpenMM simulation, we would just import DCDSubsetReporter from dcdsubsetreporter.py, and have dcdsubsetfile.py present in the same directory, using it like so.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dcdsubsetreporter</span> <span class="kn">import</span> <span class="n">DCDSubsetReporter</span>
+<span class="n">simulation</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DCDSubsetReporter</span><span class="p">(</span><span class="s">'trajectory_subset.dcd'</span><span class="p">,</span> <span class="n">subset_writing_interval</span><span class="p">,</span> <span class="n">indices_list</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>I’ve placed dcdsubsetfile.py and dcdsubsetreporter.py at <a href="https://github.com/gpantel/MD_methods-and-analysis/tree/master/OpenMM_DCDSubset">https://github.com/gpantel/MD_methods-and-analysis/tree/master/OpenMM_DCDSubset</a>.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/categories/#computational-method" class="page__taxonomy-item" rel="tag">computational-method</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-23T02:00:00-04:00">September 23, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Writing a Subset of Atom Coordinates in OpenMM http://localhost:4000/computational-method/OpenMM_DCDSubset/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/computational-method/OpenMM_DCDSubset/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/computational-method/OpenMM_DCDSubset/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/computational-method/OpenMM_DCDSubset/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/computational-method/MolPainter1/" class="pagination--pager" title="MolPainter and MolSolvator
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/literature-review/PhD_Thesis/" class="pagination--pager" title="An Introduction to Bilayer Phases, Cholesterol, Amyloid Precursor Protein, and their Relation
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/gpantel"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+
+  </body>
+</html>

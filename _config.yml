@@ -79,10 +79,11 @@ analytics:
 author:
   name             : "George A. Pantelopulos"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am a PhD student working within the labs of John E. Straub (Boston University) and Yuji Sugita (RIKEN) aspiring to accurate modeling of the cell membrane via atomistic simulation. I post novel methods and analyses here for friends, collaborators, and the scientific community."
+  bio              : "I am a post-doctoral scholar working under the supervision of Robert Best and the Laboratory of Chemical Physics at NIH/NIDDK.<br/><br/>
+  I recently completed my PhD with John E. Straub of the Boston University Chemistry Department. My new focus is on modeling of collagen and the extracellular matrix with atomistic accuracy with a focus toward reproduction of multiscale mechanics. This website is used to occasionally catalogue write-ups on theory, analysis, and software for sharing with colleagues."
   cv               : ""
-  location         : "Boston, MA, USA"
-  email            : "gpantel@bu.edu"
+  location         : "Bethesda, MD, USA"
+  email            : "george.pantelopulos@nih.gov"
   uri              :
   bitbucket        :
   codepen          :
