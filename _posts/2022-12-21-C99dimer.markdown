@@ -11,4 +11,4 @@ Recently, one of the last manuscripts prepared during my PhD work was published 
 "Formation of extramembrane β-strands controls dimerization of transmembrane helices in amyloid precursor protein C99" George A. Pantelopulos, Daisuke Matsuoka, James M. Hutchison, Charles R. Sanders, Yuji Sugita, John E. Straub, & D. Thirumalai, *PNAS* 119 (52) **2022** doi:10.1073/pnas.2212207119
 
 
-We were contacted by several people regarding access to the manuscript and data. The simulation data and inputs can be viewed on Mendeley as [DOI:10.17632/j6rtdskrvc.1](https://data.mendeley.com/datasets/j6rtdskrvc/1). And the manuscript can be accessed [here]({{ site.url }}/assets/PDF/Pantelopulos2022_C99dimer.pdf).
+We were contacted by several people regarding access to the manuscript and data. The simulation inputs and data, and NMR data can be viewed on Mendeley as [DOI:10.17632/j6rtdskrvc.1](https://data.mendeley.com/datasets/j6rtdskrvc/1). And the manuscript can be accessed [here]({{ site.url }}/assets/PDF/Pantelopulos2022_C99dimer.pdf).
