@@ -54,12 +54,13 @@ To address height mismatches of a lipid tail's nearest neighbors, I fit a lipid 
 ![NN plane Fitting]({{ site.url }}/assets/Membrane/Plane_fitting.jpg)  
 **Figure:** Coordinate representing a MARTINI lipid tail with coordinates representing its six nearest neighhbor tails transformed to lie on a plane that best-fits all seven points. The reference vector is transformed to lie in the plane as well. In this particular application, C2A, C2B (D2A, D2B) beads of DPPC (DIPC) are selected and the centroid of R[1-5] of CHOL are selected to represent lipid tails.
 
-If you'd like to check out an example script written to analyze MARTINI DPPC, DIPC, and CHOL lipid membranes using the MDAnalysis library to find these coordinates, please check out my [github](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/psi6_MARTINI_tail_example.py). There, plane fitting is performed using [singular value decomposition of the coordinates](https://www.ltu.se/cms_fs/1.51590!/svd-fitting.pdf).
+If you'd like to check out an example script written to analyze MARTINI DPPC, DIPC, and CHOL lipid membranes using the MDAnalysis library to find these coordinates, please check out my [github](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/psi6_MARTINI_tail_example.py). Additionally, a sample of trajectory data from our 2018 work examining the effects of MARTINI cholesterol from low to high concentrations [is available](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/DPPC29-DIPC29-CHOL42.xtc), along with scripts that can produce Voronoi tessels colored by [$$\Psi_6^k$$](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/plot_voronoi_tesselations_with_psi_6_example.py) and [$$\|\Psi_6^k\|$$](https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/plot_voronoi_tesselations_with_absPsi_6_example.py) are available.
 
-Additionally, this past year saw a very nice use of $$\Psi_6^k$$ to describe a "hexatic-like" lipid phase of DPPC with the MARTINI coarse-grained model. It's a pretty cool read.[4]
+An additional interesting application of $$\Psi_6^k$$ was around the same time as we applied $$\Psi_6^k$$ for examining ternary lipid mixtures for elucidating a "hexatic-like" lipid phase of DPPC with the MARTINI coarse-grained model.[4]
 
 Please cite:  
 G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, & J.E. Straub "Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures," *J. Chem. Phys.*  **147**, 095101 (2017)
+G.A. Pantelopulos & J.E. Straub "Regimes of Complex Lipid Bilayer Phases Induced by Cholesterol Concentration in MD Simulation," *Biophys. J.*  **115**, 2167–2178 (2018)
 
 References:
 1. B.I. Halperin & D.R. Nelson "Theory of Two-Dimensional melting," *Phys. Rev. Lett.* **41**, 121–124 (1978). 

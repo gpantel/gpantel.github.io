@@ -332,12 +332,13 @@ T^* = k_{\text{B}}T/<U> %]]></script>. Voronoi tessellations credited to <a href
 <p><img src="http://localhost:4000/assets/Membrane/Plane_fitting.jpg" alt="NN plane Fitting" /><br />
 <strong>Figure:</strong> Coordinate representing a MARTINI lipid tail with coordinates representing its six nearest neighhbor tails transformed to lie on a plane that best-fits all seven points. The reference vector is transformed to lie in the plane as well. In this particular application, C2A, C2B (D2A, D2B) beads of DPPC (DIPC) are selected and the centroid of R[1-5] of CHOL are selected to represent lipid tails.</p>
 
-<p>If you’d like to check out an example script written to analyze MARTINI DPPC, DIPC, and CHOL lipid membranes using the MDAnalysis library to find these coordinates, please check out my <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/psi6_MARTINI_tail_example.py">github</a>. There, plane fitting is performed using <a href="https://www.ltu.se/cms_fs/1.51590!/svd-fitting.pdf">singular value decomposition of the coordinates</a>.</p>
+<p>If you’d like to check out an example script written to analyze MARTINI DPPC, DIPC, and CHOL lipid membranes using the MDAnalysis library to find these coordinates, please check out my <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/psi6_MARTINI_tail_example.py">github</a>. Additionally, a sample of trajectory data from our 2018 work examining the effects of MARTINI cholesterol from low to high concentrations <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/DPPC29-DIPC29-CHOL42.xtc">is available</a>, along with scripts that can produce Voronoi tessels colored by <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/plot_voronoi_tesselations_with_psi_6_example.py"><script type="math/tex">\Psi_6^k</script></a> and <a href="https://github.com/gpantel/MD_methods-and-analysis/blob/master/membrane_analysis/plot_voronoi_tesselations_with_absPsi_6_example.py"><script type="math/tex">\|\Psi_6^k\|</script></a> are available.</p>
 
-<p>Additionally, this past year saw a very nice use of <script type="math/tex">\Psi_6^k</script> to describe a “hexatic-like” lipid phase of DPPC with the MARTINI coarse-grained model. It’s a pretty cool read.[4]</p>
+<p>An additional interesting application of <script type="math/tex">\Psi_6^k</script> was around the same time as we applied <script type="math/tex">\Psi_6^k</script> for examining ternary lipid mixtures for elucidating a “hexatic-like” lipid phase of DPPC with the MARTINI coarse-grained model.[4]</p>
 
 <p>Please cite:<br />
-G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>J. Chem. Phys.</em>  <strong>147</strong>, 095101 (2017)</p>
+G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critical size dependence of domain formation observed in coarse-grained simulations of bilayers composed of ternary lipid mixtures,” <em>J. Chem. Phys.</em>  <strong>147</strong>, 095101 (2017)
+G.A. Pantelopulos &amp; J.E. Straub “Regimes of Complex Lipid Bilayer Phases Induced by Cholesterol Concentration in MD Simulation,” <em>Biophys. J.</em>  <strong>115</strong>, 2167–2178 (2018)</p>
 
 <p>References:</p>
 <ol>
@@ -436,7 +437,7 @@ G.A. Pantelopulos, T. Nagai, A. Bandara, A. Panahi, &amp; J.E. Straub “Critica
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2022 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2023 George Pantelopulos. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
       </footer>
     </div>
 
