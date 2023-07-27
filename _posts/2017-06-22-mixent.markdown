@@ -24,7 +24,7 @@ There are over one hundred lipids that may compose a cell membrane. These mix to
 
 # Lipid Mixing Entropy
 
-To quantify how "mixed" a lipid membrane is, many have employed a measure of "mixing entropy" (*S<sub>mix</sub>*). The most common way this has been done is by gridding each leaflet of the membrane in to *M*  regions and counting the fraction of each j<sup>th</sup> lipid (*p<sub>j</sub>*) within each i<sup>th</sup> region, and then taking the mean of the entropies calculated for all regions[1]:
+To quantify how "mixed" a lipid membrane is, many have employed a measure of "mixing entropy" (*S<sub>mix</sub>*). The most common way this has been done is by gridding each leaflet of the membrane in to *N*  regions and counting the fraction of each j<sup>th</sup> lipid (*p<sub>j</sub>*) of *M* lipid types within each i<sup>th</sup> region, and then taking the mean of the entropies calculated for all regions[1]:
 
 $$S_{mix} = -\frac{1}{N_{regions}} \sum^{N_{regions}}_{i=1} \sum^{M}_{j=1} p_j(i) \log(p_j(i))$$
 
